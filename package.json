@@ -1,0 +1,24 @@
+{
+  "name": "clinet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandonWidjaja/IT-Project.git"
+  },
+  
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrandonWidjaja/IT-Project/issues"
+  },
+  "homepage": "https://github.com/BrandonWidjaja/IT-Project#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
+
