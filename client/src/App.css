@@ -1,0 +1,41 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1rem;
+}
+    
+.color_theme {
+    --dark-primary: #EAE3D2;
+    --light-primary: #F9F5EB;
+    --dark-secondary: #1C3879;
+    --light-secondary: #607EAA;
+}
+
+@media screen and (max-width: 1000px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    p {
+        font-size: 1.5rem;
+    }
+}
