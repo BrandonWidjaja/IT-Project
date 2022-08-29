@@ -8,6 +8,8 @@ import Login from './components/pages/Login';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Navbar2 from './components/Navbar2';
+import Register from './components/pages/Register';
+import About from './components/pages/About';
 
 const Layout1 = () => {
   return (
@@ -49,6 +51,8 @@ function App() {
           </Route>
           <Route element={<Layout2 />} >
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/about" element={<About />} />
           </Route>
         </Routes>
       </BrowserRouter>

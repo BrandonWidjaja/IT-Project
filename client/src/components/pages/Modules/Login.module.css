@@ -27,10 +27,9 @@
     margin-bottom: 1rem;
 }
 
-
 .login_card input{
     margin: auto;
-    width: 60%;
+    width: 90%;
     padding:0.5rem;
     border-radius: 1rem;
     margin: auto;
@@ -39,7 +38,6 @@
 
 .login_card button{
     margin: auto;
-    min-width: 40%;
     margin-top: 2rem;
     padding: 0.5rem;
     border-radius: 2rem;
