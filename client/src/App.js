@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Home from './components/pages/Home';
 import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
-
+import ProfileEdit from './components/pages/ProfileEdit';
 
 function App() {
   return (
@@ -19,9 +19,9 @@ function App() {
               <Route path='/' element={<Home/>} />
               <Route path='/buildings' element={<Buildings/>} />
               <Route path='/profile' element={<Profile/>} />
+              <Route path='/profile-edit' element={<ProfileEdit/>} />
             </Routes>
           </div>
-          
         </div>
         <Footer />
       </Router>

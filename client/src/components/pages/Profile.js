@@ -28,7 +28,6 @@ function Profile() {
                 <form className={styles.comments}>
                     <p>hi</p>
                     <input className={styles.new_comment} type="text" placeholder='Comment'></input>
-                    
                 </form>
             </div>
             
