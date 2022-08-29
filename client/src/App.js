@@ -11,16 +11,20 @@ import Profile from './components/pages/Profile';
 function App() {
   return (
     <>
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path='/buildings' element={<Buildings/>} />
-        <Route path='/profile' element={<Profile/>} />
-      </Routes>
-      <Footer />
-    </Router>
-      
+      <Router>
+        <Navbar />
+        <div class = "background">
+          <div class = "container">
+            <Routes>
+              <Route path='/' element={<Home/>} />
+              <Route path='/buildings' element={<Buildings/>} />
+              <Route path='/profile' element={<Profile/>} />
+            </Routes>
+          </div>
+          
+        </div>
+        <Footer />
+      </Router>
     </>
   )
 }

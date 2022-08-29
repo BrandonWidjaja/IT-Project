@@ -1,29 +1,36 @@
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    height: 100%;
-}
-
 h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+    margin: 0;
 }
 
 h2 {
     font-size: 1.5rem;
+    margin: 0;
 }
 
 p {
     font-size: 1rem;
+    margin: 0;
 }
-    
-.color_theme {
+
+:root {
     --dark-primary: #EAE3D2;
     --light-primary: #F9F5EB;
     --dark-secondary: #1C3879;
     --light-secondary: #607EAA;
+}
+
+.background {
+    background-color: var(--dark-primary);
+    height: 100%;
+}
+
+.container {
+    background-color: var(--light-primary);
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    padding: 1rem;
 }
 
 @media screen and (max-width: 1000px) {
