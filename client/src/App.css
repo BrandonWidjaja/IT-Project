@@ -18,6 +18,7 @@ p {
     --light-primary: #F9F5EB;
     --dark-secondary: #1C3879;
     --light-secondary: #607EAA;
+    --color-highlight: 255, 0, 0;
 }
 
 .background {
@@ -31,6 +32,20 @@ p {
     height: 100%;
     margin: auto;
     padding: 1rem;
+}
+
+button {
+    background-color: var(--dark-primary);
+    font-size: 1rem;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    min-width: 15%;
+}
+
+button:hover {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {

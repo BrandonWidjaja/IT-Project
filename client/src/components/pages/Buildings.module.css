@@ -1,7 +1,8 @@
-img {
+.card img {
     width: 20%;
     height: auto;
     margin-right: 1rem;
+    border-radius: 0.5rem;
 }
 
 .card {
@@ -12,11 +13,18 @@ img {
     margin-top: 1rem;
 }
 
+.card:hover{
+    background-color: #E1DED5;
+    cursor: pointer;
+}
+
 .searchbar {
     background-color: white;
-    width: 30%;
-    float: right;
     margin: auto;
     margin-right: 0;
+    border : None;
     padding: 0.5rem;
+    width: 30%;
+    border-radius: 1rem;
+    border: 1px 
 }

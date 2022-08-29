@@ -1,0 +1,60 @@
+.card {
+    background-color: #F2EFE7;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    margin-top: 1rem;
+}
+
+.card img {
+    width: 20%;
+    height: auto;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
+.card button {
+    padding: 0.5rem;
+}
+
+.post {
+    background-color: #F2EFE7;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.title{
+    background-color: var(--dark-primary);
+    font-size: 1rem;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.content {
+    margin: 1rem;
+}
+
+.comments {
+    background-color: #EFEBE3;
+    border: 1px solid lightgrey;
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1%;
+    border-radius: 0.5rem;
+}
+
+.new_comment {
+    background-color: var(--dark-primary);
+    font-size: 1rem;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    width: 98%;
+    margin-top: 1rem;
+    padding: 1%;
+}
