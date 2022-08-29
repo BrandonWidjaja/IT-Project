@@ -23,7 +23,11 @@ p {
 
 .background {
     background-color: var(--dark-primary);
-    height: 100%;
+}
+
+.background2 {
+    background-color: var(--dark-primary);
+    padding-bottom: 3%;
 }
 
 .container {
@@ -47,6 +51,14 @@ button:hover {
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
     cursor: pointer;
 }
+
+.login-container {
+    background-color: var(--light-primary);
+    margin: auto;
+    width: 80%;
+    border-radius: 1rem;
+}
+
 
 @media screen and (max-width: 1000px) {
     h1 {

@@ -16,6 +16,14 @@ body{
 
 }
 
+.nav2 {
+    background-color: var(--dark-primary);
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .home-title{
     font-size: 1.5rem;
     margin: .5rem;

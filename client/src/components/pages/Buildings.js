@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Buildings.module.css';
+import styles from './Modules/Buildings.module.css';
 
 function Buildings() {
     return (

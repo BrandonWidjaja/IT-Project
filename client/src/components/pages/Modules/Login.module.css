@@ -1,0 +1,56 @@
+.card {
+    display: flex;
+    text-align: center;
+    margin: auto;
+    padding: 5%;
+}
+
+.logo {
+    width: 50%;
+    height: auto;
+}
+
+.login_card {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin: auto;
+    width: 40%;
+    height: 100%;
+    background-color: #F2EFE7;
+    padding: 5%;
+    border-radius: 3rem;
+    border: 1px solid lightgrey;
+}
+
+.login_card h1{
+    margin-bottom: 1rem;
+}
+
+
+.login_card input{
+    margin: auto;
+    width: 60%;
+    padding:0.5rem;
+    border-radius: 1rem;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.login_card button{
+    margin: auto;
+    min-width: 40%;
+    margin-top: 2rem;
+    padding: 0.5rem;
+    border-radius: 2rem;
+}
+
+.login_card a{
+    color: grey;
+    text-decoration: None;
+}
+
+.login_card a:hover{
+    color: black;
+    text-decoration: underline;
+}
