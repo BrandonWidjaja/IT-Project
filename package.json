@@ -10,7 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/BrandonWidjaja/IT-Project.git"
   },
-  
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -18,7 +17,7 @@
   },
   "homepage": "https://github.com/BrandonWidjaja/IT-Project#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "react-icons": "^4.4.0"
   }
 }
-

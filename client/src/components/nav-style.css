@@ -1,97 +1,79 @@
-* {
-    box-sizing: border-box;
-}
-
-body{
-    margin: 0;
-    padding: 0;
-}
-
-.nav {
+.navi{
     background-color: #607EAA ;
-    color: #FFFFFF;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    opacity: 0.9;
+}
+
+.navi nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
-.nav2 {
-    background-color: var(--dark-primary);
-    color: #FFFFFF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.home-title{
-    font-size: 1.5rem;
+.navi nav .logo {
     margin: .5rem;
 }
 
-.bar-links ul {
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.bar-links li{
+.navi nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.bar-links li a{
-    color: #FFFFFF;
+.navi nav ul li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.navi nav ul li a {
+    color: white;
     text-decoration: none;
-    display: block;
-    padding: 1rem;
 }
-.bar-links li:hover{
-    background-color: #555;
+
+.navi a:hover {
+    color:blueviolet;
 }
-.toggle {
-    position: absolute;
-    top: 0.85rem;
-    right: 1rem;
+
+.navi .mobile-navi {
     display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 20px;
 }
 
-.toggle .bar{
-    height: 3px;
-    width: 100%;
-    background-color: #FFFFFF;
-    border-radius: 10px;
-
-}
-
-@media (max-width: 600px){
-    .toggle {
-        display:flex;
-    }
-
-    .bar-links{
+@media (max-width:600px){
+    .navi .desktop-navi {
         display: none;
-        width: 100%;
     }
 
-    .nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .bar-links ul{
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .bar-links li{
-        text-align: center;
-    }
-
-    .bar-links.active {
+    .navi .mobile-navi {
         display: flex;
+        align-items: center;
     }
+
+    .navi .mobile-navi .hamburger {
+        position: absolute;
+        top: 20%;
+        right: 2.5%;
+        cursor: pointer;
+    }
+
+    .navi .mobile-navi .logo{
+        position: absolute;
+        top: 20%;
+        left: 2.5%;
+        cursor: pointer;
+    }
+
+    .navi nav ul{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        background-color: #607EAA;
+        align-items: center;
+    }
+
 }
