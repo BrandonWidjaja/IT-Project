@@ -8,6 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 7vh;
 }
 
 .nav2 {
@@ -16,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 6vh;
 }
 
 .home-title{
