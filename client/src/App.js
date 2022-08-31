@@ -5,7 +5,7 @@ import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
 import ProfileEdit from './components/pages/ProfileEdit';
 import Login from './components/pages/Login';
-import Footer from './components/Footer';
+import Footer from './components/pages/Footer';
 import Navbar from './components/Navbar';
 import Navbar2 from './components/Navbar2';
 import Register from './components/pages/Register';
