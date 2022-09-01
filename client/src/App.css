@@ -71,12 +71,11 @@ button:hover {
 
 .login-container {
     background-color: var(--light-primary);
-    margin: auto;
     width: 80%;
     border-radius: 3rem;
     z-index: 999;
+    margin: auto;
 }
-
 
 @media screen and (max-width: 1000px) {
     h1 {

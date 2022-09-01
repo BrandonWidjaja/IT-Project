@@ -30,14 +30,15 @@ const Layout2 = () => {
   return (
       <>
         <Navbar2/>
-            <div class = "login-container">
-              <Outlet/>
-            </div>
+        <div style = {{minHeight: "85vh"}}>
+          <div class = "login-container">
+            <Outlet/>
+          </div>
+        </div>
         <div class = "background2"> </div>
         <Footer/>
       </>
   )
-  
 }
 
 

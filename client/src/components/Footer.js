@@ -4,8 +4,8 @@ import "./Footer.css"
 function Footer() {
   return (
     <>
-      <div className='circle1'></div>
-      <div className='circle2'></div>
+      <div className='circle3'></div>
+      <div className='circle4'></div>
       <footer className="footer">
         <p>Footer</p>
       </footer>
