@@ -69,9 +69,10 @@ li a:hover {
     .drop-down-menu ul{
         display: flex;
         flex-direction: column;
-        position: relative;
+        position: absolute;
         margin: 0;
-        top: 6vh;
+        top: 7vh;
+        right: 0;
         width: 100vw;
         background-color: #607EAA;
         align-items: center;
