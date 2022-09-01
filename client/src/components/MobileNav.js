@@ -7,7 +7,6 @@ const MobileNav= () => {
     const [open, setOpen] = useState(false);
 
     return(
-        
         <nav className='mobile-navi'>
             <div className='logo'>
                 UniRec
