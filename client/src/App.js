@@ -7,20 +7,23 @@ import ProfileEdit from './components/pages/ProfileEdit';
 import Login from './components/pages/Login';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import Navbar2 from './components/Navbar2';
 import Register from './components/pages/Register';
 import About from './components/pages/About';
 
 const Layout1 = () => {
   return (
       <>
-        <Navbar/>
+        <nav className='navi'>
+            <Navbar />
+        </nav>
         <div>
             <div class = "container">
               <Outlet />
             </div>
         </div>
         <div class = "background"></div>
+        <div className='circle1'></div>
+        <div className='circle2'></div>
         <Footer/>
       </>
   )
@@ -29,13 +32,17 @@ const Layout1 = () => {
 const Layout2 = () => {
   return (
       <>
-        <Navbar2/>
+        <nav className='navi' style = {{backgroundColor: "transparent"}}>
+            <Navbar />
+        </nav>
         <div style = {{minHeight: "85vh"}}>
           <div class = "login-container">
             <Outlet/>
           </div>
         </div>
         <div class = "background2"> </div>
+        <div className='circle3'></div>
+        <div className='circle4'></div>
         <Footer/>
       </>
   )
