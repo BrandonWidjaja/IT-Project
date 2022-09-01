@@ -30,7 +30,7 @@ li a {
 }
 
 li a:hover {
-    color:#607EAA;
+    color:darkgrey;
 }
 
 .hamburger {
@@ -41,7 +41,11 @@ li a:hover {
     display: None;
 }
 
-.drop-down-menu{
+.drop_down_menu{
+    display: none;
+}
+
+.drop-down-menu ul{
     display: none;
 }
 
@@ -59,18 +63,19 @@ li a:hover {
     }
 
     .drop-down-menu{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 7vh;
-        right: 0;
-        width: 100%;
-        background-color: #607EAA;
-        align-items: center;
-        border-top: 1px solid #5C78A1;
+        display: block;
     }
 
     .drop-down-menu ul{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin: 0;
+        top: 6vh;
+        width: 100vw;
+        background-color: #607EAA;
+        align-items: center;
+        border-top: 1px solid #5C78A1;
         list-style-type: none;
         padding: none;
         text-align: center;

@@ -12,7 +12,10 @@ function Profile() {
                     <p>Date of Birth:</p>
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio:</p>
-                    <button style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0"}}>Edit</button>
+                    <a href="/profile-edit" style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                        <button style = {{width: "100%"}}>Edit</button>
+                    </a>
+                    
                         
                 </div>
             </div>

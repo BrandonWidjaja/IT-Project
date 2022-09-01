@@ -1,14 +1,14 @@
 import NavLinks from "./NavLinks";
 import {GiHamburgerMenu} from 'react-icons/gi'
 import { useState } from "react";
-import "./nav-style.css";
+import "./Navbar.css";
 const Navbar= () => {
 
     const [open, setOpen] = useState(false);
 
     return(
         <>
-            <div className='logo'>
+            <div className="logo">
                 UniRec
             </div>
             <GiHamburgerMenu className ='hamburger' 

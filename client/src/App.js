@@ -1,53 +1,13 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter, Routes, Route, Outlet} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
 import ProfileEdit from './components/pages/ProfileEdit';
 import Login from './components/pages/Login';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
 import Register from './components/pages/Register';
 import About from './components/pages/About';
-
-const Layout1 = () => {
-  return (
-      <>
-        <nav className='navi'>
-            <Navbar />
-        </nav>
-        <div>
-            <div class = "container">
-              <Outlet />
-            </div>
-        </div>
-        <div class = "background"></div>
-        <div className='circle1'></div>
-        <div className='circle2'></div>
-        <Footer/>
-      </>
-  )
-}
-
-const Layout2 = () => {
-  return (
-      <>
-        <nav className='navi' style = {{backgroundColor: "transparent"}}>
-            <Navbar />
-        </nav>
-        <div style = {{minHeight: "85vh"}}>
-          <div class = "login-container">
-            <Outlet/>
-          </div>
-        </div>
-        <div class = "background2"> </div>
-        <div className='circle3'></div>
-        <div className='circle4'></div>
-        <Footer/>
-      </>
-  )
-}
-
+import {Layout1, Layout2} from './components/Layouts';
 
 function App() {
   return (
@@ -67,7 +27,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-
   );
 }
 
