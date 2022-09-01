@@ -15,11 +15,13 @@ const Layout1 = () => {
   return (
       <>
         <Navbar/>
-        <div class = "background">
+        <div>
             <div class = "container">
               <Outlet />
             </div>
         </div>
+        <div class = "background"></div>
+        <Footer/>
       </>
   )
 }
@@ -28,11 +30,11 @@ const Layout2 = () => {
   return (
       <>
         <Navbar2/>
-        <div class = "background2">
             <div class = "login-container">
               <Outlet/>
             </div>
-        </div>
+        <div class = "background2"> </div>
+        <Footer/>
       </>
   )
   
@@ -56,7 +58,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      <Footer/>
     </>
 
   );
