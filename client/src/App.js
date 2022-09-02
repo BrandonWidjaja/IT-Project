@@ -8,6 +8,7 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import About from './components/pages/About';
 import {Layout1, Layout2} from './components/Layouts';
+import NewBuilding from './components/pages/NewBuilding';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Buildings />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
+            <Route path="/new-building" element={<NewBuilding />} />
           </Route>
           <Route element={<Layout2 />} >
             <Route path="/login" element={<Login />} />
