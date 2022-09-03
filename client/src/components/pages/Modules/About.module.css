@@ -3,6 +3,19 @@
     padding: 2rem;
 }
 
+.container .logo img{
+    width: 15%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.container .member img{
+    width: 10%;
+    height: auto;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
 h1 {
     color: #607EAA;
 }

@@ -9,7 +9,7 @@ const Navbar= () => {
     return(
         <>
             <div className="logo">
-                UniRec
+            <img src="https://i.ibb.co/yPk5FFv/abccc.png" alt = "logo"></img>
             </div>
             <GiHamburgerMenu className ='hamburger' 
             size ='40px' color='white' 
