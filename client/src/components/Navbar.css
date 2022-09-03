@@ -9,9 +9,9 @@
     min-height: 7vh;
 }
 
-.navi .logo img{
-    width: 15%;
-    height: auto;
+.navi .logo{
+    width: auto;
+    height: 6vh;
     margin-left: 0.5rem;
     border-radius: 0.5rem;
 }
@@ -74,7 +74,7 @@ li a:hover {
         flex-direction: column;
         position: absolute;
         margin: 0;
-        top: 7vh;
+        top: 8vh;
         right: 0;
         width: 100vw;
         background-color: #607EAA;

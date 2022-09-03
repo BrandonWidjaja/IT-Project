@@ -5,7 +5,7 @@ function Login() {
     return (
         <>
             <div className={styles.card}>
-                <img className={styles.logo}src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png" alt = "test"></img>
+                <img src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png"  className={styles.login_logo} alt = "test"></img>
                 <form style = {{marginRight: "0"}} className={styles.login_card}>
                     <h1 style = {{color: "#607EAA"}}>Login</h1>
                     <input type="text" placeholder="eg.js@gmail.com"></input>

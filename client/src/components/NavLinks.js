@@ -11,6 +11,9 @@ const NavLinks= () => {
                 <a href="/Profile">Profile</a>
             </li>
             <li>
+                <a href="/about">About Us</a>
+            </li>
+            <li>
                 <a href="/Login">Login</a>
             </li>
         </ul>

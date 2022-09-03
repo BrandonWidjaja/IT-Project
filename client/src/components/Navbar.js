@@ -8,12 +8,8 @@ const Navbar= () => {
 
     return(
         <>
-            <div className="logo">
-            <img src="https://i.ibb.co/yPk5FFv/abccc.png" alt = "logo"></img>
-            </div>
-            <GiHamburgerMenu className ='hamburger' 
-            size ='40px' color='white' 
-            onClick ={() => setOpen(!open)}/>
+            <img className="logo" src="https://i.ibb.co/yPk5FFv/abccc.png" alt = "logo"></img>
+            <GiHamburgerMenu className ='hamburger' size ='6vh' color='white' onClick ={() => setOpen(!open)}/>
             { open && <div className="drop-down-menu"><NavLinks /></div>}
             <div className="menu">
                 <NavLinks />
