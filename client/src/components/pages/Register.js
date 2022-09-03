@@ -5,7 +5,7 @@ function Register() {
     return (
         <>
             <div style = {{padding: "3%"}}>
-                <form style = {{padding: "3%", width : "100%"}} className={styles.login_card}>
+                <form style = {{padding: "3%", width : "94%"}} className={styles.login_card}>
                     <h1 style = {{color: "#607EAA"}}>Register</h1>
                     <input style = {{width : "40%"}} type="text" placeholder="Username"></input>
                     <input style = {{width : "40%"}} type="email" placeholder="Email Address"></input>

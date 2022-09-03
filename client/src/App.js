@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
@@ -10,8 +10,18 @@ import About from './components/pages/About';
 import {Layout1, Layout2} from './components/Layouts';
 
 function App() {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("/api")
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
+  }, []);
+
   return (
     <>
+      <p>{!data ? "Loading..." : data}</p>
       <BrowserRouter>
         <Routes>
           <Route element={<Layout1 />} >
