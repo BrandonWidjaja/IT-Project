@@ -1,11 +1,12 @@
 const express = require('express') 
-var testRouter = require("./routes/test");
 const app = express() 
 const PORT = process.env.PORT || 3001;
 const mongoose = require('mongoose')
+var testRouter = require("./routes/test");
+var userRouter = require("./routes/userRouter");
 
 // database
-const connectionURL = '';
+const connectionURL = 'mongodb+srv://admin:admin@cluster0.jyt8v.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(connectionURL)
     const db = mongoose.connection
     // event handlers
@@ -23,3 +24,4 @@ app.listen(PORT, () => {
 }); 
 
 app.use("/test", testRouter);
+app.use("/user", userRouter);

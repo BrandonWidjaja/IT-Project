@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   displayName: { type: String, required: true },
   bio: { Type: String, default: "" },
-  birthDate: { Type: String, required: true },
+  birthDate: { Type: String},
   course: { Type: String },
   posts: [ObjectId],
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
@@ -21,6 +21,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = {
-  User,
-};
+module.exports = User;

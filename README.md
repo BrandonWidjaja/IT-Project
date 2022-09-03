@@ -12,6 +12,7 @@
 ### Prerequisites:
 1. Node.js (v17.8.0)
 2. React (18.2.0)
+3. Mongoose (6.5.4)
 
 ### Start Guide:
 #### Frontend:
