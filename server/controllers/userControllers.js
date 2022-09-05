@@ -1,17 +1,25 @@
-const { User } = require("../models/user");
+const User = require("../models/user");
 
 const createUser = async (req, res, next) => {
   try {
-    const user = new User(req.body);
-    const email = req.body.email;
-    user.dateCreated = getDateTime();
-    user.onModel = req.body.accType;
+    // data from the body
+    let bodydata = req.body;
 
-    await newUser.save().catch((err) => {
-      res.send(err);
-    });
+    // check if a user with that email already exists, if not, continue
+    let exists = await User.findOne({ email: bodydata.email });
+
+    if (exists) {
+      return res.send("email already exists");
+    }
+
+    // create new user from req
+    const newUser = await new User(req.body);
+    await newUser.save();
+
+    return await res.send(newUser);
   } catch (e) {
-    return next(e);
+    console.error(e);
+    return res.send(e);
   }
 };
 
