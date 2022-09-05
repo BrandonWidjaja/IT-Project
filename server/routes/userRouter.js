@@ -3,18 +3,24 @@ var userRouter = express.Router();
 //const userController = require('../controllers/userControllers')
 
 // hardcode user (testing)
-const User = require('../models/user')
-userRouter.get('/new', (req, res) => {
-    const newUser = new User({
-        email: "jiayao@gmail.com",
-        password: "hahaha",
-        lastName: "hahaha",
-        firstName: "hahaha",
-        displayName: "Jiayao",
-    })
+const User = require("../models/user");
 
-    // save in db
-    newUser.save().catch(err => { res.send(err) })
+userRouter.post("/new", async function (req, res) {
+  try {
+    let bodydata = req.body;
+    let exists = await User.findOne({ email: bodydata.email });
+
+    if (exists) {
+      return res.send("email exists");
+    }
+
+    const newUser = await new User(req.body);
+    await newUser.save();
+    return await res.send(newUser);
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
 });
 
 module.exports = userRouter;
