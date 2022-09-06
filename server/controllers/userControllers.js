@@ -23,4 +23,22 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser };
+const getUser = async (req, res, next) => {
+
+  try {
+    let id = req.body._id;
+    let exists = await User.findOne({ _id: id});
+    if (exists){
+      return await res.send(exists);
+    }
+
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+}
+
+
+
+module.exports = { createUser, getUser };
+

@@ -6,5 +6,6 @@ const userController = require("../controllers/userControllers");
 const User = require("../models/user");
 
 userRouter.post("/new", userController.createUser);
+userRouter.get("/getUser", userController.getUser);
 
 module.exports = userRouter;
