@@ -16,21 +16,30 @@ const createUser = async (req, res, next) => {
     const newUser = await new User(req.body);
     await newUser.save();
 
+    // send new user
     return await res.send(newUser);
   } catch (e) {
+    // send error
     console.error(e);
     return res.send(e);
   }
 };
 
-const getUser = async (req, res, next) => {
 
+
+// get a user from their objectID
+const getUser = async (req, res, next) => {
   try {
-    let id = req.body._id;
-    let exists = await User.findOne({ _id: id});
+    // retrieve object id of user from request
+    let userID = req.body._id;
+
+    // find the user in the database
+    let exists = await User.findOne({ _id: userID});
     if (exists){
-      return await res.send(exists);
+      return res.send(exists);
     }
+    // user not found
+    return res.send("user does not exist")
 
   } catch (e) {
     console.error(e);

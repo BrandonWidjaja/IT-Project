@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   //secret: {type: String, required: true},     this can be used later with cookies
-  lastName: { type: String, required: true },
-  firstName: { type: String, required: true },
+  lastName: { type: String},
+  firstName: { type: String },
   displayName: { type: String, required: true },
   bio: { Type: String, default: "" },
   birthDate: { Type: String },
@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
   accountType: { type: String, enum: ["Admin", "Public", "Club"] },
   model: { type: mongoose.Schema.Types.ObjectId, refPath: "accountType" },
 });
+
+
+
 /*
 userSchema.methods.verifyPassword = function (password, callback) {
   bcrypt.compare(password, this.password, (err, valid) => {
