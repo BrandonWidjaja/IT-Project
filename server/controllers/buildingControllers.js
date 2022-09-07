@@ -1,8 +1,7 @@
-const Building = require("../models/building");
+const { Building } = require("../models/building");
 
 const addNewBuilding = async (req, res, next) => {
   try {
-
     // create new building from req
     const newBuilding = await new Building(req.body);
     await newBuilding.save();
@@ -23,20 +22,16 @@ const getBuilding = async (req, res, next) => {
     let buildingID = req.body._id;
 
     // find the user in the database
-    let exists = await Building.findOne({ _id: buildingID});
-    if (exists){
+    let exists = await Building.findOne({ _id: buildingID });
+    if (exists) {
       return res.send(exists);
     }
     // user not found
-    return res.send("building does not exist")
-
+    return res.send("building does not exist");
   } catch (e) {
     console.error(e);
     return res.send(e);
   }
-}
-
-
+};
 
 module.exports = { addNewBuilding, getBuilding };
-

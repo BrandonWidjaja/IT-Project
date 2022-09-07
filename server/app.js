@@ -4,7 +4,9 @@ const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 //var testRouter = require("./routes/test");
 var userRouter = require("./routes/userRouter");
-require('dotenv').config({path:__dirname+'/../.env'});
+var buildingRouter = require("./routes/buildingRouter");
+const postRouter = require("./routes/postRouter");
+require("dotenv").config({ path: __dirname + "/../.env" });
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -32,3 +34,4 @@ app.listen(PORT, () => {
 //app.use("/test", testRouter);
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
+app.use("/post", postRouter);
