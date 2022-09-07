@@ -31,3 +31,4 @@ app.listen(PORT, () => {
 
 //app.use("/test", testRouter);
 app.use("/user", userRouter);
+app.use("/building", buildingRouter);

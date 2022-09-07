@@ -9,7 +9,7 @@ const buildingSchema = new mongoose.Schema({
   lastUpdated: { type: String },
   tags: [String],
   approved: Boolean,
-  suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "Building" },
 });
 
 const Building = mongoose.model("Building", buildingSchema);
