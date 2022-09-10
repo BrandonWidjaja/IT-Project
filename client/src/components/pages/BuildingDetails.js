@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './Modules/BuildingDetails.module.css';
 import Rating from 'react-rating'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from "@fortawesome/fontawesome-free-solid"
 
 function BuildingDetails() {
       
@@ -32,7 +34,7 @@ function BuildingDetails() {
                     <p>hi</p>
                     <input className={styles.new_comment} type="text" placeholder='Comment'></input>
                 </form>
-                <p> like dislike</p>
+                <p style={{paddingTop : "0.5rem"}}>  <FontAwesomeIcon icon={Icons.faThumbsUp} size="xl" /> <FontAwesomeIcon icon={Icons.faThumbsDown} size="xl" /></p>
             </div>
             
         </>
