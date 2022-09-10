@@ -3,6 +3,7 @@ import styles from './Modules/BuildingDetails.module.css';
 import Rating from 'react-rating'
 
 function BuildingDetails() {
+      
     return (
         <>
             <h1 style = {{color: "#607EAA"}}>Widjaja Royal Building</h1>
@@ -11,12 +12,12 @@ function BuildingDetails() {
                 <div style = {{display: "flex", flexDirection: "column", marginRight: "2.5rem"}}>
                     <p>Name: Widjaja Royal Building</p>
                     <p>Location:</p>
-                    <p >Rating: <Rating /></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.rate}>
-                <p >Rate: <Rating /></p>
-                <button style = {{marginTop: "auto", alignSelf: "flex-end"}}>Update</button>
+                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={2.5} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
+                <button>Update</button>
             </div>
 
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
