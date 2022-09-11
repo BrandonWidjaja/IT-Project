@@ -8,13 +8,13 @@ const NavLinks= () => {
                 <a href="/">New Building</a>
             </li>
             <li>
-                <a href="/Profile">Profile</a>
+                <a href="/profile">Profile</a>
             </li>
             <li>
                 <a href="/about">About Us</a>
             </li>
             <li>
-                <a href="/Login">Login</a>
+                <a href="/login">Login</a>
             </li>
         </ul>
     );

@@ -11,7 +11,7 @@ import {Layout1, Layout2} from './components/Layouts';
 import NewBuilding from './components/pages/NewBuilding';
 
 function App() {
-
+  
   return (
     <>
       <BrowserRouter>

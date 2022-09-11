@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
+
+
 //var testRouter = require("./routes/test");
 var userRouter = require("./routes/userRouter");
 require('dotenv').config({path:__dirname+'/../.env'});
@@ -21,9 +23,34 @@ db.once("open", () => {
   console.log("connected to Mongo");
 });
 
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from server!" });
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
 });
+
+// // Express-Session
+// app.use(
+//   session({
+//     name: "UniRec", //name to be put in "key" field in postman etc
+//     secret: process.env.SESSION_SECRET,
+//     resave: true,
+//     saveUninitialized: false,
+//     store: mongoDBstore,
+//     cookie: {
+//       maxAge: MAX_AGE,
+//       sameSite: false,
+//       secure: rocess.env.NODE_ENV === 'production'
+//     }
+//   })
+// );
 
 app.listen(PORT, () => {
   console.log("Demo app is listening on port " + PORT);
