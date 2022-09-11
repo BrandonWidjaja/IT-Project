@@ -75,3 +75,12 @@ input {
     border: 1px solid lightgrey;
     border-radius: 0.3rem;
 }
+
+.like {
+    margin-top: 0.5rem;
+    display: flex;
+}
+
+.likeIcon:hover {
+    cursor: pointer;
+}

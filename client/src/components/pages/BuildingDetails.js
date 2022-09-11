@@ -19,7 +19,7 @@ function BuildingDetails() {
             </div>
             <div className={styles.rate}>
                 <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={2.5} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
-                <button>Update</button>
+                <button style={{height:"2rem"}}>Update</button>
             </div>
 
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
@@ -34,7 +34,12 @@ function BuildingDetails() {
                     <p>hi</p>
                     <input className={styles.new_comment} type="text" placeholder='Comment'></input>
                 </form>
-                <p style={{paddingTop : "0.5rem"}}>  <FontAwesomeIcon icon={Icons.faThumbsUp} size="xl" /> <FontAwesomeIcon icon={Icons.faThumbsDown} size="xl" /></p>
+                <div className={styles.like}>
+                    <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={()=> console.log("hahahahaha")}/>
+                    <p style={{marginLeft:'0.5rem', marginRight:'0.5rem'}}>20</p>
+                    <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl"/>
+                    <p style={{marginLeft:'0.5rem'}}>20</p>
+                </div>
             </div>
             
         </>
