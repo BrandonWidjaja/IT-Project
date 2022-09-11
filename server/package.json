@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/BrandonWidjaja/IT-Project#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mongoose": "^6.5.4",
     "react-icons": "^4.4.0"

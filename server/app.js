@@ -4,14 +4,15 @@ const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 //var testRouter = require("./routes/test");
 var userRouter = require("./routes/userRouter");
+require('dotenv').config({path:__dirname+'/../.env'});
 
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // database
-const connectionURL =
-  "mongodb+srv://admin:admin@cluster0.jyt8v.mongodb.net/?retryWrites=true&w=majority";
+console.log(process.env.DB_CONN);
+const connectionURL = process.env.DB_CONN;
 mongoose.connect(connectionURL);
 const db = mongoose.connection;
 // event handlers
