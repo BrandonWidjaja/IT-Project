@@ -10,6 +10,7 @@ import About from './components/pages/About';
 import {Layout1, Layout2} from './components/Layouts';
 import NewBuilding from './components/pages/NewBuilding';
 import BuildingDetails from './components/pages/BuildingDetails';
+import BuildingPending from './components/pages/BuildingPending';
 import NewEvent from './components/pages/NewEvent';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/new-event" element={<NewEvent />} />
             <Route path="/building-details" element={<BuildingDetails />} />
+            <Route path="/building-pending" element={<BuildingPending />} />
           </Route>
           <Route element={<Layout2 />} >
             <Route path="/login" element={<Login />} />

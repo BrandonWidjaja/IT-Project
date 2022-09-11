@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from 'react-rating'
 import styles from './Modules/Buildings.module.css';
 
 function Buildings() {
@@ -15,7 +16,7 @@ function Buildings() {
                     <p>Name:</p>
                     <p>Location:</p>
                     <hr/>
-                    <p>Rating:</p>
+                    <p>Rating:<Rating initialRating={2} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.card}>
@@ -24,7 +25,7 @@ function Buildings() {
                     <p>Name:</p>
                     <p>Location:</p>
                     <hr/>
-                    <p>Rating:</p>
+                    <p>Rating:<Rating initialRating={2} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.card}>
@@ -33,7 +34,7 @@ function Buildings() {
                     <p>Name:</p>
                     <p>Location:</p>
                     <hr/>
-                    <p>Rating:</p>
+                    <p>Rating:<Rating initialRating={2} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.card}>
@@ -42,7 +43,7 @@ function Buildings() {
                     <p>Name:</p>
                     <p>Location:</p>
                     <hr/>
-                    <p>Rating:</p>
+                    <p>Rating:<Rating initialRating={2} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.card}>
@@ -51,7 +52,7 @@ function Buildings() {
                     <p>Name:</p>
                     <p>Location:</p>
                     <hr/>
-                    <p>Rating:</p>
+                    <p>Rating:<Rating initialRating={2} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             
