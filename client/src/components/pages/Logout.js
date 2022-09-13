@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../auth'
+import AuthContext from "../../context/AuthProvider";
 import styles from './Modules/Login.module.css'
-import React from 'react';
+import React, {useContext} from 'react';
 
 export const Logout = () => {
   const navigate = useNavigate()
-  const auth = useAuth()
+  const { setAuth } = useContext(AuthContext);
 
   const handleLogout = () => {
-    auth.logout()
+    setAuth({});
     navigate('/')
   }
 

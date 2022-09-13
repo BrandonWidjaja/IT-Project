@@ -1,15 +1,15 @@
-import { useAuth } from './auth'
 import { NavLink } from 'react-router-dom'
-
+import React from 'react';
+import useAuth from "../hooks/useAuth";
 const NavLinks= () => {
-    const auth = useAuth()
+    const { auth } = useAuth();
 
     return(
         <ul>
             <li>
                 <NavLink to="/">Home</NavLink>
             </li>
-            {auth.user && (
+            {auth.email && (
                 <li>
                     <NavLink to="/">New Building</NavLink>
                 </li>
@@ -17,7 +17,7 @@ const NavLinks= () => {
             <li>
                 <NavLink to="/about">About Us</NavLink>
             </li>
-            {auth.user && (
+            {auth.email && (
                 <>
                 <li>
                     <NavLink to="/profile">Profile</NavLink>
@@ -27,7 +27,7 @@ const NavLinks= () => {
                 </li>
                 </>
             )}
-            {!auth.user && (
+            {!auth.email && (
                 <li>
                     <NavLink to="/login">Login</NavLink>
                 </li>

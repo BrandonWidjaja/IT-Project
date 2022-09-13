@@ -1,70 +1,102 @@
-import { useState } from 'react'
-import React from 'react';
-import styles from './Modules/Login.module.css'
-import { useAuth } from '../auth'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRef, useState, useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import styles from './Modules/Login.module.css';
 
-export const Login = () => {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const auth = useAuth()
-	const navigate = useNavigate()
-	const location = useLocation()
-	const redirectPath = location.state?.path || '/'
+const Login = () => {
+    const { setAuth } = useAuth();
 
-	async function loginUser(event) {
-		event.preventDefault()
-		
-		const response = await fetch('http://localhost:3001/user/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password
-			}),
-		})
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
-		const data = await response.json()
+    const userRef = useRef();
+    const errRef = useRef();
 
-		if (data.user) {
-			localStorage.setItem('token', data.user)
-			alert('Login successful')
-			window.location.href = '/'
-		} else {
-			alert('Please check your username and password')
-		}
-	}
+    const [email, setEmail] = useState('');
+    const [password, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
 
-	const handleLogin = () => {
-		auth.login(email);
-		navigate(redirectPath, { replace: true })
-	}
-	return (
-		<div className={styles.card}>
-			<img src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png"  className={styles.login_logo} alt = "test"></img>
-			<form onSubmit={loginUser} className={styles.login_card}>
-			<h1 style = {{color: "#607EAA"}}>Login</h1>
-				<input
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					type="email"
-					placeholder="Email"
-				/>
-				<br />
-				<input
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					type="password"
-					placeholder="Password"
-				/>
-				<br />
-				<button style = {{minWidth : "40%"}} type="submit" value="Login" onClick={handleLogin}>Login</button>
-			</form>
-		</div>
-	)
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [email, password])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:3001/user/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email,
+					password
+				}),
+			})
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+            const accessToken = response?.data?.accessToken;
+            const roles = response?.data?.roles;
+            setAuth({ email, password, roles, accessToken });
+            setEmail('');
+            setPwd('');
+            navigate(from, { replace: true });
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }
+    }
+
+    return (
+
+        <div className={styles.card}>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <img src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png"  className={styles.login_logo} alt = "test"></img>
+            <form onSubmit={handleSubmit} style = {{marginRight: "0"}} className={styles.login_card}>
+				<h1 style = {{color: "#607EAA"}}>Sign In</h1>
+                <input
+                    type="text"
+                    id="email"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    required
+                />
+                <input
+                    type="password"
+                    id="password"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={password}
+                    required
+                />
+                <button style = {{minWidth : "40%"}}>Sign In</button>
+				<p>
+                <span>
+                    <Link to="/register">Sign Up</Link>
+                </span>
+            </p>
+            </form>
+            
+        </div>
+
+    )
 }
+
+export default Login
 // import React from 'react';
 // import styles from './Modules/Login.module.css';
 
@@ -84,5 +116,3 @@ export const Login = () => {
 //         </>
 //     )
 // }
-
-export default Login;
