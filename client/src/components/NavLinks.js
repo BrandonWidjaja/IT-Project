@@ -11,7 +11,7 @@ const NavLinks= () => {
             </li>
             {auth.email && (
                 <li>
-                    <NavLink to="/">New Building</NavLink>
+                    <NavLink to="/new-building">New Building</NavLink>
                 </li>
             )}
             <li>

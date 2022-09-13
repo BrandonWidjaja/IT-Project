@@ -2,15 +2,16 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
+var cors = require('cors')
 
-
-//var testRouter = require("./routes/test");
 var userRouter = require("./routes/userRouter");
+var buildingRouter = require("./routes/buildingRouter");
 require('dotenv').config({path:__dirname+'/../.env'});
 
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 // database
 console.log(process.env.DB_CONN);
@@ -58,3 +59,4 @@ app.listen(PORT, () => {
 
 //app.use("/test", testRouter);
 app.use("/user", userRouter);
+app.use("/building", buildingRouter);
