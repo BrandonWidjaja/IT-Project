@@ -6,14 +6,14 @@ const Unauthorized = () => {
     const goBack = () => navigate(-1);
 
     return (
-        <section>
+        <div style = {{textAlign : "center"}}>
             <h1>Unauthorized</h1>
             <br />
             <p>You do not have access to the requested page.</p>
             <div>
                 <button onClick={goBack}>Go Back</button>
             </div>
-        </section>
+        </div>
     )
 }
 

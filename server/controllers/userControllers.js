@@ -21,6 +21,7 @@ const register = async (req, res, next) => {
 			displayName: req.body.name,
 			email: req.body.email,
 			password: newPassword,
+      role: "User"
 		})
 		res.json({ status: 'ok' })
 	} catch (err) {
@@ -52,60 +53,13 @@ const login = async (req, res, next) => {
         'secret123'
       )
   
-      return res.json({ status: 'ok', user: token })
+      return res.json({ status: 'ok', user: token, role: "User" })
     } else {
       return res.json({ status: 'error', user: false })
     }
 };
 
-const createUser = async (req, res, next) => {
-  try {
-    // data from the body
-    let bodydata = req.body;
-
-    // check if a user with that email already exists, if not, continue
-    let exists = await User.findOne({ email: bodydata.email });
-
-    if (exists) {
-      return res.send("email already exists");
-    }
-
-    // create new user from req
-    const newUser = await new User(req.body);
-    await newUser.save();
-
-    // send new user
-    return await res.send(newUser);
-  } catch (e) {
-    // send error
-    console.error(e);
-    return res.send(e);
-  }
-};
 
 
-
-// get a user from their objectID
-const getUser = async (req, res, next) => {
-  try {
-    // retrieve object id of user from request
-    let userID = req.body._id;
-
-    // find the user in the database
-    let exists = await User.findOne({ _id: userID});
-    if (exists){
-      return res.send(exists);
-    }
-    // user not found
-    return res.send("user does not exist")
-
-  } catch (e) {
-    console.error(e);
-    return res.send(e);
-  }
-}
-
-
-
-module.exports = { createUser, getUser, register, login};
+module.exports = { register, login};
 

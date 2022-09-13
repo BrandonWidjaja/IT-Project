@@ -15,8 +15,7 @@ const userSchema = new mongoose.Schema({
   course: { Type: String },
   posts: [ObjectId],
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
-
-  accountType: { type: String, enum: ["Admin", "Public", "Club"] },
+  role: { type: String },
   model: { type: mongoose.Schema.Types.ObjectId, refPath: "accountType" },
 });
 

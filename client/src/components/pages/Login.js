@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import styles from './Modules/Login.module.css';
+import axios from "axios";
 
 const Login = () => {
     const { setAuth } = useAuth();
@@ -28,21 +29,18 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/user/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email,
-					password
-				}),
-			})
+            const response = await axios.post("http://localhost:3000/user/login",
+                JSON.stringify({ email, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ email, password, roles, accessToken });
+            const role = response?.data?.role;
+            setAuth({ email, password, role, accessToken });
             setEmail('');
             setPwd('');
             navigate(from, { replace: true });

@@ -11,12 +11,13 @@ import About from './components/pages/About';
 import {Layout1, Layout2} from './components/Layouts';
 import NewBuilding from './components/pages/NewBuilding';
 import { AuthProvider } from './context/AuthProvider';
-// import RequireAuth from './components/RequireAuth';
+import RequireAuth from './components/RequireAuth';
+import Unauthorized from './components/pages/Unauthorized';
 
-// const ROLES = {
-//   'User': 2001,
-//   'Admin': 5150
-// }
+const ROLES = {
+  User: "User",
+  Admin: "Admin"
+}
 
 function App() {
 
@@ -26,12 +27,15 @@ function App() {
       <AuthProvider>
       <Routes>
         <Route element={<Layout1 />} >
+          <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
           <Route>
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/profile-edit" element={<ProfileEdit />} />
-          <Route path="/new-building" element={<NewBuilding />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+            <Route path="/new-building" element={<NewBuilding />} />
+          </Route>
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />

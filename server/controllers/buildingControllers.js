@@ -8,7 +8,7 @@ const addNewBuilding = async (req, res, next) => {
     })
 		res.json({ status: 'ok' })
 	} catch (err) {
-		res.json({ status: 'error', error: 'Duplicate email' })
+		res.json({ status: 'error', error: 'Duplicate building' })
 	}
 };
 
