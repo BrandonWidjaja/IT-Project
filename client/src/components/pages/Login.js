@@ -1,12 +1,20 @@
 import { useState } from 'react'
+import React from 'react';
+import styles from './Modules/Login.module.css'
+import { useAuth } from '../auth'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-function Login() {
+export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const auth = useAuth()
+	const navigate = useNavigate()
+	const location = useLocation()
+	const redirectPath = location.state?.path || '/'
 
 	async function loginUser(event) {
 		event.preventDefault()
-
+		
 		const response = await fetch('http://localhost:3001/user/login', {
 			method: 'POST',
 			headers: {
@@ -14,7 +22,7 @@ function Login() {
 			},
 			body: JSON.stringify({
 				email,
-				password,
+				password
 			}),
 		})
 
@@ -29,10 +37,15 @@ function Login() {
 		}
 	}
 
+	const handleLogin = () => {
+		auth.login(email);
+		navigate(redirectPath, { replace: true })
+	}
 	return (
-		<div>
-			<h1>Login</h1>
-			<form onSubmit={loginUser}>
+		<div className={styles.card}>
+			<img src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png"  className={styles.login_logo} alt = "test"></img>
+			<form onSubmit={loginUser} className={styles.login_card}>
+			<h1 style = {{color: "#607EAA"}}>Login</h1>
 				<input
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
@@ -47,7 +60,7 @@ function Login() {
 					placeholder="Password"
 				/>
 				<br />
-				<input type="submit" value="Login" />
+				<button style = {{minWidth : "40%"}} type="submit" value="Login" onClick={handleLogin}>Login</button>
 			</form>
 		</div>
 	)

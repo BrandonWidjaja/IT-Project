@@ -1,21 +1,37 @@
+import { useAuth } from './auth'
+import { NavLink } from 'react-router-dom'
+
 const NavLinks= () => {
+    const auth = useAuth()
+
     return(
         <ul>
             <li>
-                <a href="/">Home</a>
+                <NavLink to="/">Home</NavLink>
             </li>
+            {auth.user && (
+                <li>
+                    <NavLink to="/">New Building</NavLink>
+                </li>
+            )}
             <li>
-                <a href="/">New Building</a>
+                <NavLink to="/about">About Us</NavLink>
             </li>
-            <li>
-                <a href="/profile">Profile</a>
-            </li>
-            <li>
-                <a href="/about">About Us</a>
-            </li>
-            <li>
-                <a href="/login">Login</a>
-            </li>
+            {auth.user && (
+                <>
+                <li>
+                    <NavLink to="/profile">Profile</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/logout">Logout</NavLink>
+                </li>
+                </>
+            )}
+            {!auth.user && (
+                <li>
+                    <NavLink to="/login">Login</NavLink>
+                </li>
+            )}
         </ul>
     );
 }
