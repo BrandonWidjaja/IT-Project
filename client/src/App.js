@@ -13,6 +13,9 @@ import NewBuilding from './components/pages/NewBuilding';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/pages/Unauthorized';
+import BuildingDetails from './components/pages/BuildingDetails';
+import NewEvent from './components/pages/NewEvent';
+import BuildingPending from './components/pages/BuildingPending';
 
 const ROLES = {
   User: "User",
@@ -36,6 +39,9 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
           </Route>
+          <Route path="/building-details" element={<BuildingDetails />} />
+          <Route path="/new-event" element={<NewEvent />} />
+          <Route path="/building-pending" element={<BuildingPending />} />
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />
