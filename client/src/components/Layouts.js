@@ -9,11 +9,11 @@ const Layout1 = () => {
               <Navbar />
           </nav>
           <div>
-              <div class = "container">
+              <div className = "container">
                 <Outlet />
               </div>
           </div>
-          <div class = "background"></div>
+          <div className = "background"></div>
           <div className='circle1'></div>
           <div className='circle2'></div>
           <Footer/>
@@ -28,11 +28,11 @@ const Layout1 = () => {
               <Navbar />
           </nav>
           <div style = {{minHeight: "85vh"}}>
-            <div class = "login-container">
+            <div className = "login-container">
               <Outlet/>
             </div>
           </div>
-          <div class = "background2"> </div>
+          <div className = "background2"> </div>
           <div className='circle3'></div>
           <div className='circle4'></div>
           <Footer/>
