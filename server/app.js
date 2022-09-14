@@ -6,7 +6,10 @@ var cors = require('cors')
 
 var userRouter = require("./routes/userRouter");
 var buildingRouter = require("./routes/buildingRouter");
-require('dotenv').config({path:__dirname+'/../.env'});
+
+const postRouter = require("./routes/postRouter");
+require("dotenv").config({ path: __dirname + "/../.env" });
+
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -60,3 +63,5 @@ app.listen(PORT, () => {
 //app.use("/test", testRouter);
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
+app.use("/post", postRouter);
+
