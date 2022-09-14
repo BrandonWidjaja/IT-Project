@@ -22,6 +22,10 @@ const getBuildings = async (req, res, next) => {
     }
     // user not found
     return res.send("no bulding");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
 
 module.exports = { addNewBuilding, getBuildings };
-
