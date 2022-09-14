@@ -2,36 +2,30 @@ const { Building } = require("../models/building");
 
 const addNewBuilding = async (req, res, next) => {
   try {
-    // create new building from req
-    const newBuilding = await new Building(req.body);
-    await newBuilding.save();
-
-    // send new building
-    return await res.send(newBuilding);
-  } catch (e) {
-    // send error
-    console.error(e);
-    return res.send(e);
-  }
+		await Building.create({
+      name: req.body.name,
+      description: req.body.description,
+    })
+		res.json({ status: 'ok' })
+	} catch (err) {
+		res.json({ status: 'error', error: 'Duplicate building' })
+	}
 };
 
 // get a building from their objectID
-const getBuilding = async (req, res, next) => {
+const getBuildings = async (req, res, next) => {
   try {
-    // retrieve object id of user from request
-    let buildingID = req.body._id;
-
     // find the user in the database
-    let exists = await Building.findOne({ _id: buildingID });
-    if (exists) {
-      return res.send(exists);
+    let buildings = await Building.find();
+    if (buildings) {
+      return res.send({data: buildings});
     }
     // user not found
-    return res.send("building does not exist");
+    return res.send("no bulding");
   } catch (e) {
     console.error(e);
     return res.send(e);
   }
 };
 
-module.exports = { addNewBuilding, getBuilding };
+module.exports = { addNewBuilding, getBuildings };

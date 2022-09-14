@@ -1,9 +1,9 @@
 var express = require("express");
 var buildingRouter = express.Router();
-const buildingController = require('../controllers/buildingControllers')
-const Building = require("../models/building");
 
-buildingRouter.post("/new", buildingController.addNewBuilding);
-buildingRouter.get("/getBuilding", buildingController.getBuilding);
+const buildingController = require("../controllers/buildingControllers");
+
+buildingRouter.post("/addBuilding", buildingController.addNewBuilding);
+buildingRouter.get("/buildings", buildingController.getBuildings);
 
 module.exports = buildingRouter;
