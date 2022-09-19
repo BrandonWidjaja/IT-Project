@@ -5,5 +5,6 @@ const buildingController = require("../controllers/buildingControllers");
 
 buildingRouter.post("/addBuilding", buildingController.addNewBuilding);
 buildingRouter.get("/buildings", buildingController.getBuildings);
+buildingRouter.get("/building-detail/:name", buildingController.getBuildingDetail);
 
 module.exports = buildingRouter;

@@ -1,19 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Modules/BuildingDetails.module.css';
 import Rating from 'react-rating'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/fontawesome-free-solid"
+import { useParams } from 'react-router-dom';
+import axios from "axios";
 
 function BuildingDetails() {
-      
+    
+    const {name} = useParams();
+
+    const [building, setBuilding] = useState("")
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/building/building-detail/${name}`)
+        .then(res => {
+            setBuilding(res.data);
+        }).catch(
+            (err) => console.log("err", err)
+        );
+    }, [setBuilding, name])
+
     return (
         <>
-            <h1 style = {{color: "#607EAA"}}>Widjaja Royal Building</h1>
+            <h1 style = {{color: "#607EAA"}}>{building.name}</h1>
             <div className={styles.card}>
                 <img src="https://images.unsplash.com/photo-1626092806645-ae053131caff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt = "test"></img>
                 <div style = {{display: "flex", flexDirection: "column", marginRight: "2.5rem"}}>
-                    <p>Name: Widjaja Royal Building</p>
-                    <p>Location:</p>
+                    <p>Name: {building.name}</p>
+                    {building.data?.location ? (
+                        <p>Location: {building.data.location}</p>
+                    ) : (
+                        <p>No Location Yet</p>
+                    )}
+
+                    {building.data?.description ? (
+                        <p>Description: {building.data.description}</p>
+                    ) : (
+                        <p>No Description Yet</p>
+                    )}
+                    
                     <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>

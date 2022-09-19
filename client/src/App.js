@@ -39,7 +39,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
           </Route>
-          <Route path="/building-details" element={<BuildingDetails />} />
+          <Route path="/building-detail/:name" element={<BuildingDetails />} />
           <Route path="/new-event" element={<NewEvent />} />
           <Route path="/building-pending" element={<BuildingPending />} />
         </Route>

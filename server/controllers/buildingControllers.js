@@ -28,4 +28,14 @@ const getBuildings = async (req, res, next) => {
   }
 };
 
-module.exports = { addNewBuilding, getBuildings };
+// get a building from their objectID
+const getBuildingDetail = async (req, res, next) => {
+  try { 
+    const buildingDetail = await Building.findOne( {name: req.params.name} ).lean()
+    return res.send({ name: req.params.name, data: buildingDetail })
+  } catch (err) { 
+      next(err) 
+  }
+};
+
+module.exports = { addNewBuilding, getBuildings, getBuildingDetail };
