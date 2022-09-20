@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   posts: [ObjectId],
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
   role: { type: String },
+  status: { type: String },
   model: { type: mongoose.Schema.Types.ObjectId, refPath: "accountType" },
 });
 
