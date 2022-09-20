@@ -6,6 +6,7 @@ var cors = require('cors')
 
 var userRouter = require("./routes/userRouter");
 var buildingRouter = require("./routes/buildingRouter");
+var adminRouter = require("./routes/adminRouter");
 
 const postRouter = require("./routes/postRouter");
 require("dotenv").config({ path: __dirname + "/../.env" });
@@ -64,4 +65,5 @@ app.listen(PORT, () => {
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
 app.use("/post", postRouter);
+app.use("/admin", adminRouter)
 
