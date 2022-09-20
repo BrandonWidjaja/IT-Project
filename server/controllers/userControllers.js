@@ -84,14 +84,14 @@ const editProfile = async (req, res, next) => {
     }
 
     // update editable info if found in request
-    if (req.body.displayName) {
-      newDispName = req.body.displayName;
+    if (req.body.newdisplayName) {
+      newDispName = req.body.newdisplayName;
     }
-    if (req.body.bio) {
-      newBio = req.body.bio;
+    if (req.body.newbio) {
+      newBio = req.body.newbio;
     }
-    if (req.body.course) {
-      newCourse = req.body.course;
+    if (req.body.newcourse) {
+      newCourse = req.body.newcourse;
     }
 
     // update the specified user with new info
