@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styles from './Modules/Buildings.module.css';
 import { Link } from 'react-router-dom';
-
+import Rating from 'react-rating'
 
 GetList.propTypes = {
     buildingList: PropTypes.array,
@@ -24,8 +24,7 @@ function GetList(props) {
                         <div style = {{width: "100%"}}>
                             <p>Name: {building.name}</p>
                             <p>Location: {building.location}</p>
-                            <hr/>
-                            <p>Rating:</p>
+                            <p style={{}}>Rating:<Rating initialRating={building.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                         </div>
                 </div>
             </Link>
