@@ -43,11 +43,11 @@ function BuildingDetails() {
                         <p>No Description Yet</p>
                     )}
                     
-                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={2.5} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
+                <p style={{display:"flex", alignItems:"center"}}>Give Rate:<Rating initialRating={2.5} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
                 <button style={{height:"2rem"}}>Update</button>
             </div>
 

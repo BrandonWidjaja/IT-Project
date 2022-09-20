@@ -62,7 +62,7 @@ function NewBuilding() {
                     {building ? (
                         <p style = {{textAlign: "center"}}>New Building Added Successfully</p>
                     ) : (
-                        <p style = {{textAlign: "center"}}>Error</p>
+                        <p style = {{textAlign: "center"}}></p>
                     )}
                 </form>
             </div>
