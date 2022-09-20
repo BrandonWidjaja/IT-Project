@@ -24,7 +24,7 @@ const getPost = async (req, res, next) => {
     // find the user in the database
     let exists = await Post.findOne({ _id: postID });
     if (exists) {
-      return res.send(exists);
+      return res.send({data : exists});
     }
     // user not found
     return res.send("post does not exist");

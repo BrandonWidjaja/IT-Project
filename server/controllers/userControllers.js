@@ -25,8 +25,29 @@ const createUser = async (req, res, next) => {
   }
 };
 
+// get a post from their objectID
+const getProfile = async (req, res, next) => {
+  try {
+    // retrieve object id of user from request
+    let req_email = req.body.email;
+
+    // find the user in the database
+    let exists = await User.findOne({ email: req_email });
+    if (exists) {
+      return res.send({data : exists});
+    }
+    // user not found
+    return res.send("profile does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
 
 
+}
+module.exports = { register, login, getProfile};
+
+<<<<<<< Updated upstream
 // get a user from their objectID
 const getUser = async (req, res, next) => {
   try {
@@ -50,4 +71,6 @@ const getUser = async (req, res, next) => {
 
 
 module.exports = { createUser, getUser };
+=======
+>>>>>>> Stashed changes
 
