@@ -3,7 +3,9 @@ const { Post } = require("../models/post");
 const addNewPost = async (req, res, next) => {
   try {
     // create new post from req
+    let today = getDateTime().substring(0,10);
     const newPost = await new Post(req.body);
+    newPost.dateTimePosted = today;
     await newPost.save();
 
     // send new post
