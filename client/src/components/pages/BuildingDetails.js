@@ -8,10 +8,13 @@ import axios from "axios";
 
 function BuildingDetails() {
     
+    const handleRating = (e) => {
+        console.log(e);
+      }
+
     const {name} = useParams();
 
     const [building, setBuilding] = useState("")
-
 
     useEffect(() => {
         axios.get(`http://localhost:3000/building/building-detail/${name}`)
@@ -25,7 +28,7 @@ function BuildingDetails() {
     return (
         <>  <div style = {{display: "flex", justifyContent: "space-between"}}>
             <h1 style = {{color: "#607EAA"}}>{building.name}</h1>
-            <Link key = {building.id} to={`/building-edit/${building.name}`}><a>Edit Building</a></Link>
+            <Link key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
             </div>
             <div className={styles.card}>
                 <img src="https://images.unsplash.com/photo-1626092806645-ae053131caff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt = "test"></img>
@@ -43,11 +46,11 @@ function BuildingDetails() {
                         <p>No Description Yet</p>
                     )}
                     
-                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
             </div>
             <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={2.5} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
+                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={handleRating}/></p>
                 <button style={{height:"2rem"}}>Update</button>
             </div>
 
