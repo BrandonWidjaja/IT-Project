@@ -16,7 +16,7 @@ import Unauthorized from './components/pages/Unauthorized';
 import BuildingDetails from './components/pages/BuildingDetails';
 import NewEvent from './components/pages/NewEvent';
 import BuildingPending from './components/pages/BuildingPending';
-
+import BuildingEdit from './components/pages/BuildingEdit';
 const ROLES = {
   User: "User",
   Admin: "Admin"
@@ -42,6 +42,7 @@ function App() {
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
           <Route path="/new-event" element={<NewEvent />} />
           <Route path="/building-pending" element={<BuildingPending />} />
+          <Route path="/building-edit/:name" element={<BuildingEdit />} />
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />
