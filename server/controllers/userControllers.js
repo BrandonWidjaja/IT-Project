@@ -106,4 +106,23 @@ const editProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, editProfile };
+const getProfile = async (req, res, next) => {
+  try {
+    // retrieve object id of user from request
+    let req_email = req.body.email;
+    // find the user in the database
+    let exists = await User.findOne({ email: req_email });
+    if (exists) {
+      return res.send({data : exists});
+    }
+    // user not found
+    return res.send("profile does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+}
+
+
+
+module.exports = { register, login, editProfile, getProfile };
