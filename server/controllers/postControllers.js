@@ -79,6 +79,18 @@ const likeComment = async (req, res, next) => {
           if (exists.comments[comment].likedBy.includes(user)){
             return res.send("Comment already liked");
           } else {
+            var removeIndex;
+            for (var userID in exists.comments[comment].dislikedBy){
+              if (user == exists.comments[comment].dislikedBy[userID]){
+                removeIndex = userID;
+              }
+            }
+
+            if (removeIndex){
+              exists.comments[comment].dislikedBy.splice(removeIndex, 1);
+            }
+              
+            
             foundComment.likedBy.push(user);
           }
           
@@ -116,6 +128,16 @@ const dislikeComment = async (req, res, next) => {
           if (exists.comments[comment].dislikedBy.includes(user)){
             return res.send("Comment already disliked");
           } else {
+            var removeIndex;
+            for (var userID in exists.comments[comment].likedBy){
+              if (user == exists.comments[comment].likedBy[userID]){
+                removeIndex = userID;
+              }
+            }
+
+            if (removeIndex){
+              exists.comments[comment].likedBy.splice(removeIndex, 1);
+            }
             foundComment.dislikedBy.push(user);
           }
           
