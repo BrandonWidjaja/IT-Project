@@ -1,7 +1,8 @@
 var express = require("express");
 var adminRouter = express.Router();
-const userController = require("../controllers/adminControllers");
+const adminController = require("../controllers/adminControllers");
 
-adminRouter.post("/new-admin", userController.newAdmin);
+adminRouter.post("/new-admin", adminController.addNewAdmin);
+adminRouter.post("/user-to-admin", adminController.userToAdmin);
 
 module.exports = adminRouter;
