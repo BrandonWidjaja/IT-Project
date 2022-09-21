@@ -3,26 +3,6 @@ import styles from './Modules/Profile.module.css';
 // import { useParams } from 'react-router-dom';
 
 function ProfileEdit() {
-    // const {email} = useParams();
-
-    // const [name, setName] = useState("");
-
-    // UpdateProfileHandler=(e)=>{
-    //     e.preventDefault();
-    //     //create object of form data
-
-    //     //update-profile
-    //     axios.post("http://localhost:3001/user/edit-profile/",formData,{
-    //         headers: {
-    //             "content-type": "application/json"
-    //           }
-    //     }).then(res=>{
-    //         console.log(res);
-    //        this.setState({msg:res.data.message});
-    //     })
-    //     .catch(err=>console.log(err))
-    // }
-
 
     return (
         <>
