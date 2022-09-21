@@ -33,10 +33,10 @@ function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
           <Route>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:email" element={<Profile />} />
           </Route>
-          <Route path="/profile-edit" element={<ProfileEdit />} />
-          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+          <Route path="/profile-edit/:email" element={<ProfileEdit />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />

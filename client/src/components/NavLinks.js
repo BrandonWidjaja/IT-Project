@@ -20,7 +20,7 @@ const NavLinks= () => {
             {auth.email && (
                 <>
                 <li>
-                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to={`/profile/${auth.email}`}>Profile</NavLink>
                 </li>
                 <li>
                     <NavLink to="/logout">Logout</NavLink>

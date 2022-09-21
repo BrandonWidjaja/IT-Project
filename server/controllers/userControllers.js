@@ -22,6 +22,7 @@ const register = async (req, res, next) => {
       email: req.body.email,
       password: newPassword,
       role: "User",
+      bio: ""
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -63,7 +64,7 @@ const editProfile = async (req, res, next) => {
   try {
     // find the user
     const user = await User.findOne({
-      email: req.body.email,
+      email: req.params.email,
     });
 
     // initialise editable info
@@ -109,7 +110,7 @@ const editProfile = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
   try {
     // retrieve object id of user from request
-    let req_email = req.body.email;
+    let req_email = req.params.email;
     // find the user in the database
     let exists = await User.findOne({ email: req_email });
     if (exists) {
