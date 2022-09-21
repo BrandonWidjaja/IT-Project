@@ -14,8 +14,9 @@ import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/pages/Unauthorized';
 import BuildingDetails from './components/pages/BuildingDetails';
+import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
 import NewEvent from './components/pages/NewEvent';
-import BuildingPending from './components/pages/BuildingPending';
+import AdminBuildingPending from './components/pages/AdminBuildingPending';
 import BuildingEdit from './components/pages/BuildingEdit';
 const ROLES = {
   User: "User",
@@ -40,8 +41,9 @@ function App() {
             <Route path="/new-building" element={<NewBuilding />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
+          <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />
           <Route path="/new-event" element={<NewEvent />} />
-          <Route path="/building-pending" element={<BuildingPending />} />
+          <Route path="/admin-building-pending" element={<AdminBuildingPending />} />
           <Route path="/building-edit/:name" element={<BuildingEdit />} />
         </Route>
         <Route element={<Layout2 />} >

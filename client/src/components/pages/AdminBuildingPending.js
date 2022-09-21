@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Modules/BuildingPending.module.css';
+import styles from './Modules/AdminBuildingPending.module.css';
 
-function BuildingPending() {
+function AdminBuildingPending() {
     return (
         <>
             <form style = {{display: "flex", justifyContent: "space-between"}}>
@@ -45,4 +45,4 @@ function BuildingPending() {
     )
 }
 
-export default BuildingPending;
+export default AdminBuildingPending;
