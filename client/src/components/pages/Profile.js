@@ -23,7 +23,7 @@ function Profile() {
         <>
             <h1 style = {{color: "#607EAA"}}>Profile</h1>
             <div className={styles.card}>
-                <img src="https://images.unsplash.com/photo-1626092806645-ae053131caff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt = "test"></img>
+                <img src={user.data?.pic} alt = "test"></img>
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <p>Name: {user.data?.displayName} </p>
                     <p>Date of Birth: {user.data?.birthDate}</p>
