@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
-const bcrypt = require("bcryptjs");
 
 /* User properties */
 const userSchema = new mongoose.Schema({
@@ -17,6 +16,7 @@ const userSchema = new mongoose.Schema({
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
   role: { type: String },
   model: { type: mongoose.Schema.Types.ObjectId, refPath: "accountType" },
+  pic: { type: String }
 });
 
 /*

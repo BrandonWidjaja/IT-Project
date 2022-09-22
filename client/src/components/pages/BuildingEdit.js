@@ -17,6 +17,7 @@ function BuildingEdit() {
         (err) => console.log("err", err)
     );
 }, [setBuilding, name])
+
 console.log(building);
   const handleSubmit = (e) => {
     // prevent the form from refreshing the whole page

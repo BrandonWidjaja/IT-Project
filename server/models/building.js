@@ -10,6 +10,7 @@ const buildingSchema = new mongoose.Schema({
   tags: [String],
   approved: Boolean,
   suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "Building" },
+  pic: { type: String, default: "https://www.nicepng.com/png/full/89-898495_house-logo-png-home-address-logo-png.png" }
 });
 
 const Building = mongoose.model("Building", buildingSchema);
