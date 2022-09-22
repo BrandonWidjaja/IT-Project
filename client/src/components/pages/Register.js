@@ -1,59 +1,59 @@
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
 import styles from './Modules/Login.module.css';
+import { Link } from 'react-router-dom';
 
 const Register  = ()=>{
     const [name,setName] = useState("")
-    const [password,setPasword] = useState("")
+    const [password,setPassword] = useState("")
+    const [confirmPassword,setConfirmPassword] = useState("")
     const [email,setEmail] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState(undefined)
     const [register, setRegister] = useState(false);
+    const [err, setErr] = useState(false);
 
-    const uploadFields = useCallback(() => {
-      const configuration = {
-        method: "post",
-        url: "http://localhost:3001/user/register",
-        data: {
-          name,
-          email,
-          password,
-          pic:url
-        },
-      };
+    const uploadFields = useCallback((e) => {
 
-      // make the API call
-      axios(configuration)
-        .then((result) => {
-          setRegister(true);
-        })
-        .catch((error) => {
-          error = new Error();
-        });
-    }, [email, name, password, url])
-
-    //   fetch("http://localhost:3001/user/register",{
-    //       method:"post",
-    //       headers:{
-    //           "Content-Type":"application/json"
-    //       },
-    //       body:JSON.stringify({
-    //           name,
-    //           password,
-    //           email,
-    //           pic:url
-    //       })
-    //   }).then(res=>res.json())
-    //   .catch(err=>{
-    //       console.log(err)
-    //   })
-    // }, [email, name, password, url])
+      if (!err) {
+        const configuration = {
+          method: "post",
+          url: "http://localhost:3001/user/register",
+          data: {
+            name,
+            email,
+            password,
+            pic:url
+          },
+        };
+  
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+            setRegister(true);
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      } else {
+        alert("Password Did Not Match");
+      }
+      
+        
+    }, [email, name, password, url, err])
 
     useEffect(()=>{
         if(url){
             uploadFields()
         }
-    },[url, uploadFields])
+
+        if (password === confirmPassword) {
+          setErr(false);
+        } else {
+          setErr(true);
+        }
+
+    },[url, uploadFields, password, confirmPassword])
 
     const uploadPic = ()=>{
         const data = new FormData()
@@ -73,36 +73,43 @@ const Register  = ()=>{
         })
     }
     
-    const PostData = ()=>{
-        if(image){
-            uploadPic()
-        }else{
-            uploadFields()
-        }
+    const PostData = (e)=>{
+      e.preventDefault();
+      if(image){
+          uploadPic()
+      }else{
+          uploadFields()
+      }
        
     }
 
    return (
       <div style = {{padding: "3%"}}>
-          <div style = {{padding: "3%", width : "94%"}} className={styles.login_card}>
+          <form style = {{padding: "3%", width : "94%"}} className={styles.login_card} onSubmit={PostData}>
             <h1 style = {{color: "#607EAA"}}>Register</h1>
-            <input style = {{width : "40%"}} type="text" placeholder="name" value={name} onChange={(e)=>setName(e.target.value)}/>
-            <input style = {{width : "40%"}} type="text" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            <input style = {{width : "40%"}} type="password" placeholder="password" value={password} onChange={(e)=>setPasword(e.target.value)} />
+            <input style = {{width : "40%"}} type="text" placeholder="Username" value={name} onChange={(e)=>setName(e.target.value)} required/>
+            <input style = {{width : "40%"}} type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
+            <input style = {{width : "40%"}} type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+            <input style = {{width : "40%"}} type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/>
+            {err ? <p> Passwords did not match </p> : ''}
             <div style = {{width : "40%", textAlign: "center", margin: "auto", marginTop:"2rem"}}>
                 <span>Upload Profile Picture</span>
                 <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
             </div>
-            <button onClick={()=>PostData()} style = {{minWidth : "20%"}}>
-                SignUP
+            <button style = {{minWidth : "20%"}}>
+                Sign Up
             </button>
           {/* display success message */}
           {register ? (
-             <p className="text-success">You Are Registered Successfully</p>
+            <div>
+              <p>You Are Registered Successfully</p>
+              <Link to="/login">Sign In</Link>
+            </div>
+             
            ) : (
-             <p className="text-danger">You Are Not Registered</p>
+             <p>You Are Not Registered</p>
            )}            
-        </div>
+        </form>
       </div>
    )
 }

@@ -1,6 +1,7 @@
 import React,{useState, useEffect, useCallback } from 'react'
 import styles from './Modules/NewBuilding.module.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom"
 
 function NewBuilding() {
     // initial state
@@ -10,6 +11,8 @@ function NewBuilding() {
   const [building, setBuilding] = useState("");
   const [image,setImage] = useState("")
   const [url,setUrl] = useState(undefined)
+  const navigate = useNavigate()
+
 
   const uploadFields = useCallback(() => {
     const configuration = {
@@ -25,13 +28,15 @@ function NewBuilding() {
 
     // make the API call
     axios(configuration)
-      .then((result) => {
-        setBuilding(true);
-      })
-      .catch((error) => {
-        error = new Error();
-      });
-  }, [name, description, location, url])
+    .then((result) => {
+      setBuilding(true);
+    })
+    .catch((error) => {
+      error = new Error();
+    });
+    
+    navigate('/')
+  }, [name, description, location, url, navigate])
 
   useEffect(()=>{
       if(url){
@@ -44,7 +49,7 @@ function NewBuilding() {
       data.append("file",image)
       data.append("upload_preset","profile_image_upload")
       data.append("cloud_name","dm13bguzr")
-      fetch("https://api.cloudinary.com/v1_1/dm13bguzr/image/upload",{
+      fetch("https://api.cloudinary.com/v1_1/dm13bguzr/image/upload", {
           method:"post",
           body:data
       })
@@ -69,7 +74,7 @@ function NewBuilding() {
         <>
             <h1 style = {{color: "#607EAA"}}>Add New Building</h1>
             <div className={styles.add}>
-                <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
+                <form style = {{width: "100%", display: "flex", flexDirection: "column"}} onSubmit={() => PostData()}>
                     <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Name of building:</p>
                     <input style = {{width: "100%"}} className={styles.searchbar} type="text" 
                     value={name}
@@ -91,13 +96,13 @@ function NewBuilding() {
                       </div>
                     </div>
                     
-                    <button onClick={()=>PostData()} style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
+                    <button style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
                     {building ? (
                         <p style = {{textAlign: "center"}}>New Building Added Successfully</p>
                     ) : (
                         <p style = {{textAlign: "center"}}></p>
                     )}
-                </div>
+                </form>
             </div>
         </>
     )

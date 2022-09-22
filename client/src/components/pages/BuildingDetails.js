@@ -28,7 +28,7 @@ function BuildingDetails() {
             <Link key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
             </div>
             <div className={styles.card}>
-                <img src={building.pic} alt = "test"></img>
+                <img src = {building.data?.pic} alt = "building_pic"></img>
                 <div style = {{display: "flex", flexDirection: "column", marginRight: "2.5rem"}}>
                     <p>Name: {building.name}</p>
                     {building.data?.location ? (
