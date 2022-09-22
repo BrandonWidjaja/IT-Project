@@ -21,7 +21,9 @@ const register = async (req, res, next) => {
       displayName: req.body.name,
       email: req.body.email,
       password: newPassword,
+      pic: req.body.pic,
       role: "User",
+      bio: ""
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -29,6 +31,40 @@ const register = async (req, res, next) => {
   }
 };
 
+// // register endpoint
+// const register = async (req, res, next) => {
+//   const {name,email,password,pic} = req.body 
+//   if(!email || !password || !name){
+//      return res.status(422).json({error:"please add all the fields"})
+//   }
+//   User.findOne({email:email})
+//   .then((savedUser)=>{
+//       if(savedUser){
+//         return res.status(422).json({error:"user already exists with that email"})
+//       }
+//       bcrypt.hash(password, 10)
+//       .then(hashedpassword=>{
+//             const user = new User({
+//                 email,
+//                 password:hashedpassword,
+//                 name,
+//                 pic
+//             })
+    
+//             user.save()
+//             .then(user=>{
+//                 res.json({message:"saved successfully"})
+//             })
+//             .catch(err=>{
+//                 console.log(err)
+//             })
+//       })
+     
+//   })
+//   .catch(err=>{
+//     console.log(err)
+//   })
+// };
 // login endpoint
 const login = async (req, res, next) => {
   const user = await User.findOne({
@@ -63,7 +99,7 @@ const editProfile = async (req, res, next) => {
   try {
     // find the user
     const user = await User.findOne({
-      email: req.body.email,
+      email: req.params.email,
     });
 
     // initialise editable info
@@ -109,7 +145,7 @@ const editProfile = async (req, res, next) => {
 const getProfile = async (req, res, next) => {
   try {
     // retrieve object id of user from request
-    let req_email = req.body.email;
+    let req_email = req.params.email;
     // find the user in the database
     let exists = await User.findOne({ email: req_email });
     if (exists) {

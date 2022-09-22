@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,{useState, useEffect, useCallback } from 'react'
 import styles from './Modules/NewBuilding.module.css';
 import axios from "axios";
 
@@ -8,37 +8,68 @@ function NewBuilding() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [building, setBuilding] = useState("");
+  const [image,setImage] = useState("")
+  const [url,setUrl] = useState(undefined)
 
-  const handleSubmit = (e) => {
-    // prevent the form from refreshing the whole page
-    e.preventDefault();
-
-    // set configurations
+  const uploadFields = useCallback(() => {
     const configuration = {
       method: "post",
       url: "http://localhost:3001/building/addBuilding",
       data: {
         name,
         description,
-        location
+        location,
+        pic:url
       },
     };
 
     // make the API call
     axios(configuration)
-    .then((result) => {
-      setBuilding(true);
-    })
-    .catch((error) => {
-      error = new Error();
-    });
-  };
+      .then((result) => {
+        setBuilding(true);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  }, [name, description, location, url])
+
+  useEffect(()=>{
+      if(url){
+          uploadFields()
+      }
+  },[url, uploadFields])
+
+  const uploadPic = ()=>{
+      const data = new FormData()
+      data.append("file",image)
+      data.append("upload_preset","profile_image_upload")
+      data.append("cloud_name","dm13bguzr")
+      fetch("https://api.cloudinary.com/v1_1/dm13bguzr/image/upload",{
+          method:"post",
+          body:data
+      })
+      .then(res=>res.json())
+      .then(data=>{
+         setUrl(data.url)
+      })
+      .catch(err=>{
+          console.log(err)
+      })
+  }
+  
+  const PostData = ()=>{
+      if(image){
+          uploadPic()
+      }else{
+          uploadFields()
+      }
+  }
 
     return (
         <>
             <h1 style = {{color: "#607EAA"}}>Add New Building</h1>
             <div className={styles.add}>
-                <form style = {{width: "100%", display: "flex", flexDirection: "column"}} onSubmit={(e) => handleSubmit(e)}>
+                <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Name of building:</p>
                     <input style = {{width: "100%"}} className={styles.searchbar} type="text" 
                     value={name}
@@ -54,17 +85,19 @@ function NewBuilding() {
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} required></textarea>
                     </div>
-                    <div style = {{display: "flex"}}>
-                        <p style = {{width: "25%"}}>Image:</p>
-                        <button>Upload</button>
+                    <div style = {{display: "flex", marginBottom: "1rem"}}><p style = {{width: "25%"}}>Image:</p>
+                        <div style = {{width : "100%", marginRight: "auto"}}>
+                          <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
+                      </div>
                     </div>
-                    <button onClick={(e) => handleSubmit(e)} type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
+                    
+                    <button onClick={()=>PostData()} style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
                     {building ? (
                         <p style = {{textAlign: "center"}}>New Building Added Successfully</p>
                     ) : (
                         <p style = {{textAlign: "center"}}></p>
                     )}
-                </form>
+                </div>
             </div>
         </>
     )
