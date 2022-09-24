@@ -22,7 +22,7 @@ function Profile() {
         <>
             <h1 style = {{color: "#607EAA"}}>Profile</h1>
             <div className={styles.card}>
-                <img src={user.data?.pic} alt = "test"></img>
+                <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <p>Name: {user.data?.displayName} </p>
                     <p>Date of Birth: {user.data?.birthDate}</p>

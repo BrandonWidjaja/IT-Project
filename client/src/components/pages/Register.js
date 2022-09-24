@@ -12,6 +12,7 @@ const Register  = ()=>{
     const [url,setUrl] = useState(undefined)
     const [register, setRegister] = useState(false);
     const [err, setErr] = useState(false);
+    const [preview, setPreview] = useState("");
 
     const uploadFields = useCallback((e) => {
 
@@ -83,6 +84,11 @@ const Register  = ()=>{
        
     }
 
+    const previewImage = async (e) => {
+      setImage(e.target.files[0])
+      setPreview(URL.createObjectURL(e.target.files[0]))
+    }
+
    return (
       <div style = {{padding: "3%"}}>
           <form style = {{padding: "3%", width : "94%"}} className={styles.login_card} onSubmit={PostData}>
@@ -91,10 +97,17 @@ const Register  = ()=>{
             <input style = {{width : "40%"}} type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/>
-            {err ? <p> Passwords did not match </p> : ''}
+            {err ? <p style = {{fontSize:"0.8rem", color:"grey"}}> Passwords did not match </p> : ''}
             <div style = {{width : "40%", textAlign: "center", margin: "auto", marginTop:"2rem"}}>
-                <span>Upload Profile Picture</span>
-                <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
+                <h3 style = {{color : "var(--light-secondary)"}}>Profile Picture</h3>
+                {
+                    preview ? (
+                        <img style = {{width : "8rem", height : "10rem", maxHeight: "10rem",marginTop: "1rem", objectFit: "cover"}} src = {preview} alt = "upload"></img>
+                    ) : (
+                        <></>
+                    )
+                }
+                <input type="file" onChange={previewImage} />
             </div>
             <button style = {{minWidth : "20%"}}>
                 Sign Up
