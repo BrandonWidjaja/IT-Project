@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
@@ -17,6 +17,7 @@ import BuildingDetails from './components/pages/BuildingDetails';
 import NewEvent from './components/pages/NewEvent';
 import BuildingPending from './components/pages/BuildingPending';
 import BuildingEdit from './components/pages/BuildingEdit';
+
 const ROLES = {
   User: "User",
   Admin: "Admin"

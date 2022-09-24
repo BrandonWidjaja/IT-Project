@@ -31,40 +31,6 @@ const register = async (req, res, next) => {
   }
 };
 
-// // register endpoint
-// const register = async (req, res, next) => {
-//   const {name,email,password,pic} = req.body 
-//   if(!email || !password || !name){
-//      return res.status(422).json({error:"please add all the fields"})
-//   }
-//   User.findOne({email:email})
-//   .then((savedUser)=>{
-//       if(savedUser){
-//         return res.status(422).json({error:"user already exists with that email"})
-//       }
-//       bcrypt.hash(password, 10)
-//       .then(hashedpassword=>{
-//             const user = new User({
-//                 email,
-//                 password:hashedpassword,
-//                 name,
-//                 pic
-//             })
-    
-//             user.save()
-//             .then(user=>{
-//                 res.json({message:"saved successfully"})
-//             })
-//             .catch(err=>{
-//                 console.log(err)
-//             })
-//       })
-     
-//   })
-//   .catch(err=>{
-//     console.log(err)
-//   })
-// };
 // login endpoint
 const login = async (req, res, next) => {
   const user = await User.findOne({
@@ -89,7 +55,7 @@ const login = async (req, res, next) => {
       "secret123"
     );
 
-    return res.json({ status: "ok", user: token, role: "User" });
+    return res.send({data : user});
   } else {
     return res.json({ status: "error", user: false });
   }

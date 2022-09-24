@@ -28,34 +28,23 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3000/user/login",
+            axios.post("http://localhost:3000/user/login",
                 JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
+            ).then(res => {
+                window.localStorage.setItem("User", JSON.stringify(res.data.data));
+                setAuth(res.data.data);
+            }).catch(
+                (err) => console.log("err", err)
             );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const role = response?.data?.role;
-            setAuth({ email, password, role, accessToken });
-            setEmail('');
-            setPwd('');
-            navigate(from, { replace: true });
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+            //if (accessToken) {
+                setEmail('');
+                setPwd('');
+                navigate(from, { replace: true });
+            //}
     }
 
     return (
