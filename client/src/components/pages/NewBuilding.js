@@ -62,7 +62,8 @@ function NewBuilding() {
       })
   }
   
-  const PostData = ()=>{
+  const handleSubmit = async (e) => {
+        e.preventDefault();
       if(image){
           uploadPic()
       }else{
@@ -74,7 +75,7 @@ function NewBuilding() {
         <>
             <h1 style = {{color: "#607EAA"}}>Add New Building</h1>
             <div className={styles.add}>
-                <form style = {{width: "100%", display: "flex", flexDirection: "column"}} onSubmit={() => PostData()}>
+                <form style = {{width: "100%", display: "flex", flexDirection: "column"}} onSubmit={handleSubmit}>
                     <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Name of building:</p>
                     <input style = {{width: "100%"}} className={styles.searchbar} type="text" 
                     value={name}
@@ -96,7 +97,7 @@ function NewBuilding() {
                       </div>
                     </div>
                     
-                    <button style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
+                    <button type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
                     {building ? (
                         <p style = {{textAlign: "center"}}>New Building Added Successfully</p>
                     ) : (

@@ -1,7 +1,7 @@
 import styles from './Modules/Profile.module.css';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Profile() {
 

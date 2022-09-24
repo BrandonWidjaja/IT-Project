@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Buildings from './components/pages/Buildings';
 import Profile from './components/pages/Profile';
@@ -34,9 +34,9 @@ function App() {
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
           <Route>
-            <Route path="/profile/:email" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
-          <Route path="/profile-edit/:email" element={<ProfileEdit />} />
+          <Route path="/profile-edit" element={<ProfileEdit />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
           </Route>

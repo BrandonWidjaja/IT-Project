@@ -12,8 +12,8 @@ const RequireAuth = ({ allowedRoles }) => {
         if (!loggedIn) {
             navigate("/login");
         }
-    }, [])
-    
+    }, [navigate])
+
     return (
         allowedRoles?.includes(auth.role)
             ? <Outlet />
