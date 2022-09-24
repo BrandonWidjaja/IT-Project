@@ -8,8 +8,7 @@ const RequireAuth = ({ allowedRoles }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const loggedIn = window.localStorage.getItem("User");
-        if (!loggedIn) {
+        if (!window.localStorage.getItem("User")) {
             navigate("/login");
         }
     }, [navigate])

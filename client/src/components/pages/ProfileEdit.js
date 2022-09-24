@@ -1,13 +1,12 @@
 import styles from './Modules/Profile.module.css';
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+//import { useNavigate } from "react-router-dom"
 
 function ProfileEdit() {
     const [newDisplayName, setNewDisplayName] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newBio, setNewBio] = useState('');
-    const navigate = useNavigate();
     const [image,setImage] = useState("");
     const [url, setUrl] = useState(undefined);
 
@@ -31,7 +30,7 @@ function ProfileEdit() {
           error = new Error();
         });
         window.open("/profile");
-      }, [newDisplayName, newPassword, newBio, url, navigate])
+      }, [newDisplayName, newPassword, newBio, url])
     
       useEffect(()=>{
           if(url){

@@ -28,29 +28,33 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-            axios.post("http://localhost:3000/user/login",
-                JSON.stringify({ email, password }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            ).then(res => {
+        axios.post("http://localhost:3000/user/login",
+            JSON.stringify({ email, password }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+        ).then(res => {
+            if (res.data.status === "ok") {
                 window.localStorage.setItem("User", JSON.stringify(res.data.data));
                 setAuth(res.data.data);
-            }).catch(
-                (err) => console.log("err", err)
-            );
-            //if (accessToken) {
                 setEmail('');
                 setPwd('');
                 navigate(from, { replace: true });
-            //}
+            } else {
+                setErrMsg("Incorrect Password or Invalid Email");
+            }
+        }).catch(
+            (err) => console.log("err", err)
+        );
+        //if (accessToken) {
+            
+        //}
     }
 
     return (
 
         <div className={styles.card}>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <img src="https://i.ibb.co/XD62Rsw/Black-logo-no-background.png"  className={styles.login_logo} alt = "test"></img>
             <form onSubmit={handleSubmit} style = {{marginRight: "0"}} className={styles.login_card}>
 				<h1 style = {{color: "#607EAA"}}>Sign In</h1>
@@ -70,6 +74,7 @@ const Login = () => {
                     value={password}
                     required
                 />
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>
                 <button style = {{minWidth : "40%"}}>Sign In</button>
 				<p>
                 <span>
