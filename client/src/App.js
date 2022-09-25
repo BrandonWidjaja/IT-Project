@@ -33,12 +33,10 @@ function App() {
         <Route element={<Layout1 />} >
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
-          <Route>
-            <Route path="/profile" element={<Profile />} />
-          </Route>
-          <Route path="/profile-edit" element={<ProfileEdit />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+            <Route path="/profile" element={<Profile />} />
             <Route path="/new-building" element={<NewBuilding />} />
+            <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
           <Route path="/new-event" element={<NewEvent />} />

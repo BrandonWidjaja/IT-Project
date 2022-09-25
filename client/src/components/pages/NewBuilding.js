@@ -12,7 +12,7 @@ function NewBuilding() {
   const [image,setImage] = useState("")
   const [url,setUrl] = useState(undefined)
   const navigate = useNavigate()
-
+  const [preview, setPreview] = useState("");
 
   const uploadFields = useCallback(() => {
     const configuration = {
@@ -71,6 +71,11 @@ function NewBuilding() {
       }
   }
 
+  const previewImage = async (e) => {
+    setImage(e.target.files[0])
+    setPreview(URL.createObjectURL(e.target.files[0]))
+  }
+
     return (
         <>
             <h1 style = {{color: "#607EAA"}}>Add New Building</h1>
@@ -91,10 +96,18 @@ function NewBuilding() {
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} required></textarea>
                     </div>
-                    <div style = {{display: "flex", marginBottom: "1rem"}}><p style = {{width: "25%"}}>Image:</p>
-                        <div style = {{width : "100%", marginRight: "auto"}}>
-                          <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
-                      </div>
+                    <div style = {{display: "flex", marginBottom: "1rem"}}>
+                        <p style = {{width: "25%"}}>Image:</p>
+                        <div style = {{width : "100%", marginRight: "auto", display: "flex",flexDirection: "column"}}>
+                            {
+                                preview ? (
+                                    <img style = {{width : "40%"}}src = {preview} alt = "upload"></img>
+                                ) : (
+                                    <></>
+                                )
+                            }
+                          <input style = {{marginTop: "0", marginBottom: "auto", border: "none"}} type="file" onChange={previewImage} />
+                        </div>
                     </div>
                     
                     <button type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>

@@ -16,8 +16,6 @@ function ProfileEdit() {
     const [success, setSuccess] = useState(false);
     const [user, setUser] = useState("")
 
-
-
     const uploadFields = useCallback(() => {
         setLoading(true);
         const configuration = {
@@ -102,7 +100,7 @@ function ProfileEdit() {
         <>
             <h1 style = {{color: "#607EAA"}}>Profile</h1>
             <div className={styles.card}>
-            <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
+                <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <div style = {{display: "flex"}}>
                         <p style = {{width: "25%"}}>Display Name:</p>
@@ -121,7 +119,7 @@ function ProfileEdit() {
                         />
                     </div>
                     <div style = {{display: "flex"}}>
-                        <p style = {{width: "25%"}}>New Password:</p>
+                        <p style = {{width: "25%"}}>Confirm New Password:</p>
                         <div style = {{display: "flex", flexDirection: "column", width: "60%"}}>
                             <input style = {{width: "100%"}} 
                             type="password" 
