@@ -2,20 +2,27 @@ import styles from './Modules/Profile.module.css';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
 
 function Profile() {
 
     const [user, setUser] = useState("")
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
-        .then(res => {
-            setUser(res.data);
-        }).catch(
-            (err) => console.log("err", err)
-        );
-    }, [setUser])
+        if (localStorage.getItem('User')) {
+            const user = JSON.parse(localStorage.getItem('User'));
+            axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
+            .then(res => {
+                setUser(res.data);
+            }).catch(
+                (err) => console.log("err", err)
+            );
+        } else {
+            navigate("/unauthorized");
+        }
+
+    }, [setUser, navigate])
 
 
     return (

@@ -32,7 +32,7 @@ function App() {
       <AuthProvider>
       <Routes>
         <Route element={<Layout1 />} >
-          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/profile" element={<Profile />} />
@@ -46,6 +46,7 @@ function App() {
             <Route path="/new-event" element={<NewEvent />} />
           </Route>
           <Route path="/building-edit/:name" element={<BuildingEdit />} />
+          <Route path="/*" element={<Unauthorized />} />
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />

@@ -1,7 +1,7 @@
 import styles from './Modules/Profile.module.css';
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
-//import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ProfileEdit() {
     const [newDisplayName, setNewDisplayName] = useState('');
@@ -15,6 +15,7 @@ function ProfileEdit() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [user, setUser] = useState("")
+    const navigate = useNavigate();
 
     const uploadFields = useCallback(() => {
         setLoading(true);
@@ -38,8 +39,8 @@ function ProfileEdit() {
         .catch((error) => {
           error = new Error();
         });
-        window.open("/profile");
-      }, [newDisplayName, newPassword, newBio, url])
+        navigate("/profile");
+      }, [newDisplayName, newPassword, newBio, url, navigate])
     
       useEffect(() => {
         if(url){

@@ -1,24 +1,35 @@
-import { useEffect } from "react";
-import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet , useNavigate} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import React, {useEffect} from 'react'
 
 const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
-    const location = useLocation();
     const navigate = useNavigate();
+    const {auth} = useAuth();
 
     useEffect(() => {
-        if (!window.localStorage.getItem("User")) {
-            navigate("/login");
+        if (localStorage.getItem("User")) {
+            const user = JSON.parse(localStorage.getItem("User"));
+            if (!allowedRoles?.includes(user.role)) {
+                if (user.email) {
+                    navigate("/unauthorized");
+                } else {
+                    navigate("/login");
+                }
+            }
+        } else {
+            if (auth.email) {
+                navigate("/unauthorized");
+            } else {
+                navigate("/login");
+            }
         }
-    }, [navigate])
+      }, [allowedRoles, navigate, auth])
 
     return (
-        allowedRoles?.includes(auth.role)
-            ? <Outlet />
-            : auth?.email
-                ? <Navigate to="/unauthorized" state={{ from: location }} replace />
-                : <Navigate to="/login" state={{ from: location }} replace />
+        <>
+            <Outlet />
+        </>
+
         
     );
 }

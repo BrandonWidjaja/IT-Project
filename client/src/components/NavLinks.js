@@ -3,7 +3,7 @@ import React from 'react';
 import useAuth from "../hooks/useAuth";
 const NavLinks= () => {
     const { auth } = useAuth();
-
+    console.log(auth);
     return(
         <ul>
             <li>
