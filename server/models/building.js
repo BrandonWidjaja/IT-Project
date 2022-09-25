@@ -8,16 +8,10 @@ const rating = new mongoose.Schema({
 const buildingSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  //location: { type: String, required: true },
-  //image: { type: String, required: true },
-<<<<<<< Updated upstream
+  location: { type: String, required: true },
+  ratings: [rating],
   averageRating: { type: Number, required: true, default: 0 },
-  lastUpdated: { type: String },
-  tags: [String],
-  approved: Boolean,
   suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-=======
-  ratingsList: [rating],
   lastUpdated: { type: String },
   tags: [String],
   approved: Boolean,
@@ -27,7 +21,7 @@ const buildingSchema = new mongoose.Schema({
     default:
       "https://www.nicepng.com/png/full/89-898495_house-logo-png-home-address-logo-png.png",
   },
->>>>>>> Stashed changes
+  pic_id: { type: String, default: "" }
 });
 
 const Building = mongoose.model("Building", buildingSchema);

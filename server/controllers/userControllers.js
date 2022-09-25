@@ -1,53 +1,153 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
-const createUser = async (req, res, next) => {
-  try {
-    // data from the body
-    let bodydata = req.body;
+verifyToken = (req, res, next) => {
+  let token = req.headers["x-access-token"];
 
-    // check if a user with that email already exists, if not, continue
-    let exists = await User.findOne({ email: bodydata.email });
+  if (!token) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
 
-    if (exists) {
-      return res.send("email already exists");
+  jwt.verify(token, "secretkey", (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Unauthorized!" });
     }
+    req.userId = decoded.id;
+    next();
+  });
+};
 
-    // create new user from req
-    const newUser = await new User(req.body);
-    await newUser.save();
-
-    // send new user
-    return await res.send(newUser);
-  } catch (e) {
-    // send error
-    console.error(e);
-    return res.send(e);
+// register endpoint
+const register = async (req, res, next) => {
+  try {
+    const newPassword = await bcrypt.hash(req.body.password, 10);
+    await User.create({
+      displayName: req.body.name,
+      email: req.body.email,
+      password: newPassword,
+      pic: req.body.pic,
+      role: "User",
+      status: "Active",
+      bio: req.body.bio
+    });
+    res.json({ status: "ok" });
+  } catch (err) {
+    res.json({ status: "error", error: "Duplicate email" });
   }
 };
 
+// login endpoint
+const login = async (req, res, next) => {
+  
+  const user = await User.findOne({
+    email: req.body.email,
+  });
 
+  if (!user) {
+    return { status: "error", error: "Invalid login" };
+  }
 
-// get a user from their objectID
-const getUser = async (req, res, next) => {
+  const isPasswordValid = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
+
+  if (isPasswordValid) {
+    const token = jwt.sign(
+      {
+        name: user.name,
+        email: user.email,
+      },
+      "secretkey", 
+      {
+        expiresIn: 86400
+      }
+    );
+
+    return res.send({status: "ok", data : user, accessToken: token});
+  } else {
+    return res.send({status: "error", error: "Incorrect Password" });
+  }
+};
+
+const editProfile = async (req, res, next) => {
+  try {
+    // find the user
+    const user = await User.findOne({
+      email: req.params.email,
+    });
+
+    // initialise editable info
+    var newDisplayName = user.displayName;
+    var newCourse;
+    var newBio;
+    var newPassword;
+    var newPic;
+
+    // if these exists, will make the new info equal to the original one. otherwise, leave them blank
+    if (user.newBio) {
+      newBio = user.bio;
+    } else {
+      newBio = "";
+    }
+    if (user.course) {
+      newCourse = user.course;
+    } else {
+      newCourse = "";
+    }
+    if (user.pic) {
+      newPic = user.pic;
+    } else {
+      newPic = "";
+    }
+
+    // update editable info if found in request
+    if (req.body.newDisplayName) {
+      newDisplayName = req.body.newDisplayName;
+    }
+    if (req.body.newBio) {
+      newBio = req.body.newBio;
+    }
+    if (req.body.newCourse) {
+      newCourse = req.body.newCourse;
+    }
+    if (req.body.newPassword) {
+      newPassword = await bcrypt.hash(req.body.newPassword, 10);
+    }
+    if (req.body.pic) {
+      newPic = req.body.pic;
+    }
+
+    // update the specified user with new info
+    await User.updateOne(
+      { email: req.params.email },
+      {$set: {displayName: newDisplayName, bio: newBio, course: newCourse, password: newPassword, pic: newPic}}
+    );
+    
+    res.json({ status: "ok" });
+  } catch (err) {
+      next(err);
+  }
+}
+
+const getProfile = async (req, res, next) => {
   try {
     // retrieve object id of user from request
-    let userID = req.body._id;
-
+    let req_email = req.params.email;
     // find the user in the database
-    let exists = await User.findOne({ _id: userID});
-    if (exists){
-      return res.send(exists);
+    let exists = await User.findOne({ email: req_email });
+    if (exists) {
+      return res.send({data : exists});
     }
     // user not found
-    return res.send("user does not exist")
-
+    return res.send("profile does not exist");
   } catch (e) {
     console.error(e);
     return res.send(e);
   }
 }
+module.exports = { register, login, getProfile};
 
 
-
-module.exports = { createUser, getUser };
-
+module.exports = { register, login, editProfile, getProfile };

@@ -2,10 +2,9 @@ var express = require("express");
 var userRouter = express.Router();
 const userController = require("../controllers/userControllers");
 
-// hardcode user (testing)
-const User = require("../models/user");
-
-userRouter.post("/new", userController.createUser);
-userRouter.get("/getUser", userController.getUser);
+userRouter.post("/login", userController.login);
+userRouter.post("/register", userController.register);
+userRouter.post("/edit-profile/:email", userController.editProfile);
+userRouter.get("/getprofile/:email", userController.getProfile);
 
 module.exports = userRouter;

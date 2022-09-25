@@ -1,15 +1,21 @@
 .add{
     background-color: #F2EFE7;
-    padding: 1rem;
+    padding: 2%;
     border-radius: 0.5rem;
     display: flex;
     margin-top: 1rem;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .add button {
     padding: 0.5rem;
+    background-color: #607EAA;
 }
 
+.add div {
+    margin-top: 1rem;
+}
 
 input {
     border: 1px solid lightgrey;

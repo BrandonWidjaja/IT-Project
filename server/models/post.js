@@ -1,5 +1,15 @@
 const mongoose = require("mongoose");
 
+const comment = new mongoose.Schema({
+  postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  content: { type: String, required: true },
+  dateTimePosted: { type: String, required: true },
+  likes: { type: Number },
+  dislikes: { type: Number },
+  likedBy: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+  dislikedBy: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
+});
+
 const postSchema = new mongoose.Schema({
   postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
@@ -11,14 +21,6 @@ const postSchema = new mongoose.Schema({
   dislikes: { type: Number },
   buildingID: { type: mongoose.Schema.Types.ObjectId, ref: "Building" },
   edited: { tpye: Boolean },
-});
-
-const comment = new mongoose.Schema({
-  postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  content: { type: String, required: true },
-  dateTimePosted: { type: String, required: true },
-  likes: { type: Number },
-  dislikes: { type: Number },
 });
 
 const Post = mongoose.model("Post", postSchema);

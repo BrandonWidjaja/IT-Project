@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
-const bcrypt = require("bcryptjs");
 
 /* User properties */
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   //secret: {type: String, required: true},     this can be used later with cookies
-  lastName: { type: String},
+  lastName: { type: String },
   firstName: { type: String },
   displayName: { type: String, required: true },
   bio: { Type: String, default: "" },
@@ -15,12 +14,11 @@ const userSchema = new mongoose.Schema({
   course: { Type: String },
   posts: [ObjectId],
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
-
-  accountType: { type: String, enum: ["Admin", "Public", "Club"] },
+  role: { type: String },
+  status: { type: String },
   model: { type: mongoose.Schema.Types.ObjectId, refPath: "accountType" },
+  pic: { type: String }
 });
-
-
 
 /*
 userSchema.methods.verifyPassword = function (password, callback) {
@@ -28,15 +26,12 @@ userSchema.methods.verifyPassword = function (password, callback) {
     callback(err, valid);
   });
 };
-
 const SALT_FACTOR = 15;
-
 userSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {
     return next();
   }
-
   bcrypt.hash(user.password, SALT_FACTOR, (err, hash) => {
     if (err) {
       return next(err);

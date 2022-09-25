@@ -1,0 +1,25 @@
+.card img {
+    width: 20%;
+    height: auto;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
+.card {
+    background-color: #F2EFE7;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    margin-top: 1rem;
+}
+
+.card .pendbutton{
+    padding-top: 5rem;
+    height: 2rem;
+    display: flex;
+    justify-content:flex-end;
+}
+
+.card .pendbutton button{
+    margin-left: 1rem;
+}
