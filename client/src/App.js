@@ -18,6 +18,7 @@ import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
 import NewEvent from './components/pages/NewEvent';
 import AdminBuildingPending from './components/pages/AdminBuildingPending';
 import BuildingEdit from './components/pages/BuildingEdit';
+
 const ROLES = {
   User: "User",
   Admin: "Admin"
@@ -33,12 +34,10 @@ function App() {
         <Route element={<Layout1 />} >
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="/" element={<Buildings />} />
-          <Route>
-            <Route path="/profile/:email" element={<Profile />} />
-          </Route>
-          <Route path="/profile-edit/:email" element={<ProfileEdit />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+            <Route path="/profile" element={<Profile />} />
             <Route path="/new-building" element={<NewBuilding />} />
+            <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
           <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />

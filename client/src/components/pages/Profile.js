@@ -1,35 +1,34 @@
 import styles from './Modules/Profile.module.css';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Profile() {
 
-    const {email} = useParams();
-
     const [user, setUser] = useState("")
 
-
     useEffect(() => {
-        axios.get(`http://localhost:3001/user/getprofile/${email}`)
+        const user = JSON.parse(localStorage.getItem('User'));
+        axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
         .then(res => {
             setUser(res.data);
         }).catch(
             (err) => console.log("err", err)
         );
-    }, [setUser, email])
-    console.log(user);
+    }, [setUser])
+
+
     return (
         <>
             <h1 style = {{color: "#607EAA"}}>Profile</h1>
             <div className={styles.card}>
-                <img src={user.data?.pic} alt = "test"></img>
+                <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <p>Name: {user.data?.displayName} </p>
                     <p>Date of Birth: {user.data?.birthDate}</p>
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio: {user.data?.bio}</p>
-                    <Link to={`/profile-edit/${email}`} style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                    <Link to={`/profile-edit`} style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
                         <button style = {{width: "100%"}}>Edit</button>
                     </Link>
                 </div>
