@@ -2,16 +2,21 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// const isAuth = async (req,res,next) => {
-//   const sessUser = req.session.user;
-//   if(sessUser) {
-//       next();
-//   }
-//   else {
-//       err = res.status(401).json("Access Denied ")
-//       return err;
-//   }
-// };
+verifyToken = (req, res, next) => {
+  let token = req.headers["x-access-token"];
+
+  if (!token) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
+
+  jwt.verify(token, "secretkey", (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Unauthorized!" });
+    }
+    req.userId = decoded.id;
+    next();
+  });
+};
 
 // register endpoint
 const register = async (req, res, next) => {
@@ -23,7 +28,7 @@ const register = async (req, res, next) => {
       password: newPassword,
       pic: req.body.pic,
       role: "User",
-      bio: ""
+      bio: req.body.bio
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -31,42 +36,9 @@ const register = async (req, res, next) => {
   }
 };
 
-// // register endpoint
-// const register = async (req, res, next) => {
-//   const {name,email,password,pic} = req.body 
-//   if(!email || !password || !name){
-//      return res.status(422).json({error:"please add all the fields"})
-//   }
-//   User.findOne({email:email})
-//   .then((savedUser)=>{
-//       if(savedUser){
-//         return res.status(422).json({error:"user already exists with that email"})
-//       }
-//       bcrypt.hash(password, 10)
-//       .then(hashedpassword=>{
-//             const user = new User({
-//                 email,
-//                 password:hashedpassword,
-//                 name,
-//                 pic
-//             })
-    
-//             user.save()
-//             .then(user=>{
-//                 res.json({message:"saved successfully"})
-//             })
-//             .catch(err=>{
-//                 console.log(err)
-//             })
-//       })
-     
-//   })
-//   .catch(err=>{
-//     console.log(err)
-//   })
-// };
 // login endpoint
 const login = async (req, res, next) => {
+  
   const user = await User.findOne({
     email: req.body.email,
   });
@@ -86,12 +58,15 @@ const login = async (req, res, next) => {
         name: user.name,
         email: user.email,
       },
-      "secret123"
+      "secretkey", 
+      {
+        expiresIn: 86400
+      }
     );
 
-    return res.json({ status: "ok", user: token, role: "User" });
+    return res.send({status: "ok", data : user, accessToken: token});
   } else {
-    return res.json({ status: "error", user: false });
+    return res.send({status: "error", error: "Incorrect Password" });
   }
 };
 
@@ -103,9 +78,11 @@ const editProfile = async (req, res, next) => {
     });
 
     // initialise editable info
-    var newDispName = user.displayName;
+    var newDisplayName = user.displayName;
     var newCourse;
     var newBio;
+    var newPassword;
+    var newPic;
 
     // if these exists, will make the new info equal to the original one. otherwise, leave them blank
     if (user.newBio) {
@@ -118,29 +95,40 @@ const editProfile = async (req, res, next) => {
     } else {
       newCourse = "";
     }
+    if (user.pic) {
+      newPic = user.pic;
+    } else {
+      newPic = "";
+    }
 
     // update editable info if found in request
-    if (req.body.newdisplayName) {
-      newDispName = req.body.newdisplayName;
+    if (req.body.newDisplayName) {
+      newDisplayName = req.body.newDisplayName;
     }
-    if (req.body.newbio) {
-      newBio = req.body.newbio;
+    if (req.body.newBio) {
+      newBio = req.body.newBio;
     }
-    if (req.body.newcourse) {
-      newCourse = req.body.newcourse;
+    if (req.body.newCourse) {
+      newCourse = req.body.newCourse;
+    }
+    if (req.body.newPassword) {
+      newPassword = await bcrypt.hash(req.body.newPassword, 10);
+    }
+    if (req.body.pic) {
+      newPic = req.body.pic;
     }
 
     // update the specified user with new info
-    await User.findOneAndUpdate(
-      { email: req.body.email },
-      { displayName: newDispName, bio: newBio, course: newCourse }
+    await User.updateOne(
+      { email: req.params.email },
+      {$set: {displayName: newDisplayName, bio: newBio, course: newCourse, password: newPassword, pic: newPic}}
     );
-
+    
     res.json({ status: "ok" });
   } catch (err) {
-    res.json({ status: "error", error: "Duplicate email" });
+      next(err);
   }
-};
+}
 
 const getProfile = async (req, res, next) => {
   try {

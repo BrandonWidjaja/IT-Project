@@ -3,7 +3,6 @@ import React from 'react';
 import useAuth from "../hooks/useAuth";
 const NavLinks= () => {
     const { auth } = useAuth();
-
     return(
         <ul>
             <li>
@@ -20,7 +19,7 @@ const NavLinks= () => {
             {auth.email && (
                 <>
                 <li>
-                    <NavLink to={`/profile/${auth.email}`}>Profile</NavLink>
+                    <NavLink to={`/profile`}>Profile</NavLink>
                 </li>
                 <li>
                     <NavLink to="/logout">Logout</NavLink>

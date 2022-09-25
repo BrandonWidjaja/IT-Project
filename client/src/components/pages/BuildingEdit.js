@@ -66,11 +66,11 @@ console.log(building);
                         </div>
                     </div>
                     <button onClick={(e) => handleSubmit(e)} type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"} }>Save</button>
-                    {building ? (
+                    {/* {building ? (
                         <p style = {{textAlign: "center"}}>Building Editted Successfully</p>
                     ) : (
                         <p style = {{textAlign: "center"}}>Error</p>
-                    )}
+                    )} */}
                 </form>
             </div>
         </>

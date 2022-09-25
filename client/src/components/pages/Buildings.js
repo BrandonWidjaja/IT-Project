@@ -16,7 +16,6 @@ const Buildings = () => {
         );
     }, [setBuildingList])
 
-    console.log(buildingList);
     return (
         <>
             <form style = {{display: "flex", justifyContent: "space-between"}}>
