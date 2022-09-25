@@ -9,6 +9,7 @@ export const Logout = () => {
 
   const handleLogout = () => {
     setAuth({});
+    window.localStorage.removeItem("User");
     navigate('/')
   }
 

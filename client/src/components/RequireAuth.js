@@ -1,9 +1,17 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
     const { auth } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!window.localStorage.getItem("User")) {
+            navigate("/login");
+        }
+    }, [navigate])
 
     return (
         allowedRoles?.includes(auth.role)
@@ -11,6 +19,7 @@ const RequireAuth = ({ allowedRoles }) => {
             : auth?.email
                 ? <Navigate to="/unauthorized" state={{ from: location }} replace />
                 : <Navigate to="/login" state={{ from: location }} replace />
+        
     );
 }
 

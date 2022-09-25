@@ -5,7 +5,7 @@ function Footer() {
   return (
     <>
       <footer className="footer">
-        <p>Footer</p>
+        <p>UniRec</p>
       </footer>
     </>
   )

@@ -5,6 +5,8 @@ const addNewBuilding = async (req, res, next) => {
 		await Building.create({
       name: req.body.name,
       description: req.body.description,
+      location: req.body.location,
+      pic: req.body.pic
     })
 		res.json({ status: 'ok' })
 	} catch (err) {

@@ -6,6 +6,8 @@ const comment = new mongoose.Schema({
   dateTimePosted: { type: String, required: true },
   likes: { type: Number },
   dislikes: { type: Number },
+  likedBy: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+  dislikedBy: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
 });
 
 const postSchema = new mongoose.Schema({
