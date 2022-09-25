@@ -28,6 +28,7 @@ const register = async (req, res, next) => {
       password: newPassword,
       pic: req.body.pic,
       role: "User",
+      status: "Active",
       bio: req.body.bio
     });
     res.json({ status: "ok" });
@@ -146,7 +147,7 @@ const getProfile = async (req, res, next) => {
     return res.send(e);
   }
 }
-
+module.exports = { register, login, getProfile};
 
 
 module.exports = { register, login, editProfile, getProfile };
