@@ -6,7 +6,8 @@ const addNewBuilding = async (req, res, next) => {
       name: req.body.name,
       description: req.body.description,
       location: req.body.location,
-      pic: req.body.pic
+      pic: req.body.pic,
+      pic_id: req.body.pic_id
     })
 		res.json({ status: 'ok' })
 	} catch (err) {

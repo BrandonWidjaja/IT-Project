@@ -13,6 +13,7 @@ function NewBuilding() {
   const [url,setUrl] = useState(undefined)
   const navigate = useNavigate()
   const [preview, setPreview] = useState("");
+  const [publicId, setPublicId] = useState("");
 
   const uploadFields = useCallback(() => {
     const configuration = {
@@ -22,7 +23,8 @@ function NewBuilding() {
         name,
         description,
         location,
-        pic:url
+        pic:url,
+        pic_id: publicId
       },
     };
 
@@ -36,7 +38,7 @@ function NewBuilding() {
     });
     
     navigate('/')
-  }, [name, description, location, url, navigate])
+  }, [name, description, location, url,publicId, navigate])
 
   useEffect(()=>{
       if(url){
@@ -55,7 +57,9 @@ function NewBuilding() {
       })
       .then(res=>res.json())
       .then(data=>{
-         setUrl(data.url)
+        console.log(data);
+         setUrl(data.url);
+         setPublicId(data.public_id);
       })
       .catch(err=>{
           console.log(err)

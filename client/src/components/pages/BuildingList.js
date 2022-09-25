@@ -14,7 +14,6 @@ GetList.defaultProps = {
 
 function GetList(props) {
     const {buildingList} = props;
-    // console.log(props)
     return (
         <>
         {buildingList.map((building) => (
@@ -25,7 +24,6 @@ function GetList(props) {
                         <div styles = {{height: "80%"}}>
                             <h2>Name: {building.name}</h2>
                             <p>Location: {building.location}</p>
-                            <p style={{}}>Rating:<Rating initialRating={building.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                         </div>
                         <div>
                             <p>Rating:<Rating initialRating={building.rating} emptySymbol="fa fa-star-o fa-lx" fullSymbol="fa fa-star fa-lx" readonly/></p>
