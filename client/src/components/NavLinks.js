@@ -3,6 +3,7 @@ import React from 'react';
 import useAuth from "../hooks/useAuth";
 const NavLinks= () => {
     const { auth } = useAuth();
+
     return(
         <ul>
             <li>
@@ -16,6 +17,13 @@ const NavLinks= () => {
             <li>
                 <NavLink to="/about">About Us</NavLink>
             </li>
+            {auth.role === "Admin" && (
+                <>
+                <li>
+                    <NavLink to={`/admin-building-pending`}>Pending</NavLink>
+                </li>
+                </>
+            )}
             {auth.email && (
                 <>
                 <li>
@@ -31,6 +39,7 @@ const NavLinks= () => {
                     <NavLink to="/login">Login</NavLink>
                 </li>
             )}
+
         </ul>
     );
 }

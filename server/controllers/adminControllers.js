@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Building } = require("../models/building");
 const { Post } = require("../models/post");
+const cloudinary = require("../utils/cloudinary");
 
 const userToAdmin = async (req, res, next) => {
   try {
@@ -34,8 +35,14 @@ const addNewAdmin = async (req, res, next) => {
 
 const deleteBuilding = async (req, res, next) => {
   try {
+    const building = await Building.findOne({name: req.body.name});
+    if (building.pic_id) {
+      await cloudinary.uploader.destroy(building.pic_id);
+    }
+    
     await Building.deleteOne({name: req.body.name} );
-    res.json({ status: "ok" });
+    
+    return res.json({ status: "ok" });
   } catch (e) {
     console.error(e);
     return res.send(e);

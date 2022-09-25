@@ -40,9 +40,11 @@ function App() {
             <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
-          <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />
-          <Route path="/new-event" element={<NewEvent />} />
-          <Route path="/admin-building-pending" element={<AdminBuildingPending />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />
+            <Route path="/admin-building-pending" element={<AdminBuildingPending />} />
+            <Route path="/new-event" element={<NewEvent />} />
+          </Route>
           <Route path="/building-edit/:name" element={<BuildingEdit />} />
         </Route>
         <Route element={<Layout2 />} >

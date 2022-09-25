@@ -5,9 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/fontawesome-free-solid"
 import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function BuildingDetails() {
-    
+    const { auth } = useAuth();
+    const navigate = useNavigate();
+
     const handleRating = (e) => {
         console.log(e);
       }
@@ -24,6 +28,25 @@ function BuildingDetails() {
             (err) => console.log("err", err)
         );
     }, [setBuilding, name])
+
+    const deleteBuilding = () => {
+        const configuration = {
+          method: "delete",
+          url: "http://localhost:3001/admin/delete-building",
+          data: {
+            name
+          },
+        };
+        // make the API call
+        axios(configuration)
+        .then((result) => {
+            navigate("/");
+        })
+        .catch((error) => {
+          error = new Error();
+        });
+        
+    }
 
     return (
         <>  <div style = {{display: "flex", justifyContent: "space-between"}}>
@@ -48,9 +71,14 @@ function BuildingDetails() {
                     
                     <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
+                {auth.role === "Admin" && (
+                    <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>
+                )}
+                
             </div>
             <div className={styles.rate}>
                 <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={handleRating}/></p>
+
                 <button style={{height:"2rem"}}>Update</button>
             </div>
 
