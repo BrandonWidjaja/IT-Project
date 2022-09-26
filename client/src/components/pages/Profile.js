@@ -2,28 +2,35 @@ import styles from './Modules/Profile.module.css';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 function Profile() {
-
-    const [user, setUser] = useState("")
+    const { id } = useParams();
+    const [user, setUser] = useState("");
+    const [other, setOther] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
+        
         if (localStorage.getItem('User')) {
             const user = JSON.parse(localStorage.getItem('User'));
-            axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
-            .then(res => {
-                setUser(res.data);
-            }).catch(
-                (err) => console.log("err", err)
+            axios.get(`http://localhost:3001/user/getprofile/${id}`)
+                .then(res => {
+                    setUser(res.data);
+                }).catch(
+                    (err) => console.log("err", err)
             );
+            if (user._id === id) {
+                setOther(false);
+            } else {
+                setOther(true);
+                console.log("hi");
+            }
         } else {
             navigate("/unauthorized");
         }
 
     }, [setUser, navigate])
-
 
     return (
         <>
@@ -35,9 +42,16 @@ function Profile() {
                     <p>Date of Birth: {user.data?.birthDate}</p>
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio: {user.data?.bio}</p>
-                    <Link to={`/profile-edit`} style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                    {
+                    other ? (
+                        <></>
+                    ) : (
+                        <Link to={`/profile-edit`} style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
                         <button style = {{width: "100%"}}>Edit</button>
-                    </Link>
+                        </Link>
+                    )
+                }
+                    
                 </div>
             </div>
 

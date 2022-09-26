@@ -37,7 +37,7 @@ function App() {
           <Route path="/ban-page" element={<Banned />} />
           <Route path="/" element={<Buildings />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>

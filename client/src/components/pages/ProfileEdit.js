@@ -21,7 +21,7 @@ function ProfileEdit() {
         setLoading(true);
         const configuration = {
           method: "post",
-          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User")).email}`,
+          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
           data: {
             newDisplayName,
             newPassword,
@@ -39,7 +39,7 @@ function ProfileEdit() {
         .catch((error) => {
           error = new Error();
         });
-        navigate("/profile");
+        navigate(`/profile/${JSON.parse(localStorage.getItem("User"))._id}`);
       }, [newDisplayName, newPassword, newBio, url, navigate])
     
       useEffect(() => {
@@ -53,7 +53,7 @@ function ProfileEdit() {
           setErr(true);
         }
         const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
+        axios.get(`http://localhost:3001/user/getprofile/${user._id}`)
         .then(res => {
             setUser(res.data);
         }).catch(
@@ -88,7 +88,7 @@ function ProfileEdit() {
                 uploadFields()
             }
         } else {
-            alert("Passwords Not Matching")
+            alert("Passwords Not Matching");
         }
       }
 
@@ -129,8 +129,6 @@ function ProfileEdit() {
                             />
                             {err ? <p style = {{fontSize:"0.8rem", color:"grey"}}> Passwords did not match </p> : ''}
                         </div>
-                        
-                        
                     </div>
                     
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
@@ -169,7 +167,6 @@ function ProfileEdit() {
                     </div>
                 </form>
             </div>
-
         </>
     )
 }
