@@ -9,6 +9,9 @@ const RequireAuth = ({ allowedRoles }) => {
     useEffect(() => {
         if (localStorage.getItem("User")) {
             const user = JSON.parse(localStorage.getItem("User"));
+            if (user?.status === "Banned") {
+                navigate("/ban-page");
+            }
             if (!allowedRoles?.includes(user.role)) {
                 if (user.email) {
                     navigate("/unauthorized");

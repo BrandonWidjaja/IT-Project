@@ -13,6 +13,7 @@ import NewBuilding from './components/pages/NewBuilding';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/pages/Unauthorized';
+import Banned from './components/pages/BanPage';
 import BuildingDetails from './components/pages/BuildingDetails';
 import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
 import NewEvent from './components/pages/NewEvent';
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route element={<Layout1 />} >
           <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/ban-page" element={<Banned />} />
           <Route path="/" element={<Buildings />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/profile" element={<Profile />} />
