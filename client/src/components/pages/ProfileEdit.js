@@ -140,16 +140,18 @@ function ProfileEdit() {
                         onChange={(e) => setNewBio(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex", marginTop: "1rem"}}>
+                    <div style = {{display: "flex", marginBottom: "1rem"}}>
                         <p style = {{width: "25%"}}>Image:</p>
-                        <input style = {{border: "none"}} type="file" onChange={previewImage} />
-                        {
-                            preview ? (
-                                <img src = {preview} alt = "upload"></img>
-                            ) : (
-                                <></>
-                            )
-                        }
+                        <div style = {{width : "75%", marginRight: "auto", display: "flex", flexDirection: "column"}}>
+                            {
+                                preview ? (
+                                    <img style = {{width : "40%"}}src = {preview} alt = "upload"></img>
+                                ) : (
+                                    <></>
+                                )
+                            }
+                          <input style = {{marginTop: "0", marginBottom: "auto", border: "none"}} type="file" onChange={previewImage} />
+                        </div>
                     </div>
                     <button type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"}}>Save</button>
                     <div style = {{textAlign : "center"}}>

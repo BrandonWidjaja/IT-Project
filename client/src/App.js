@@ -13,6 +13,7 @@ import NewBuilding from './components/pages/NewBuilding';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/pages/Unauthorized';
+import NotFound from './components/pages/NotFound';
 import Banned from './components/pages/BanPage';
 import BuildingDetails from './components/pages/BuildingDetails';
 import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
@@ -35,6 +36,7 @@ function App() {
         <Route element={<Layout1 />} >
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/ban-page" element={<Banned />} />
+          <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<Buildings />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/profile/:id" element={<Profile />} />
@@ -48,7 +50,7 @@ function App() {
             <Route path="/new-event" element={<NewEvent />} />
           </Route>
           <Route path="/building-edit/:name" element={<BuildingEdit />} />
-          <Route path="/*" element={<Unauthorized />} />
+          <Route path="/*" element={<NotFound />} />
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />

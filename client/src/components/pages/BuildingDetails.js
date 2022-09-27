@@ -6,7 +6,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import GetPosts from './Posts';
-import PostComments from './Comments'
+//import PostComments from './Comments'
 import PostList from './PostList';
 
 
@@ -17,6 +17,7 @@ function BuildingDetails() {
     const {name} = useParams();
     const [building, setBuilding] = useState("");
     const [post, setPost] = useState([]);
+    const [rated, setRated] = useState(false);
 
     const setRating = (e) => {
         rating = e;
@@ -39,6 +40,7 @@ function BuildingDetails() {
         // make the API call
         axios(configuration)
           .then((result) => {
+            setRated(true);
           })
           .catch((error) => {
             error = new Error();
@@ -110,8 +112,12 @@ function BuildingDetails() {
                 
             </div>
             <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
-                <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
+                <p style={{display:"flex", alignItems:"center"}}>Your Rating:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
+                {!rated ? (
+                    <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
+                ) : (
+                    <p>Updated</p>
+                )}
             </div>
             <GetPosts building = {name}/>
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>

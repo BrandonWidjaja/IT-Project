@@ -41,7 +41,7 @@ const uploadFields = useCallback(() => {
   .catch((error) => {
     error = new Error();
   });
-  navigate(`/building/${name}`);
+  navigate(`/building-detail/${name}`);
 }, [name, newName, newLocation, newDescription, url, navigate])
 
 useEffect(() => {

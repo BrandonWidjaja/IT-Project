@@ -55,7 +55,7 @@ function Profile() {
                 </div>
             </div>
 
-            <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
+            {/* <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <div className={styles.post}>
                 <div className={styles.title}>
                     <h2 style = {{margin: '0.5rem'}}>Title:</h2>
@@ -67,7 +67,7 @@ function Profile() {
                     <p>hi</p>
                     <input className={styles.new_comment} type="text" placeholder='Comment'></input>
                 </form>
-            </div>
+            </div> */}
             
         </>
     )
