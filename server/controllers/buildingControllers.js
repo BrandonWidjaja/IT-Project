@@ -114,18 +114,17 @@ const removeTag = async (req, res, next) => {
 };
 
 const rateBuilding = async (req, res, next) => {
-  let user = req.body.ratedByID;
-  let value = req.body.ratingValue;
+  let user = req.body.id;
+  let value = req.body.rating;
   let newRating = {"ratedByID": user, "ratingValue": value};
   var total = 0;
   var newAverageRating = 0;
 
-
   try{
-    const buildingFound = await Building.findOne( {name: req.body.name} )
+    const buildingFound = await Building.findOne( {name: req.body.buildingName} )
     if (buildingFound){
       var removeIndex;
-      
+
       for (var rating in buildingFound.ratings){
         if (user == buildingFound.ratings[rating].ratedByID){
           removeIndex = rating;
@@ -143,14 +142,14 @@ const rateBuilding = async (req, res, next) => {
 
       newAverageRating = total / buildingFound.ratings.length;
       buildingFound.averageRating = newAverageRating;
-      
+
       buildingFound.save();
       return res.send(buildingFound);
-    
+
     } else {
       return res.send("building does not exist");
     }
-    
+
 
   } catch (err){
       next(err)

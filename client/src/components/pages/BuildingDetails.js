@@ -13,14 +13,39 @@ import PostComments from './Comments'
 function BuildingDetails() {
     const { auth } = useAuth();
     const navigate = useNavigate();
-
-    const handleRating = (e) => {
-        console.log(e);
-      }
-
+    
+    var rating = 0;
     const {name} = useParams();
 
     const [building, setBuilding] = useState("")
+
+    const setRating = (e) => {
+        rating = e;
+    }
+
+    const handleRating = (e) => {
+        // prevent the form from refreshing the whole page
+        e.preventDefault();
+  
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "http://localhost:3001/building/rate-building",
+          data: {
+            id: JSON.parse(localStorage.getItem("User"))._id,
+            buildingName: name,
+            rating
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      };
 
     useEffect(() => {
         axios.get(`http://localhost:3000/building/building-detail/${name}`)
@@ -79,9 +104,9 @@ function BuildingDetails() {
                 
             </div>
             <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={handleRating}/></p>
+                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
 
-                <button style={{height:"2rem"}}>Update</button>
+                <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
             </div>
             <GetPosts building = {name}/>
 
