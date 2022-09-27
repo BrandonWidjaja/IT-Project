@@ -95,7 +95,7 @@ function NewBuilding() {
                         onChange={(e) => setLocation(e.target.value)} required></input>
                     </div>
                     <div style = {{display: "flex", marginBottom: "1rem"}}><p style = {{width: "25%"}}>Description:</p>
-                        <textarea style = {{width: "100%", height: "15rem"}} className={styles.searchbar} type="text" 
+                        <textarea style = {{width: "100%", height: "15rem", border:"1px solid lightgrey"}} className={styles.searchbar} type="text" 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} required></textarea>
                     </div>

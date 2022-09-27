@@ -67,8 +67,8 @@
     border: 1px solid lightgray;
     border-radius: 0.5rem;
     width: 98%;
-    margin-top: 1rem;
     padding: 1%;
+    margin: auto;
 }
 
 input {
@@ -79,6 +79,7 @@ input {
 .like {
     margin-top: 0.5rem;
     display: flex;
+    color: var(--light-secondary);
 }
 
 .likeIcon:hover {

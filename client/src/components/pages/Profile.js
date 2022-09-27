@@ -40,8 +40,10 @@ function Profile() {
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <p>Name: {user.data?.displayName} </p>
                     {/* <p>Date of Birth: {user.data?.birthDate}</p> */}
+                    <p>Email: {user.data?.email}</p>
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio: {user.data?.bio}</p>
+                    
                     {
                     other ? (
                         <></>

@@ -32,9 +32,9 @@ function PostList(props) {
             </form>
             <div className={styles.like}>
                 <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={()=> console.log("hahahahaha")}/>
-                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem'}}>20</p>
+                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>20</p>
                 <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl"/>
-                <p style={{marginLeft:'0.5rem'}}>20</p>
+                <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>20</p>
             </div>
         </div>
         ))}

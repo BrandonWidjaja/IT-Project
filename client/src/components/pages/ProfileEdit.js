@@ -103,7 +103,7 @@ function ProfileEdit() {
             <div className={styles.card}>
                 <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", flexDirection: "column"}}>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>Display Name:</p>
                         <input style = {{width: "60%"}} 
                         type="text" 
@@ -111,7 +111,7 @@ function ProfileEdit() {
                         onChange={(e) => setNewDisplayName(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>New Password:</p>
                         <input style = {{width: "60%"}} 
                         type="password" 
@@ -119,9 +119,9 @@ function ProfileEdit() {
                         onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>Confirm New Password:</p>
-                        <div style = {{display: "flex", flexDirection: "column", width: "60%"}}>
+                        <div style = {{display: "flex", flexDirection: "column", width: "60%", padding:"0"}}>
                             <input style = {{width: "100%"}} 
                             type="password" 
                             placeholder='Confirm Password' 

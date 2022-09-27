@@ -53,9 +53,6 @@ const Login = () => {
         }).catch(
             (err) => console.log("err", err)
         );
-        //if (accessToken) {
-            
-        //}
     }
 
     return (
@@ -84,7 +81,7 @@ const Login = () => {
                 <button style = {{minWidth : "40%"}}>Sign In</button>
 				<p>
                 <span>
-                    <Link to="/register">Sign Up</Link>
+                    <Link to="/register" style = {{fontSize:"0.5rem", textDecoration:"underline"}}><p>Sign Up</p></Link>
                 </span>
             </p>
             </form>

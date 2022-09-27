@@ -113,17 +113,24 @@ function BuildingDetails() {
                 )}
                 
             </div>
-            <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Your Rating:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
-                {!rated ? (
-                    <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
-                ) : (
-                    <p>Updated</p>
-                )}
-            </div>
-            <GetPosts building = {name}/>
+            {auth.email ? (
+                <>
+                <div className={styles.rate}>
+                    <p style={{display:"flex", alignItems:"center"}}>Your Rating:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
+                    {!rated ? (
+                        <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
+                    ) : (
+                        <p>Updated</p>
+                    )}
+                </div>
+                <GetPosts building = {name}/>
+                </>
+            ) : (
+                <></>
+            )}
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <PostList postList = {post}/>
+
             
         </>
     )
