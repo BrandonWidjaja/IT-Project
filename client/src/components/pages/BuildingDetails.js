@@ -26,7 +26,6 @@ function BuildingDetails() {
     const handleRating = (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
-  
         // set configurations
         const configuration = {
           method: "post",
@@ -96,7 +95,7 @@ function BuildingDetails() {
                         <p>No Description Yet</p>
                     )}
                     
-                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.averageRating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
                 {auth.role === "Admin" && (
                     <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>

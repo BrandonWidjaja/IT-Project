@@ -139,12 +139,16 @@ const rateBuilding = async (req, res, next) => {
       } 
 
       buildingFound.ratings.push(newRating);
+
       for (var rating in buildingFound.ratings){
+        console.log(buildingFound.ratings[rating]);
         total  = buildingFound.ratings[rating].ratingValue + total;
       }
 
       newAverageRating = total / buildingFound.ratings.length;
-      buildingFound.averageRating = newAverageRating;
+      if(newAverageRating) {
+        buildingFound.averageRating = newAverageRating;
+      }
 
       buildingFound.save();
       return res.send(buildingFound);
