@@ -47,12 +47,12 @@ function Posts(props) {
         
           <div className={styles.post}>
             <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
-                <h2> Write a review</h2>
+                <h2 style = {{marginBottom: "1rem"}}> Write a review</h2>
                 {!post ? (
                   <>
                     <input style = {{width: "100%", height:"2rem"}} type="text" placeholder='Title'
                     value={title} onChange={(e) => setTitle(e.target.value)} required/>
-                    <input style = {{width: "100%", height:"5rem"}} type="text"
+                    <input style = {{width: "100%", height:"5rem", marginBottom: "1rem"}} type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)} required/>
                     <div style = {{marginTop: "0.5rem", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
@@ -60,7 +60,7 @@ function Posts(props) {
                     </div>
                   </>
                 ): (
-                  <>Posted</>
+                  <p>Posted</p>
                 )}
             </div>
         </div>

@@ -21,14 +21,14 @@ const addNewPost = async (req, res, next) => {
 const getPost = async (req, res, next) => {
   try {
     // retrieve object id of post from request
-    let postID = req.body._id;
+    let post = req.params.name;
 
     // find the user in the database
-    let exists = await Post.findOne({ _id: postID });
+    let exists = await Post.find({ buildingName: post });
     if (exists) {
       return res.send(exists);
     }
-    // user not found
+    // not found
     return res.send("post does not exist");
   } catch (e) {
     console.error(e);
