@@ -45,10 +45,13 @@ const getBuildingDetail = async (req, res, next) => {
 
 const editBuilding = async (req, res, next) => {
   try {
+    console.log('hi')
     // find the building
     const buildingDetails = await Building.findOne({
       name: req.params.name,
     }).lean();
+
+    console.log(buildingDetails);
     // initialise info
     var newDescription = buildingDetails.newDescription;
     var newPic = buildingDetails.newPic;
@@ -62,8 +65,8 @@ const editBuilding = async (req, res, next) => {
     }
 
     // update the specified building with new info
-    await User.findOneAndUpdate(
-      { name: req.body.name },
+    await Building.findOneAndUpdate(
+      { name: req.params.name },
       { description: newDescription, pic: newPic }
     );
     res.json({ status: "ok" });

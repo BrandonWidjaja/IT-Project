@@ -37,7 +37,7 @@ function BuildingDetails() {
             rating
           },
         };
-    
+
         // make the API call
         axios(configuration)
           .then((result) => {
