@@ -28,7 +28,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/user/login",
+        axios.post("/user/login",
             JSON.stringify({ email, password }),
             {
                 headers: { 'Content-Type': 'application/json' },

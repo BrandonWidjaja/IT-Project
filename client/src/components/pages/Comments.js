@@ -4,7 +4,7 @@ import styles from './Modules/BuildingDetails.module.css';
 
 const Comments = () => {
     const [content, setContent] = useState([]);
-    const [comment, setComments] = useState('');
+    //const [comment, setComments] = useState('');
 
     const handleSubmit = (e) => {
       // prevent the form from refreshing the whole page
@@ -13,7 +13,7 @@ const Comments = () => {
       // set configurations
       const configuration = {
         method: "post",
-        url: "http://localhost:3001/post/addcomment",
+        url: "/post/addcomment",
         data: {
           content
         },
@@ -22,7 +22,7 @@ const Comments = () => {
       // make the API call
       axios(configuration)
         .then((result) => {
-          setComments(true);
+          //setComments(true);
         })
         .catch((error) => {
           error = new Error();

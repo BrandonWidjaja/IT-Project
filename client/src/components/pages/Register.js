@@ -19,7 +19,7 @@ const Register  = ()=>{
       if (!err) {
         const configuration = {
           method: "post",
-          url: "http://localhost:3001/user/register",
+          url: "/user/register",
           data: {
             name,
             email,

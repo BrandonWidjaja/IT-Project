@@ -29,7 +29,7 @@ function BuildingDetails() {
         // set configurations
         const configuration = {
           method: "post",
-          url: "http://localhost:3001/building/rate-building",
+          url: "/building/rate-building",
           data: {
             id: JSON.parse(localStorage.getItem("User"))._id,
             buildingName: name,
@@ -86,7 +86,9 @@ function BuildingDetails() {
         <>  
             <div style = {{display: "flex", justifyContent: "space-between"}}>
             <h1 style = {{color: "#607EAA"}}>{building.name}</h1>
-            <Link key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
+            <div style = {{marginTop: "auto", marginBottom: "0"}}>
+                <Link style = {{color: "grey"}} key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
+            </div>
             </div>
             <div className={styles.card}>
                 <img src = {building.data?.pic} alt = "building_pic"></img>

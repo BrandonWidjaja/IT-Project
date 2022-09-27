@@ -13,7 +13,7 @@ function AdminBuildingDetails() {
     const [building, setBuilding] = useState("")
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/building/building-detail/${name}`)
+        axios.get(`/building/building-detail/${name}`)
         .then(res => {
             setBuilding(res.data);
         }).catch(

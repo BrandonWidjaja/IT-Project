@@ -14,7 +14,7 @@ function Profile() {
         
         if (localStorage.getItem('User')) {
             const user = JSON.parse(localStorage.getItem('User'));
-            axios.get(`http://localhost:3001/user/getprofile/${id}`)
+            axios.get(`/user/getprofile/${id}`)
                 .then(res => {
                     setUser(res.data);
                 }).catch(
@@ -39,7 +39,7 @@ function Profile() {
                 <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                     <p>Name: {user.data?.displayName} </p>
-                    <p>Date of Birth: {user.data?.birthDate}</p>
+                    {/* <p>Date of Birth: {user.data?.birthDate}</p> */}
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio: {user.data?.bio}</p>
                     {

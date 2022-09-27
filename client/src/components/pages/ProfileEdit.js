@@ -21,7 +21,7 @@ function ProfileEdit() {
         setLoading(true);
         const configuration = {
           method: "post",
-          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
+          url: `/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
           data: {
             newDisplayName,
             newPassword,
@@ -53,7 +53,7 @@ function ProfileEdit() {
           setErr(true);
         }
         const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`http://localhost:3001/user/getprofile/${user._id}`)
+        axios.get(`/user/getprofile/${user._id}`)
         .then(res => {
             setUser(res.data);
         }).catch(

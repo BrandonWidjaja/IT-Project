@@ -9,7 +9,7 @@ const Buildings = () => {
     const [query, setQuery] = useState("");
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/building/buildings`)
+        axios.get(`/building/buildings`)
         .then(res => {
             setBuildingList(res.data);
         }).catch(

@@ -23,7 +23,7 @@ const uploadFields = useCallback(() => {
   setLoading(true);
   const configuration = {
     method: "post",
-    url: `http://localhost:3001/building/edit-building/${name}`,
+    url: `/building/edit-building/${name}`,
     data: {
       name: newName,
       newLocation,
@@ -50,7 +50,7 @@ useEffect(() => {
   }
 
 
-  axios.get(`http://localhost:3000/building/building-detail/${name}`)
+  axios.get(`/building/building-detail/${name}`)
     .then(res => {
         setBuilding(res.data);
     }).catch(

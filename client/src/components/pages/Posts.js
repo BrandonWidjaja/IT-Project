@@ -24,7 +24,7 @@ function Posts(props) {
       // set configurations
       const configuration = {
         method: "post",
-        url: "http://localhost:3001/post/new",
+        url: "/post/new",
         data: {
           buildingName: building,
           title,
@@ -47,13 +47,14 @@ function Posts(props) {
         
           <div className={styles.post}>
             <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
-                <h2 style = {{marginBottom: "1rem"}}> Write a review</h2>
+                <h2 style = {{marginBottom: "1rem", color: "var(--light-secondary)"}}> Write a review</h2>
                 {!post ? (
                   <>
-                    <input style = {{width: "100%", height:"2rem"}} type="text" placeholder='Title'
+                    <input style = {{width: "100%", height:"2rem", backgroundColor: "var(--dark-primary)", marginBottom: "1rem"}} type="text" placeholder='Title'
                     value={title} onChange={(e) => setTitle(e.target.value)} required/>
-                    <input style = {{width: "100%", height:"5rem", marginBottom: "1rem"}} type="text"
+                    <textarea style = {{width: "100%", height:"5rem", marginBottom: "1rem", backgroundColor: "var(--dark-primary)", border:"1px solid lightgrey"}} type="text"
                     value={description}
+                    placeholder = "Content"
                     onChange={(e) => setDescription(e.target.value)} required/>
                     <div style = {{marginTop: "0.5rem", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
                         <button  onClick={(e) => handleSubmit(e)} style = {{height: "2rem", width: "100%"}}>Post</button>

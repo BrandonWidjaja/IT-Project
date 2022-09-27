@@ -18,7 +18,7 @@ function NewBuilding() {
   const uploadFields = useCallback(() => {
     const configuration = {
       method: "post",
-      url: "http://localhost:3001/building/addBuilding",
+      url: "/building/addBuilding",
       data: {
         name,
         description,
