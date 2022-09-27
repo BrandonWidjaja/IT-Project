@@ -14,12 +14,12 @@ const postSchema = new mongoose.Schema({
   postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
   description: { type: String, required: true },
-  rating: { type: Number, required: true },
+  rating: { type: Number },
   dateTimePosted: { type: String, required: true },
   comments: [comment],
   likes: { type: Number },
   dislikes: { type: Number },
-  buildingID: { type: mongoose.Schema.Types.ObjectId, ref: "Building" },
+  buildingName: { type: String, ref: "Building" },
   edited: { tpye: Boolean },
 });
 

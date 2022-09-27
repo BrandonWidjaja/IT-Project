@@ -83,8 +83,7 @@ function BuildingDetails() {
 
                 <button style={{height:"2rem"}}>Update</button>
             </div>
-
-            <GetPosts Post />
+            <GetPosts building = {name}/>
 
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <div className={styles.post}>
