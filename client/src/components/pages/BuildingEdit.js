@@ -18,7 +18,7 @@ function BuildingEdit() {
     );
 }, [setBuilding, name])
 
-console.log(building);
+
   const handleSubmit = (e) => {
     // prevent the form from refreshing the whole page
     e.preventDefault();

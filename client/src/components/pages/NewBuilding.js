@@ -57,7 +57,6 @@ function NewBuilding() {
       })
       .then(res=>res.json())
       .then(data=>{
-        console.log(data);
          setUrl(data.url);
          setPublicId(data.public_id);
       })

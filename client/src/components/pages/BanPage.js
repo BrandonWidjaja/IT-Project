@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-const Unauthorized = () => {
+const BanPage = () => {
     const navigate = useNavigate();
 
     const goBack = () => navigate(-1);
 
     return (
         <div style = {{textAlign : "center"}}>
-            <h1>Unauthorized</h1>
+            <h1>Banned</h1>
             <br />
-            <p>You do not have access to the requested page.</p>
+            <p>You are banned from this website.</p>
             <div>
                 <button onClick={goBack}>Go Back</button>
             </div>
@@ -17,4 +17,4 @@ const Unauthorized = () => {
     )
 }
 
-export default Unauthorized
+export default BanPage

@@ -75,7 +75,7 @@ const editProfile = async (req, res, next) => {
   try {
     // find the user
     const user = await User.findOne({
-      email: req.params.email,
+      "_id": req.params.id,
     });
 
     // initialise editable info
@@ -101,12 +101,12 @@ const editProfile = async (req, res, next) => {
     } else {
       newPic = "";
     }
-
+    
     // update editable info if found in request
     if (req.body.newDisplayName) {
       newDisplayName = req.body.newDisplayName;
     }
-    if (req.body.newBio) {
+    if (req.body.newBio && req.body.newBio != "") {
       newBio = req.body.newBio;
     }
     if (req.body.newCourse) {
@@ -121,7 +121,7 @@ const editProfile = async (req, res, next) => {
 
     // update the specified user with new info
     await User.updateOne(
-      { email: req.params.email },
+      { "_id" : req.params.id },
       {$set: {displayName: newDisplayName, bio: newBio, course: newCourse, password: newPassword, pic: newPic}}
     );
     
@@ -133,10 +133,8 @@ const editProfile = async (req, res, next) => {
 
 const getProfile = async (req, res, next) => {
   try {
-    // retrieve object id of user from request
-    let req_email = req.params.email;
     // find the user in the database
-    let exists = await User.findOne({ email: req_email });
+    let exists = await User.findOne({"_id": req.params.id});
     if (exists) {
       return res.send({data : exists});
     }

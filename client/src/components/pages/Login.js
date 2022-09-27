@@ -36,11 +36,17 @@ const Login = () => {
             }
         ).then(res => {
             if (res.data.status === "ok") {
-                window.localStorage.setItem("User", JSON.stringify(res.data.data));
-                setAuth(res.data.data);
-                setEmail('');
-                setPwd('');
-                navigate(from, { replace: true });
+                const user = JSON.stringify(res.data.data);
+                if (JSON.parse(user).status !== "Banned") {
+                    window.localStorage.setItem("User", user);
+                    setAuth(res.data.data);
+                    setEmail('');
+                    setPwd('');
+                    navigate(from, { replace: true });
+                } else {
+                    navigate("/ban-page");
+                }
+                
             } else {
                 setErrMsg("Incorrect Password or Invalid Email");
             }

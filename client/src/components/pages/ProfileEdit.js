@@ -1,7 +1,7 @@
 import styles from './Modules/Profile.module.css';
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
-//import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ProfileEdit() {
     const [newDisplayName, setNewDisplayName] = useState('');
@@ -15,12 +15,13 @@ function ProfileEdit() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [user, setUser] = useState("")
+    const navigate = useNavigate();
 
     const uploadFields = useCallback(() => {
         setLoading(true);
         const configuration = {
           method: "post",
-          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User")).email}`,
+          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
           data: {
             newDisplayName,
             newPassword,
@@ -38,8 +39,8 @@ function ProfileEdit() {
         .catch((error) => {
           error = new Error();
         });
-        window.open("/profile");
-      }, [newDisplayName, newPassword, newBio, url])
+        navigate(`/profile/${JSON.parse(localStorage.getItem("User"))._id}`);
+      }, [newDisplayName, newPassword, newBio, url, navigate])
     
       useEffect(() => {
         if(url){
@@ -52,7 +53,7 @@ function ProfileEdit() {
           setErr(true);
         }
         const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
+        axios.get(`http://localhost:3001/user/getprofile/${user._id}`)
         .then(res => {
             setUser(res.data);
         }).catch(
@@ -87,7 +88,7 @@ function ProfileEdit() {
                 uploadFields()
             }
         } else {
-            alert("Passwords Not Matching")
+            alert("Passwords Not Matching");
         }
       }
 
@@ -128,8 +129,6 @@ function ProfileEdit() {
                             />
                             {err ? <p style = {{fontSize:"0.8rem", color:"grey"}}> Passwords did not match </p> : ''}
                         </div>
-                        
-                        
                     </div>
                     
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
@@ -168,7 +167,6 @@ function ProfileEdit() {
                     </div>
                 </form>
             </div>
-
         </>
     )
 }
