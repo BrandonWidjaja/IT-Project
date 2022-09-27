@@ -22,6 +22,7 @@ const getBuildings = async (req, res, next) => {
     let buildings = await Building.find();
     if (buildings) {
       return res.send({ data: buildings });
+      
     }
     // user not found
     return res.send("no bulding");

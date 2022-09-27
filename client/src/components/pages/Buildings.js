@@ -12,9 +12,11 @@ const Buildings = () => {
         axios.get(`/building/buildings`)
         .then(res => {
             setBuildingList(res.data);
+            console.log(res);
         }).catch(
             (err) => console.log("err", err)
         );
+        
     }, [setBuildingList])
 
     const search =(data) => {
