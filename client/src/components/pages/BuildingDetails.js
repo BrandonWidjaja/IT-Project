@@ -48,14 +48,14 @@ function BuildingDetails() {
       };
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/building/building-detail/${name}`)
+        axios.get(`/building/building-detail/${name}`)
         .then(res => {
             setBuilding(res.data);
         }).catch(
             (err) => console.log("err", err)
         );
 
-        axios.get(`http://localhost:3001/post/getpost/${name}`)
+        axios.get(`/post/getpost/${name}`)
         .then(res => {
             setPost(res.data);
         }).catch(
@@ -66,7 +66,7 @@ function BuildingDetails() {
     const deleteBuilding = () => {
         const configuration = {
           method: "delete",
-          url: "http://localhost:3001/admin/delete-building",
+          url: "/admin/delete-building",
           data: {
             name
           },
