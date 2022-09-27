@@ -7,6 +7,8 @@ import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import GetPosts from './Posts';
+import PostComments from './Comments'
 
 function BuildingDetails() {
     const { auth } = useAuth();
@@ -81,6 +83,7 @@ function BuildingDetails() {
 
                 <button style={{height:"2rem"}}>Update</button>
             </div>
+            <GetPosts building = {name}/>
 
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <div className={styles.post}>
@@ -92,7 +95,7 @@ function BuildingDetails() {
                 </p>
                 <form className={styles.comments}>
                     <p>hi</p>
-                    <input className={styles.new_comment} type="text" placeholder='Comment'></input>
+                    <PostComments Comments />
                 </form>
                 <div className={styles.like}>
                     <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={()=> console.log("hahahahaha")}/>
