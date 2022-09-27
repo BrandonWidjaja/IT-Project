@@ -27,7 +27,7 @@ function GetList(props) {
                             <p>Location: {building.location}</p>
                         </div>
                         <div>
-                            <p>Rating:<Rating initialRating={building.rating} emptySymbol="fa fa-star-o fa-lx" fullSymbol="fa fa-star fa-lx" readonly/></p>
+                            <p>Rating:<Rating initialRating={building.averageRating} emptySymbol="fa fa-star-o fa-lx" fullSymbol="fa fa-star fa-lx" readonly/></p>
                         </div>
                     </div>
                 </div>

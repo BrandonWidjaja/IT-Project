@@ -6,14 +6,44 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import GetPosts from './Posts';
+import PostComments from './Comments'
 import PostList from './PostList';
+
 
 function BuildingDetails() {
     const { auth } = useAuth();
     const navigate = useNavigate();
+    var rating = 0;
     const {name} = useParams();
     const [building, setBuilding] = useState("");
     const [post, setPost] = useState([]);
+
+    const setRating = (e) => {
+        rating = e;
+    }
+
+    const handleRating = (e) => {
+        // prevent the form from refreshing the whole page
+        e.preventDefault();
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "http://localhost:3001/building/rate-building",
+          data: {
+            id: JSON.parse(localStorage.getItem("User"))._id,
+            buildingName: name,
+            rating
+          },
+        };
+
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      };
 
     useEffect(() => {
         axios.get(`http://localhost:3001/building/building-detail/${name}`)
@@ -72,7 +102,7 @@ function BuildingDetails() {
                         <p>No Description Yet</p>
                     )}
                     
-                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.averageRating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
                 {auth.role === "Admin" && (
                     <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>
@@ -80,9 +110,8 @@ function BuildingDetails() {
                 
             </div>
             <div className={styles.rate}>
-                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2}/></p>
-
-                <button style={{height:"2rem"}}>Update</button>
+                <p style={{display:"flex", alignItems:"center"}}>Rate:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
+                <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
             </div>
             <GetPosts building = {name}/>
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
