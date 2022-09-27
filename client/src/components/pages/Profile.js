@@ -30,7 +30,7 @@ function Profile() {
             navigate("/unauthorized");
         }
 
-    }, [setUser, navigate])
+    }, [setUser, navigate, id])
 
     return (
         <>
