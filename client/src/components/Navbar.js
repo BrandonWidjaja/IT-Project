@@ -8,7 +8,7 @@ const Navbar= () => {
 
     return(
         <>
-            <img className="logo" src="https://i.ibb.co/yPk5FFv/abccc.png" alt = "logo"></img>
+            <img className="logo" src="https://res.cloudinary.com/dm13bguzr/image/upload/v1664315793/unknown_yistqv.png" alt = "logo"></img>
             <GiHamburgerMenu className ='hamburger' size ='6vh' color='white' onClick ={() => setOpen(!open)}/>
             { open && <div className="drop-down-menu"><NavLinks /></div>}
             <div className="menu">
