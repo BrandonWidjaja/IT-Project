@@ -87,12 +87,18 @@ function BuildingDetails() {
             <div style = {{display: "flex", justifyContent: "space-between"}}>
             <h1 style = {{color: "#607EAA"}}>{building.name}</h1>
             <div style = {{marginTop: "auto", marginBottom: "0"}}>
-                <Link style = {{color: "grey"}} key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
+                {auth.email ? (
+                    <Link style = {{color: "grey"}} key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
+                ) :(
+                    <></>
+                )
+                }
+                
             </div>
             </div>
             <div className={styles.card}>
                 <img src = {building.data?.pic} alt = "building_pic"></img>
-                <div style = {{display: "flex", flexDirection: "column", marginRight: "2.5rem"}}>
+                <div style = {{display: "flex", flexDirection: "column", marginRight: "2.5rem", textAlign: "center"}}>
                     <p>Name: {building.name}</p>
                     {building.data?.location ? (
                         <p>Location: {building.data.location}</p>
@@ -106,7 +112,7 @@ function BuildingDetails() {
                         <p>No Description Yet</p>
                     )}
                     
-                    <p style={{display:"flex", alignItems:"center"}}>Rating: <Rating initialRating={building.data?.averageRating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
+                    <p style={{display:"flex", alignItems:"center", margin: "auto", marginTop:"1rem"}}>Rating: <Rating initialRating={building.data?.averageRating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
                 {auth.role === "Admin" && (
                     <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>

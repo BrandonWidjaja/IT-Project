@@ -16,6 +16,7 @@ function Profile() {
             const user = JSON.parse(localStorage.getItem('User'));
             axios.get(`/user/getprofile/${id}`)
                 .then(res => {
+                    console.log(res.data);
                     setUser(res.data);
                 }).catch(
                     (err) => console.log("err", err)
@@ -34,7 +35,9 @@ function Profile() {
 
     return (
         <>
-            <h1 style = {{color: "#607EAA"}}>Profile</h1>
+            {user.data?.role === "User" && <h1 style = {{color: "#607EAA"}}>Profile</h1>}
+            {user.data?.role === "Admin" && <h1 style = {{color: "#607EAA"}}>Admin Profile</h1>}
+            
             <div className={styles.card}>
                 <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>

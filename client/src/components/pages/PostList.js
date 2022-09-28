@@ -15,11 +15,14 @@ PostList.defaultProps = {
 
 function PostList(props) {
     const {postList} = props;
-    console.log(postList);
+    console.log(props);
+
     return (
         <>
         {postList.map((post) => (
-            <div className={styles.post}>
+            
+        <div className={styles.post}>
+            <p style = {{color: "grey",marginBottom: "0.5rem"}}>{post.dateTimePosted}</p>
             <div className={styles.title}>
                 <h2 style = {{margin: '0.5rem'}}>Title: {post.title}</h2>
             </div>
@@ -27,7 +30,7 @@ function PostList(props) {
                 {post.description}
             </p>
             <form className={styles.comments}>
-                <p>no Comment</p>
+                <p>Comment Function Not Available Yet</p>
                 <PostComments Comments />
             </form>
             <div className={styles.like}>

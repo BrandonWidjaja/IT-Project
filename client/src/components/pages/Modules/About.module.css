@@ -9,10 +9,11 @@
     border-radius: 0.5rem;
 }
 
+
 .container .member img{
-    width: 10%;
+    width: 40%;
     height: auto;
-    margin-right: 1rem;
+    margin: 1rem;
     border-radius: 0.5rem;
 }
 

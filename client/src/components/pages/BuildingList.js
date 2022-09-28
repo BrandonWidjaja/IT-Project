@@ -20,10 +20,12 @@ function GetList(props) {
         {buildingList.map((building) => (
             <Link key = {building.id} to={`/building-detail/${building.name}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                 <div className={styles.card}>
-                    <img src={building?.pic} alt = "test"></img>
+                    <div style = {{width: "25%", marginRight: "1rem"}}>
+                        <img style = {{width: "100%", maxHeight: "10rem", objectFit:"cover"}}src={building?.pic} alt = "test"></img>
+                    </div>
                     <div className={styles.cardDetail} style = {{width: "100%"}}>
                         <div styles = {{height: "80%"}}>
-                            <h2>Name: {building.name}</h2>
+                            <h2>{building.name}</h2>
                             <p>Location: {building.location}</p>
                         </div>
                         <div>

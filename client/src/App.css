@@ -77,6 +77,10 @@ button:hover {
     margin: auto;
 }
 
+textarea {
+    border: 1px solid lightgrey;
+}
+
 @media screen and (max-width: 1000px) {
     h1 {
         font-size: 3rem;

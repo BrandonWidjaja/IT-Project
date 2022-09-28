@@ -2,6 +2,7 @@ import React, { useState }from 'react';
 import styles from './Modules/BuildingDetails.module.css';
 import axios from "axios";
 import PropTypes from 'prop-types';
+import useAuth from "../../hooks/useAuth";
 
 Posts.propTypes = {
   building: PropTypes.string,
@@ -16,16 +17,19 @@ function Posts(props) {
     const [description, setDescription] = useState("");
     const [post, setPost] = useState(false);
     const {building} = props;
-
+    const {auth} = useAuth();
+    console.log("hi");
+    console.log(auth);
     const handleSubmit = (e) => {
       // prevent the form from refreshing the whole page
       e.preventDefault();
-
+      
       // set configurations
       const configuration = {
         method: "post",
         url: "/post/new",
         data: {
+          postedByID: auth._id,
           buildingName: building,
           title,
           description
@@ -50,9 +54,9 @@ function Posts(props) {
                 <h2 style = {{marginBottom: "1rem", color: "var(--light-secondary)"}}> Write a review</h2>
                 {!post ? (
                   <>
-                    <input style = {{width: "100%", height:"2rem", backgroundColor: "var(--dark-primary)", marginBottom: "1rem"}} type="text" placeholder='Title'
+                    <input style = {{width: "100%", height:"2rem", marginBottom: "1rem"}} type="text" placeholder='Title'
                     value={title} onChange={(e) => setTitle(e.target.value)} required/>
-                    <textarea style = {{width: "100%", height:"5rem", marginBottom: "1rem", backgroundColor: "var(--dark-primary)", border:"1px solid lightgrey"}} type="text"
+                    <textarea style = {{width: "100%", height:"5rem", marginBottom: "1rem", border:"1px solid lightgrey"}} type="text"
                     value={description}
                     placeholder = "Content"
                     onChange={(e) => setDescription(e.target.value)} required/>
