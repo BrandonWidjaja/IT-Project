@@ -39,7 +39,11 @@ li a:hover {
 
 .hamburger {
     position: absolute;
+<<<<<<< Updated upstream
     vertical-align: middle;
+=======
+    align-items: center;
+>>>>>>> Stashed changes
     right: 2.5%;
     cursor: pointer;
     display: None;
@@ -77,14 +81,23 @@ li a:hover {
         margin: 0;
         top: 7vh;
         right: 0;
+<<<<<<< Updated upstream
+=======
+        width: 50%;
+        height: 100%;
+>>>>>>> Stashed changes
         background-color: #607EAA;
         align-items: center;
         border-top: 2px solid #5C78A1;
         list-style-type: none;
         text-align: center;
+<<<<<<< Updated upstream
         width: 50%;
         height: 100%;
         translate: "translateX(40%)";
+=======
+        line-height: 3;
+>>>>>>> Stashed changes
     }
 
 }
