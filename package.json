@@ -18,7 +18,23 @@
   },
   "homepage": "https://github.com/BrandonWidjaja/IT-Project#readme",
   "dependencies": {
+<<<<<<< Updated upstream
     "express": "^4.18.1"
+=======
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.32.0",
+    "concurrently": "^7.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.2",
+    "react-icons": "^4.4.0"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
+>>>>>>> Stashed changes
   }
 }
 

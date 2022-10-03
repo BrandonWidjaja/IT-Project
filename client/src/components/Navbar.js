@@ -1,6 +1,7 @@
 import React from 'react';
 import "./nav-style.css"
 
+<<<<<<< Updated upstream
 function Navbar() {
     return (
         <nav className="nav">
@@ -24,6 +25,17 @@ function Navbar() {
                         <a href="/Profile">Profile</a>
                     </li>
                 </ul>
+=======
+    const [open, setOpen] = useState(false);
+
+    return(
+        <>
+            <img className="logo" src="https://res.cloudinary.com/dm13bguzr/image/upload/v1664315793/unknown_yistqv.png" alt = "logo"></img>
+            <GiHamburgerMenu className ='hamburger' size ='4vh' color='white' onClick ={() => setOpen(!open)}/>
+            { open && <div className="drop-down-menu"><NavLinks /></div>}
+            <div className="menu">
+                <NavLinks />
+>>>>>>> Stashed changes
             </div>
         </nav>
     )
