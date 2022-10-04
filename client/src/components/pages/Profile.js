@@ -7,30 +7,26 @@ import { useNavigate, useParams } from "react-router-dom"
 function Profile() {
     const { id } = useParams();
     const [user, setUser] = useState("");
-    const [other, setOther] = useState(false);
+    const [other, setOther] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-        
+        const user = JSON.parse(localStorage.getItem('User'));
+        axios.get(`/user/getprofile/${id}`)
+            .then(res => {
+                console.log(res.data);
+                setUser(res.data);
+            }).catch(
+                (err) => console.log("err", err)
+        );
         if (localStorage.getItem('User')) {
-            const user = JSON.parse(localStorage.getItem('User'));
-            axios.get(`/user/getprofile/${id}`)
-                .then(res => {
-                    console.log(res.data);
-                    setUser(res.data);
-                }).catch(
-                    (err) => console.log("err", err)
-            );
             if (user._id === id) {
                 setOther(false);
             } else {
                 setOther(true);
                 console.log("hi");
             }
-        } else {
-            navigate("/unauthorized");
         }
-
     }, [setUser, navigate, id])
 
     return (

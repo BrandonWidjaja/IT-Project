@@ -29,6 +29,7 @@ function Posts(props) {
         method: "post",
         url: "/post/new",
         data: {
+          postedByName: auth.displayName,
           postedByID: auth._id,
           buildingName: building,
           title,
@@ -48,7 +49,6 @@ function Posts(props) {
   
     return (
         <>
-        
           <div className={styles.post}>
             <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
                 <h2 style = {{marginBottom: "1rem", color: "var(--light-secondary)"}}> Write a review</h2>

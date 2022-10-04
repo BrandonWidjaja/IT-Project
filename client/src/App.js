@@ -38,8 +38,8 @@ function App() {
           <Route path="/ban-page" element={<Banned />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<Buildings />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-            <Route path="/profile/:id" element={<Profile />} />
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>

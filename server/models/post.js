@@ -11,6 +11,7 @@ const comment = new mongoose.Schema({
 });
 
 const postSchema = new mongoose.Schema({
+  postedByName: { type: String },
   postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
   description: { type: String, required: true },
