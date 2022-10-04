@@ -62,7 +62,7 @@ const deletePost = async (req, res, next) => {
 const banUser = async (req, res, next) => {
   try {
     await User.findOneAndUpdate(
-      { email: req.body.email },
+      { _id:  req.body.id },
       { status: "Banned"},
     );
 		res.json({ status: 'ok' })

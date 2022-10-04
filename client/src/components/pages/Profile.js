@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from "react-router-dom"
+import useAuth from "../../hooks/useAuth";
 
 function Profile() {
+    const { auth } = useAuth();
     const { id } = useParams();
     const [user, setUser] = useState("");
     const [other, setOther] = useState(true);
@@ -29,6 +31,30 @@ function Profile() {
         }
     }, [setUser, navigate, id])
 
+    const handleSubmit = (e) => {
+        // prevent the form from refreshing the whole page
+        e.preventDefault();
+        
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "/admin/ban-user",
+          data: {
+            id: id
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+            navigate("/");
+          })
+          .catch((error) => {
+            error = new Error();
+        });
+    };
+
+    
     return (
         <>
             {user.data?.role === "User" && <h1 style = {{color: "#607EAA"}}>Profile</h1>}
@@ -40,12 +66,25 @@ function Profile() {
                     <p>Name: {user.data?.displayName} </p>
                     {/* <p>Date of Birth: {user.data?.birthDate}</p> */}
                     <p>Email: {user.data?.email}</p>
+                    {user.data?.status === "Banned" ? (
+                        <p style = {{color: "red"}}> (Banned)</p>
+                    ): (
+                        <></>
+                    )}
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
                     <p >Bio: {user.data?.bio}</p>
                     
                     {
                     other ? (
-                        <></>
+                        <>
+                            { auth.role === "Admin" ? (
+                                <div style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                                    <button style = {{width: "100%"}} onClick={(e) => handleSubmit(e)} >Ban</button>
+                                </div>
+                            ): (
+                                <></>
+                            )}
+                        </>
                     ) : (
                         <Link to={`/profile-edit`} style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
                         <button style = {{width: "100%"}}>Edit</button>
