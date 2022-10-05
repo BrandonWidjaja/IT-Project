@@ -8,5 +8,7 @@ postRouter.get("/getpost/:name", postController.getPost);
 postRouter.post("/addcomment", postController.addComment);
 postRouter.post("/likeComment", postController.likeComment);
 postRouter.post("/dislikeComment", postController.dislikeComment);
+postRouter.post("/likepost", postController.likePost);
+postRouter.post("/dislikepost", postController.dislikePost);
 
 module.exports = postRouter;
