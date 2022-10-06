@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/fontawesome-free-solid"
 import styles from './Modules/BuildingDetails.module.css';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 PostList.propTypes = {
     postList: PropTypes.array,
@@ -16,8 +18,47 @@ PostList.defaultProps = {
 
 function PostList(props) {
     const {postList} = props;
-    console.log(props);
-
+    const { auth } = useAuth();
+    function like(e) {   
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "/post/likepost",
+          data: {
+            _id: e._id,
+            user: auth._id
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      };
+    
+    function dislike(e) {
+        console.log(e);        
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "/post/dislikepost",
+          data: {
+            _id: e._id,
+            user: auth._id
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+          });
+      };
     return (
         <>
         {postList.map((post) => (
@@ -46,10 +87,10 @@ function PostList(props) {
                 <PostComments Comments />
             </form>
             <div className={styles.like}>
-                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={()=> console.log("hahahahaha")}/>
-                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>20</p>
-                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl"/>
-                <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>20</p>
+                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
+                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
             </div>
         </div>
         ))}
