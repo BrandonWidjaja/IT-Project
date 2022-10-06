@@ -45,8 +45,18 @@ const likePost = async (req, res, next) => {
     // find the post in the database
     let exists = await Post.findOne({ _id: postID });
     if (exists) {
+      var removeLikeIndex;
       if (exists.likedBy.includes(user)) {
-        return res.send("Post already liked");
+        for (var userID in exists.likedBy) {
+          if (user == exists.likedBy[userID]) {
+            removeLikeIndex = userID;
+          }
+        }
+        if (removeLikeIndex) {
+          exists.likedBy.splice(removeLikeIndex, 1);
+        }
+        exists.save();
+        return res.send(exists);
       } else {
         var removeIndex;
         for (var userID in exists.dislikedBy) {
@@ -59,9 +69,9 @@ const likePost = async (req, res, next) => {
         }
 
         exists.likedBy.push(user);
+        exists.save();
       }
 
-      exists.save();
       return res.send(exists);
     }
     // post not found
@@ -81,8 +91,18 @@ const dislikePost = async (req, res, next) => {
     // find the post in the database
     let exists = await Post.findOne({ _id: postID });
     if (exists) {
+      var removeDislikeIndex;
       if (exists.dislikedBy.includes(user)) {
-        return res.send("Post already disliked");
+        for (var userID in exists.dislikedBy) {
+          if (user == exists.dislikedBy[userID]) {
+            removeDislikeIndex = userID;
+          }
+        }
+        if (removeDislikeIndex) {
+          exists.dislikedBy.splice(removeDislikeIndex, 1);
+        }
+        exists.save();
+        return res.send(exists);
       } else {
         var removeIndex;
         for (var userID in exists.likedBy) {
