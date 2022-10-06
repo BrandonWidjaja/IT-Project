@@ -128,6 +128,44 @@ const dislikePost = async (req, res, next) => {
   }
 };
 
+const hasBeenLiked = async (req, res, next) => {
+  try {
+    // retrieve object id of post from request
+    let postID = req.body._id;
+    let user = req.body.user;
+
+    // find the post in the database
+    let exists = await Post.findOne({ _id: postID });
+    if (exists) {
+      return res.send(exists.likedBy.includes(user));
+    }
+    // post not found
+    return res.send("post does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
+
+const hasBeenDisliked = async (req, res, next) => {
+  try {
+    // retrieve object id of post from request
+    let postID = req.body._id;
+    let user = req.body.user;
+
+    // find the post in the database
+    let exists = await Post.findOne({ _id: postID });
+    if (exists) {
+      return res.send(exists.dislikedBy.includes(user));
+    }
+    // post not found
+    return res.send("post does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
+
 const addComment = async (req, res, next) => {
   try {
     // retrieve object id of post from request
@@ -260,4 +298,6 @@ module.exports = {
   dislikeComment,
   likePost,
   dislikePost,
+  hasBeenLiked,
+  hasBeenDisliked,
 };
