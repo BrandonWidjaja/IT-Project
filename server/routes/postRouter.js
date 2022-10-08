@@ -10,7 +10,7 @@ postRouter.post("/likeComment", postController.likeComment);
 postRouter.post("/dislikeComment", postController.dislikeComment);
 postRouter.post("/likepost", postController.likePost);
 postRouter.post("/dislikepost", postController.dislikePost);
-postRouter.get("/checkliked", postController.hasBeenLiked);
-postRouter.get("/checkdisliked", postController.hasBeenDisliked);
+postRouter.get("/checkliked/:id/:user", postController.hasBeenLiked);
+postRouter.get("/checkdisliked/:id/:user", postController.hasBeenDisliked);
 
 module.exports = postRouter;

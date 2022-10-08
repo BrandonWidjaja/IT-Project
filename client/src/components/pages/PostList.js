@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
-import PostComments from './Comments'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from "@fortawesome/fontawesome-free-solid"
 import styles from './Modules/BuildingDetails.module.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import CommentList from './CommentList';
 
 PostList.propTypes = {
     postList: PropTypes.array,
@@ -19,6 +19,53 @@ PostList.defaultProps = {
 function PostList(props) {
     const {postList} = props;
     const { auth } = useAuth();
+    const [content, setContent] = useState([]);
+
+    function handleSubmit(e) {
+      // prevent the form from refreshing the whole page
+      // set configurations
+      const configuration = {
+        method: "post",
+        url: "/post/addcomment",
+        data: {
+          _id: e._id,
+          newComment: content,
+          user_id: auth._id,
+          user_name: auth.displayName
+        },
+      };
+  
+      // make the API call
+      axios(configuration)
+        .then((result) => {
+          console.log(result)
+          //setComments(true);
+        })
+        .catch((error) => {
+          error = new Error();
+        });
+    };
+
+    function checkliked(e) {
+      // set configurations
+      axios.get(`/post/checkliked/${e._id}/${auth._id}`,)
+      .then(res => {
+          return res.data;
+        }
+      )
+      return false;
+    };
+
+    function checkdisliked(e) {
+      // set configurations
+      axios.get(`/post/checkdisliked/${e._id}/${auth._id}`,)
+      .then(res => {
+          return res.data;
+        }
+      )
+      return false;
+    };
+
     function like(e) {   
         // set configurations
         const configuration = {
@@ -83,13 +130,31 @@ function PostList(props) {
             </div>
 
             <form className={styles.comments}>
-                <p>Comment Function Not Available Yet</p>
-                <PostComments Comments />
+                <CommentList commentList = {post.comments}/>
+                <div >
+                  <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
+                    <input className={styles.new_comment} type="text" placeholder='Comment' 
+                    onChange={(e) => setContent(e.target.value)}></input>
+                    <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem", color:"var(--light-secondary)"}} icon= {Icons.faPaperPlane}/>
+                  </form>
+                </div>
             </form>
             <div className={styles.like}>
-                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
-                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
-                <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+            {checkliked(post) ? (
+              <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+            ) : (
+              <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+            )}
+            <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
+            
+            {checkdisliked(post) ? (
+              <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+            ) : (
+              <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+            )}
+
+                
+                
                 <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
             </div>
         </div>

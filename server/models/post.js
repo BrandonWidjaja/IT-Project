@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
 const comment = new mongoose.Schema({
-  postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  parent :{ type: mongoose.Schema.Types.ObjectId, ref: "Post" },
+  postedByName: { type: String },
+  postededID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   content: { type: String, required: true },
   dateTimePosted: { type: String, required: true },
   likes: { type: Number },

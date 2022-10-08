@@ -129,10 +129,11 @@ const dislikePost = async (req, res, next) => {
 };
 
 const hasBeenLiked = async (req, res, next) => {
+
   try {
     // retrieve object id of post from request
-    let postID = req.body._id;
-    let user = req.body.user;
+    let postID = req.params.id;
+    let user = req.params.user;
 
     // find the post in the database
     let exists = await Post.findOne({ _id: postID });
@@ -148,11 +149,12 @@ const hasBeenLiked = async (req, res, next) => {
 };
 
 const hasBeenDisliked = async (req, res, next) => {
+  
   try {
     // retrieve object id of post from request
-    let postID = req.body._id;
-    let user = req.body.user;
-
+    let postID = req.params.id;
+    let user = req.params.user;
+    
     // find the post in the database
     let exists = await Post.findOne({ _id: postID });
     if (exists) {
@@ -169,18 +171,18 @@ const hasBeenDisliked = async (req, res, next) => {
 const addComment = async (req, res, next) => {
   try {
     // retrieve object id of post from request
-    let postID = req.body._id;
     let today = getDateTime().substring(0, 10);
-    let commentedBy = req.body.displayName;
 
     let comment = {
       content: req.body.newComment,
       dateTimePosted: today,
-      postedByID: commentedBy,
+      postedByName: req.body.user_name,
+      postedbyID: req.body.user_id,
+      parent: req.body._id
     };
 
     // find the post in the database
-    let exists = await Post.findOne({ _id: postID });
+    let exists = await Post.findOne({ _id: req.body._id });
     if (exists) {
       exists.comments.push(comment);
       exists.save();

@@ -18,8 +18,7 @@ function Posts(props) {
     const [post, setPost] = useState(false);
     const {building} = props;
     const {auth} = useAuth();
-    console.log("hi");
-    console.log(auth);
+
     const handleSubmit = (e) => {
       // prevent the form from refreshing the whole page
       e.preventDefault();
