@@ -92,3 +92,12 @@ input {
 .buttons:hover {
     cursor: pointer;
 }
+
+.deleteButton {
+    color: red;
+    text-decoration: underline;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+}

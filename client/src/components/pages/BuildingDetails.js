@@ -18,6 +18,7 @@ function BuildingDetails() {
     const [building, setBuilding] = useState("");
     const [post, setPost] = useState([]);
     const [rated, setRated] = useState(false);
+    const [approve, setApprove] = useState(false);
 
     const setRating = (e) => {
         rating = e;
@@ -82,7 +83,7 @@ function BuildingDetails() {
     }
 
     function approveBuilding(e) {
-        console.log(e);
+        setApprove(true);
         const configuration = {
           method: "post",
           url: "/admin/approve",
@@ -93,7 +94,6 @@ function BuildingDetails() {
         // make the API call
         axios(configuration)
         .then((result) => {
-            navigate('/');
         })
         .catch((error) => {
           error = new Error();
@@ -133,7 +133,20 @@ function BuildingDetails() {
                 </div>
                 {auth.role === "Admin" && (
                     <div style = {{display: "flex", width: "100%", justifyContent:"right"}}>
-                        <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={(e) => approveBuilding(building.data._id)}>Approve</button>
+                        {building?.data?.approved ? (
+                            <></>
+                        ) : (
+                            <>
+                                {approve ? (
+                                    <p style = {{margin :"auto", marginRight: "1rem", marginBottom: "0"}}>Approved</p>
+                                ) :(
+                                    <button style = {{margin:"auto",  width: "15%"}} onClick={(e) => approveBuilding(building.data._id)}>Approve</button>
+                                )}
+                            </>
+                            
+                        )
+                        }
+                        
                         <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>
                     </div>
                     

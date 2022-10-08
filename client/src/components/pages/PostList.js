@@ -106,6 +106,26 @@ function PostList(props) {
             error = new Error();
           });
       };
+    
+      function deletePost(e) {
+        console.log(e);        
+        // set configurations
+        const configuration = {
+          method: "delete",
+          url: "/admin/delete-post",
+          data: {
+            _id: e._id,
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+        });
+    };
     return (
         <>
         {postList.map((post) => (
@@ -139,23 +159,24 @@ function PostList(props) {
                   </form>
                 </div>
             </form>
-            <div className={styles.like}>
-            {checkliked(post) ? (
-              <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
-            ) : (
-              <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
-            )}
-            <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
-            
-            {checkdisliked(post) ? (
-              <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
-            ) : (
-              <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
-            )}
-
+            <div style = {{display: "flex", justifyContent: "space-between"}}>
+              <div className={styles.like}>
+                {checkliked(post) ? (
+                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                ) : (
+                  <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                )}
+                <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
                 
-                
+                {checkdisliked(post) ? (
+                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                ) : (
+                  <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                )}
                 <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
+              </div>
+              <p className = {styles.deleteButton} onClick={(e) => deletePost(post)}>delete</p>
+
             </div>
         </div>
         ))}
