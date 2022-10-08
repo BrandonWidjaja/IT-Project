@@ -67,9 +67,20 @@ const banUser = async (req, res, next) => {
     );
 		res.json({ status: 'ok' })
 	} catch (err) {
-		res.json({ status: 'error', error: 'Duplicate email' })
+		res.json({ status: 'error'})
 	}
 }
 
+const approveBuilding = async (req, res, next) => {
+  try {
+    await Building.findOneAndUpdate(
+      { _id:  req.body.id },
+      { approved: true}
+    );
+		res.json({ status: 'ok' })
+	} catch (err) {
+		res.json({ status: 'error'})
+	}
+}
 
-module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser};
+module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser, approveBuilding};

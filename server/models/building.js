@@ -14,7 +14,7 @@ const buildingSchema = new mongoose.Schema({
   suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   lastUpdated: { type: String },
   tags: [String],
-  approved: Boolean,
+  approved: {type: Boolean, default: false},
   suggestedByID: { type: mongoose.Schema.Types.ObjectId, ref: "Building" },
   pic: {
     type: String,

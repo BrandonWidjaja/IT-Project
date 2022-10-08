@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styles from './Modules/Buildings.module.css';
 import { Link } from 'react-router-dom';
-import Rating from 'react-rating'
+import axios from "axios";
 
 GetList.propTypes = {
     buildingList: PropTypes.array,
@@ -14,12 +14,30 @@ GetList.defaultProps = {
 
 function GetList(props) {
     const {buildingList} = props;
-    console.log(props);
+
+    function deleteBuilding(e) {
+        const configuration = {
+          method: "delete",
+          url: "/admin/delete-building",
+          data: {
+            e
+          },
+        };
+        // make the API call
+        axios(configuration)
+        .then((result) => {
+
+        })
+        .catch((error) => {
+          error = new Error();
+        });
+    }
+
     return (
         <>
         {buildingList.map((building) => (
             <>
-                {building?.approved ? (
+                {!building?.approved ? (
                     <Link key = {building.id} to={`/building-detail/${building.name}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>
                     <div className={styles.card}>
                         <div style = {{width: "25%", marginRight: "1rem"}}>
@@ -30,16 +48,19 @@ function GetList(props) {
                                 <h2>{building.name}</h2>
                                 <p>Location: {building.location}</p>
                             </div>
-                            <div>
-                                <p>Rating:<Rating initialRating={building.averageRating} emptySymbol="fa fa-star-o fa-lx" fullSymbol="fa fa-star fa-lx" readonly/></p>
+                            <div className={styles.pendbutton}>
+                                <button style = {{width: "15%"}} onClick={(e) => deleteBuilding(building.name)}>Deny</button>
                             </div>
                         </div>
+                        
                     </div>
                 </Link>
                 ) : (
                     <></>
                 )}
             </>
+            
+            
         ))}
         </>
     );

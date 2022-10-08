@@ -81,7 +81,24 @@ function BuildingDetails() {
         });
     }
 
-
+    function approveBuilding(e) {
+        console.log(e);
+        const configuration = {
+          method: "post",
+          url: "/admin/approve",
+          data: {
+            id: e
+          },
+        };
+        // make the API call
+        axios(configuration)
+        .then((result) => {
+            navigate('/');
+        })
+        .catch((error) => {
+          error = new Error();
+        });
+    }
     return (
         <>  
             <div style = {{display: "flex", justifyContent: "space-between"}}>
@@ -115,7 +132,11 @@ function BuildingDetails() {
                     <p style={{display:"flex", alignItems:"center", margin: "auto", marginTop:"1rem"}}>Rating: <Rating initialRating={building.data?.averageRating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" readonly/></p>
                 </div>
                 {auth.role === "Admin" && (
-                    <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>
+                    <div style = {{display: "flex", width: "100%", justifyContent:"right"}}>
+                        <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={(e) => approveBuilding(building.data._id)}>Approve</button>
+                        <button style = {{alignSelf: 'flex-end', marginTop:'1.5rem' , width: "15%"}} onClick={deleteBuilding}>Delete</button>
+                    </div>
+                    
                 )}
                 
             </div>
