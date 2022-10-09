@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from "react-router-dom"
 import useAuth from "../../hooks/useAuth";
+import PostList from './PostList';
 
 function Profile() {
     const { auth } = useAuth();
@@ -11,16 +12,24 @@ function Profile() {
     const [user, setUser] = useState("");
     const [other, setOther] = useState(true);
     const navigate = useNavigate();
+    const [post, setPost] = useState([]);
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('User'));
         axios.get(`/user/getprofile/${id}`)
             .then(res => {
-                console.log(res.data);
                 setUser(res.data);
             }).catch(
                 (err) => console.log("err", err)
         );
+
+        axios.get(`/post/getuserpost/${id}`)
+        .then(res => {
+            setPost(res.data);
+        }).catch(
+            (err) => console.log("err", err)
+        );
+
         if (localStorage.getItem('User')) {
             if (user._id === id) {
                 setOther(false);
@@ -29,7 +38,7 @@ function Profile() {
                 console.log("hi");
             }
         }
-    }, [setUser, navigate, id])
+    }, [setUser, navigate, setPost, id, auth])
 
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
@@ -94,7 +103,8 @@ function Profile() {
                     
                 </div>
             </div>
-
+            <h1 style = {{color: "#607EAA", marginTop: "4rem",marginBottom: "1rem"}}>Posts</h1>
+            <PostList postList = {post}/>
             {/* <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <div className={styles.post}>
                 <div className={styles.title}>

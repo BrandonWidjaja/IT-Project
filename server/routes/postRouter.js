@@ -5,6 +5,7 @@ const Post = require("../models/post");
 
 postRouter.post("/new", postController.addNewPost);
 postRouter.get("/getpost/:name", postController.getPost);
+postRouter.get("/getuserpost/:id", postController.getUserPost);
 postRouter.post("/addcomment", postController.addComment);
 postRouter.post("/likeComment", postController.likeComment);
 postRouter.post("/dislikeComment", postController.dislikeComment);

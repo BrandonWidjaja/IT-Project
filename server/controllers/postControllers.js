@@ -36,6 +36,23 @@ const getPost = async (req, res, next) => {
   }
 };
 
+// get a post from their objectID
+const getUserPost = async (req, res, next) => {
+  try {
+    let post = req.params.id;
+    // find the user in the database
+    let exists = await Post.find({ postedByID: post });
+    if (exists) {
+      return res.send(exists);
+    }
+    // not found
+    return res.send("post does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
+
 const likePost = async (req, res, next) => {
   try {
     // retrieve object id of post from request
@@ -295,6 +312,7 @@ const getDateTime = () => {
 module.exports = {
   addNewPost,
   getPost,
+  getUserPost,
   addComment,
   likeComment,
   dislikeComment,
