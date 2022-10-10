@@ -65,5 +65,6 @@ app.listen(PORT, () => {
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
 app.use("/post", postRouter);
-app.use("/admin", adminRouter)
-
+app.use("/admin", adminRouter);
+app.use("/event", eventRouter);
+app.use("/club", clubRouter);
