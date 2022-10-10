@@ -7,7 +7,9 @@ var cors = require('cors')
 var userRouter = require("./routes/userRouter");
 var buildingRouter = require("./routes/buildingRouter");
 var adminRouter = require("./routes/adminRouter");
+var clubRouter = require("./routes/clubRouter");
 
+const eventRouter = require("./routes/eventRouter.js");
 const postRouter = require("./routes/postRouter");
 require("dotenv").config({ path: __dirname + "/../.env" });
 
