@@ -137,7 +137,5 @@ const getProfile = async (req, res, next) => {
     return res.send(e);
   }
 }
-module.exports = { register, login, getProfile};
-
 
 module.exports = { register, login, editProfile, getProfile };

@@ -4,6 +4,6 @@ const eventController = require("../controllers/eventControllers");
 const Event = require("../models/event");
 
 eventRouter.post("/new", eventController.addNewEvent);
-eventtRouter.get("/getevent", eventController.getEvent);
+eventRouter.get("/getevent", eventController.getEvent);
 
 module.exports = eventRouter;
