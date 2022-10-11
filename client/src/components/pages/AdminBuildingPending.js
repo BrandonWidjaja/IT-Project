@@ -17,7 +17,7 @@ function AdminBuildingPending() {
             (err) => console.log("err", err)
         );
         
-    }, [setBuildingList])
+    }, [setBuildingList, buildingList])
 
     const search =(data) => {
         if (data) {

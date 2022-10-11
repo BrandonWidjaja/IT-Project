@@ -19,7 +19,7 @@ function AdminBuildingDetails() {
         }).catch(
             (err) => console.log("err", err)
         );
-    }, [setBuilding, name])
+    }, [setBuilding, name, building])
 
     return (
         <>  
