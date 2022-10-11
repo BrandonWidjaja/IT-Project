@@ -13,16 +13,12 @@ import PostList from './PostList';
 function BuildingDetails() {
     const { auth } = useAuth();
     const navigate = useNavigate();
-    var rating = 0;
+    const [rating, setRating] = useState(0);
     const {name} = useParams();
     const [building, setBuilding] = useState("");
     const [post, setPost] = useState([]);
     const [rated, setRated] = useState(false);
     const [approve, setApprove] = useState(false);
-
-    const setRating = (e) => {
-        rating = e;
-    }
 
     const handleRating = (e) => {
         // prevent the form from refreshing the whole page
@@ -62,7 +58,8 @@ function BuildingDetails() {
         }).catch(
             (err) => console.log("err", err)
         );
-    }, [setBuilding, name])
+        setRating(rating);
+    }, [setBuilding, post, name, rating])
 
     const deleteBuilding = () => {
         const configuration = {
@@ -156,7 +153,7 @@ function BuildingDetails() {
             {auth.email ? (
                 <>
                 <div className={styles.rate}>
-                    <p style={{display:"flex", alignItems:"center"}}>Your Rating:<Rating initialRating={0} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onChange={(e) => setRating(e)}/></p>
+                    <p style={{display:"flex", alignItems:"center"}}>Your Rating:<Rating initialRating={rating} emptySymbol="fa fa-star-o fa-2x" fullSymbol="fa fa-star fa-2x" fractions={2} onClick={(e) => setRating(e)}/></p>
                     {!rated ? (
                         <button onClick={(e) => handleRating(e)} style={{height:"2rem"} }>Update</button>
                     ) : (

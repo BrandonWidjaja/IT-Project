@@ -149,7 +149,7 @@ function PostList(props) {
                 <p style = {{color: "grey",marginBottom: "0.5rem"}}>Date: {post.dateTimePosted}</p>
             </div>
 
-            <form className={styles.comments}>
+            <div className={styles.comments}>
                 <CommentList commentList = {post.comments}/>
                 <div >
                   <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
@@ -158,7 +158,7 @@ function PostList(props) {
                     <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem", color:"var(--light-secondary)"}} icon= {Icons.faPaperPlane}/>
                   </form>
                 </div>
-            </form>
+            </div>
             <div style = {{display: "flex", justifyContent: "space-between"}}>
               <div className={styles.like}>
                 {checkliked(post) ? (

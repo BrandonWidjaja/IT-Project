@@ -38,7 +38,7 @@ function Profile() {
                 console.log("hi");
             }
         }
-    }, [setUser, navigate, setPost, id, auth])
+    }, [setUser, navigate, setPost, id, auth, post, user])
 
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
