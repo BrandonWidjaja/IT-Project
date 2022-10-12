@@ -2,19 +2,21 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
-var cors = require('cors')
-
+var cors = require('cors');
+const path = require("path");
 var userRouter = require("./routes/userRouter");
 var buildingRouter = require("./routes/buildingRouter");
 var adminRouter = require("./routes/adminRouter");
+
 var clubRouter = require("./routes/clubRouter");
 
 const eventRouter = require("./routes/eventRouter.js");
+
 const postRouter = require("./routes/postRouter");
-require("dotenv").config({ path: __dirname + "/../.env" });
+const dotenv = require("dotenv");
+dotenv.config();
+__dirname = path.resolve();
 
-
-app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
@@ -42,7 +44,10 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+app.use("/user", userRouter);
+app.use("/building", buildingRouter);
+app.use("/post", postRouter);
+app.use("/admin", adminRouter)
 // // Express-Session
 // app.use(
 //   session({
@@ -59,11 +64,18 @@ app.use((req, res, next) => {
 //   })
 // );
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+} 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.listen(PORT, () => {
   console.log("Demo app is listening on port " + PORT);
 });
 
 //app.use("/test", testRouter);
+
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
 app.use("/post", postRouter);

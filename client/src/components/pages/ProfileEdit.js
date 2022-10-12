@@ -1,7 +1,7 @@
 import styles from './Modules/Profile.module.css';
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
-//import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ProfileEdit() {
     const [newDisplayName, setNewDisplayName] = useState('');
@@ -15,12 +15,13 @@ function ProfileEdit() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [user, setUser] = useState("")
+    const navigate = useNavigate();
 
     const uploadFields = useCallback(() => {
         setLoading(true);
         const configuration = {
           method: "post",
-          url: `http://localhost:3001/user/edit-profile/${JSON.parse(localStorage.getItem("User")).email}`,
+          url: `/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
           data: {
             newDisplayName,
             newPassword,
@@ -38,8 +39,8 @@ function ProfileEdit() {
         .catch((error) => {
           error = new Error();
         });
-        window.open("/profile");
-      }, [newDisplayName, newPassword, newBio, url])
+        navigate(`/profile/${JSON.parse(localStorage.getItem("User"))._id}`);
+      }, [newDisplayName, newPassword, newBio, url, navigate])
     
       useEffect(() => {
         if(url){
@@ -52,7 +53,7 @@ function ProfileEdit() {
           setErr(true);
         }
         const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`http://localhost:3001/user/getprofile/${user.email}`)
+        axios.get(`/user/getprofile/${user._id}`)
         .then(res => {
             setUser(res.data);
         }).catch(
@@ -87,7 +88,7 @@ function ProfileEdit() {
                 uploadFields()
             }
         } else {
-            alert("Passwords Not Matching")
+            alert("Passwords Not Matching");
         }
       }
 
@@ -102,7 +103,7 @@ function ProfileEdit() {
             <div className={styles.card}>
                 <img style = {{width : "8rem", height : "10rem", marginRight:"2rem", objectFit: "cover"}} src={user.data?.pic} alt = "profile_pic"></img>
                 <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", flexDirection: "column"}}>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>Display Name:</p>
                         <input style = {{width: "60%"}} 
                         type="text" 
@@ -110,7 +111,7 @@ function ProfileEdit() {
                         onChange={(e) => setNewDisplayName(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>New Password:</p>
                         <input style = {{width: "60%"}} 
                         type="password" 
@@ -118,9 +119,9 @@ function ProfileEdit() {
                         onChange={(e) => setNewPassword(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex"}}>
+                    <div style = {{display: "flex",marginTop:"0.5rem"}}>
                         <p style = {{width: "25%"}}>Confirm New Password:</p>
-                        <div style = {{display: "flex", flexDirection: "column", width: "60%"}}>
+                        <div style = {{display: "flex", flexDirection: "column", width: "60%", padding:"0"}}>
                             <input style = {{width: "100%"}} 
                             type="password" 
                             placeholder='Confirm Password' 
@@ -128,8 +129,6 @@ function ProfileEdit() {
                             />
                             {err ? <p style = {{fontSize:"0.8rem", color:"grey"}}> Passwords did not match </p> : ''}
                         </div>
-                        
-                        
                     </div>
                     
                     <hr style = {{marginLeft: "0", marginRight: "0"}}/>
@@ -141,16 +140,18 @@ function ProfileEdit() {
                         onChange={(e) => setNewBio(e.target.value)}
                         />
                     </div>
-                    <div style = {{display: "flex", marginTop: "1rem"}}>
+                    <div style = {{display: "flex", marginBottom: "1rem"}}>
                         <p style = {{width: "25%"}}>Image:</p>
-                        <input style = {{border: "none"}} type="file" onChange={previewImage} />
-                        {
-                            preview ? (
-                                <img src = {preview} alt = "upload"></img>
-                            ) : (
-                                <></>
-                            )
-                        }
+                        <div style = {{width : "75%", marginRight: "auto", display: "flex", flexDirection: "column"}}>
+                            {
+                                preview ? (
+                                    <img style = {{width : "40%"}}src = {preview} alt = "upload"></img>
+                                ) : (
+                                    <></>
+                                )
+                            }
+                          <input style = {{marginTop: "0", marginBottom: "auto", border: "none"}} type="file" onChange={previewImage} />
+                        </div>
                     </div>
                     <button type = "submit" style = {{marginTop: "auto", alignSelf: "flex-end"}}>Save</button>
                     <div style = {{textAlign : "center"}}>
@@ -168,7 +169,6 @@ function ProfileEdit() {
                     </div>
                 </form>
             </div>
-
         </>
     )
 }

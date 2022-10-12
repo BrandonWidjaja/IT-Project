@@ -1,10 +1,14 @@
 const User = require("../models/user");
+
 const Club = require("../models/club")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Building } = require("../models/building");
 const { Post } = require("../models/post");
 const { Event } = require("../models/event");
+
+const cloudinary = require("../utils/cloudinary");
+
 
 const userToAdmin = async (req, res, next) => {
   try {
@@ -36,8 +40,14 @@ const addNewAdmin = async (req, res, next) => {
 
 const deleteBuilding = async (req, res, next) => {
   try {
+    const building = await Building.findOne({name: req.body.name});
+    if (building.pic_id) {
+      await cloudinary.uploader.destroy(building.pic_id);
+    }
+    
     await Building.deleteOne({name: req.body.name} );
-    res.json({ status: "ok" });
+    
+    return res.json({ status: "ok" });
   } catch (e) {
     console.error(e);
     return res.send(e);
@@ -67,12 +77,12 @@ const deleteEvent = async (req, res, next) => {
 const banUser = async (req, res, next) => {
   try {
     await User.findOneAndUpdate(
-      { email: req.body.email },
+      { _id:  req.body.id },
       { status: "Banned"},
     );
 		res.json({ status: 'ok' })
 	} catch (err) {
-		res.json({ status: 'error', error: 'Duplicate email' })
+		res.json({ status: 'error'})
 	}
 }
 
@@ -88,4 +98,16 @@ const banClub = async (req, res, next) => {
 	}
 }
 
-module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser, banClub, deleteEvent};
+const approveBuilding = async (req, res, next) => {
+  try {
+    await Building.findOneAndUpdate(
+      { _id:  req.body.id },
+      { approved: true}
+    );
+		res.json({ status: 'ok' })
+	} catch (err) {
+		res.json({ status: 'error'})
+	}
+}
+
+module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser, approveBuilding, banClub};

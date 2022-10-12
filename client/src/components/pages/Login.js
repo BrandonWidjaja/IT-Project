@@ -28,7 +28,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/user/login",
+        axios.post("/user/login",
             JSON.stringify({ email, password }),
             {
                 headers: { 'Content-Type': 'application/json' },
@@ -36,20 +36,23 @@ const Login = () => {
             }
         ).then(res => {
             if (res.data.status === "ok") {
-                window.localStorage.setItem("User", JSON.stringify(res.data.data));
-                setAuth(res.data.data);
-                setEmail('');
-                setPwd('');
-                navigate(from, { replace: true });
+                const user = JSON.stringify(res.data.data);
+                if (JSON.parse(user).status !== "Banned") {
+                    window.localStorage.setItem("User", user);
+                    setAuth(res.data.data);
+                    setEmail('');
+                    setPwd('');
+                    navigate(from, { replace: true });
+                } else {
+                    navigate("/ban-page");
+                }
+                
             } else {
                 setErrMsg("Incorrect Password or Invalid Email");
             }
         }).catch(
             (err) => console.log("err", err)
         );
-        //if (accessToken) {
-            
-        //}
     }
 
     return (
@@ -78,7 +81,7 @@ const Login = () => {
                 <button style = {{minWidth : "40%"}}>Sign In</button>
 				<p>
                 <span>
-                    <Link to="/register">Sign Up</Link>
+                    <Link to="/register" style = {{fontSize:"0.5rem", textDecoration:"underline"}}><p>Sign Up</p></Link>
                 </span>
             </p>
             </form>

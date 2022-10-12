@@ -13,16 +13,18 @@ function NewBuilding() {
   const [url,setUrl] = useState(undefined)
   const navigate = useNavigate()
   const [preview, setPreview] = useState("");
+  const [publicId, setPublicId] = useState("");
 
   const uploadFields = useCallback(() => {
     const configuration = {
       method: "post",
-      url: "http://localhost:3001/building/addBuilding",
+      url: "/building/addBuilding",
       data: {
         name,
         description,
         location,
-        pic:url
+        pic:url,
+        pic_id: publicId
       },
     };
 
@@ -36,7 +38,7 @@ function NewBuilding() {
     });
     
     navigate('/')
-  }, [name, description, location, url, navigate])
+  }, [name, description, location, url,publicId, navigate])
 
   useEffect(()=>{
       if(url){
@@ -55,7 +57,8 @@ function NewBuilding() {
       })
       .then(res=>res.json())
       .then(data=>{
-         setUrl(data.url)
+         setUrl(data.url);
+         setPublicId(data.public_id);
       })
       .catch(err=>{
           console.log(err)
@@ -92,7 +95,7 @@ function NewBuilding() {
                         onChange={(e) => setLocation(e.target.value)} required></input>
                     </div>
                     <div style = {{display: "flex", marginBottom: "1rem"}}><p style = {{width: "25%"}}>Description:</p>
-                        <textarea style = {{width: "100%", height: "15rem"}} className={styles.searchbar} type="text" 
+                        <textarea style = {{width: "100%", height: "15rem", border:"1px solid lightgrey"}} className={styles.searchbar} type="text" 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)} required></textarea>
                     </div>

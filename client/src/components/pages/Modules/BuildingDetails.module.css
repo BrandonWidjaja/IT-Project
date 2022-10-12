@@ -52,23 +52,21 @@
 .comments {
     background-color: #EFEBE3;
     border: 1px solid lightgrey;
-    width: 98%;
+    width: 97%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1%;
+    padding: 1.5%;
     border-radius: 0.5rem;
 }
 
 .new_comment {
-    background-color: var(--dark-primary);
     font-size: 1rem;
-    color: white;
     border: 1px solid lightgray;
     border-radius: 0.5rem;
     width: 98%;
-    margin-top: 1rem;
     padding: 1%;
+    margin: auto;
 }
 
 input {
@@ -79,8 +77,27 @@ input {
 .like {
     margin-top: 0.5rem;
     display: flex;
+    color: var(--light-secondary);
 }
 
 .likeIcon:hover {
+    cursor: pointer;
+}
+
+.buttons {
+    font-size: 1.5rem;
+    margin: auto;
+}
+
+.buttons:hover {
+    cursor: pointer;
+}
+
+.deleteButton {
+    color: red;
+    text-decoration: underline;
+}
+
+.deleteButton:hover {
     cursor: pointer;
 }

@@ -13,6 +13,8 @@ import NewBuilding from './components/pages/NewBuilding';
 import { AuthProvider } from './context/AuthProvider';
 import RequireAuth from './components/RequireAuth';
 import Unauthorized from './components/pages/Unauthorized';
+import NotFound from './components/pages/NotFound';
+import Banned from './components/pages/BanPage';
 import BuildingDetails from './components/pages/BuildingDetails';
 import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
 import NewEvent from './components/pages/NewEvent';
@@ -32,18 +34,23 @@ function App() {
       <AuthProvider>
       <Routes>
         <Route element={<Layout1 />} >
-          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/ban-page" element={<Banned />} />
+          <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<Buildings />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
-            <Route path="/profile" element={<Profile />} />
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
-          <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />
-          <Route path="/new-event" element={<NewEvent />} />
-          <Route path="/admin-building-pending" element={<AdminBuildingPending />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route path="/admin-building-detail/:name" element={<AdminBuildingDetails />} />
+            <Route path="/admin-building-pending" element={<AdminBuildingPending />} />
+            <Route path="/new-event" element={<NewEvent />} />
+          </Route>
           <Route path="/building-edit/:name" element={<BuildingEdit />} />
+          <Route path="/*" element={<NotFound />} />
         </Route>
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />

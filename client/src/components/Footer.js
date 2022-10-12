@@ -5,7 +5,7 @@ function Footer() {
   return (
     <>
       <footer className="footer">
-        <p>UniRec</p>
+        <p>UniRec © 2022</p>
       </footer>
     </>
   )
