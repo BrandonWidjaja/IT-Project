@@ -43,17 +43,17 @@ function NewEvent() {
             <div className={styles.add}>
             {!event ? (
                 <div style = {{width: "100%", display: "flex", flexDirection: "column"}}>
-                    <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Name of Event:</p>
+                    <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Name of Event:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text"
                     value={eventName} onChange={(e) => setEventName(e.target.value)} 
                     placeholder='Romeo Birthday' required/>
                     </div>
-                    <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Date & Time of Event:</p>
+                    <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Date & Time of Event:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text"
                     value={eventDateTime} onChange={(e) => setEventDateTime(e.target.value)} 
                     placeholder='Eg: 25/1/2022 10:00am' required/>
                     </div>
-                    <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Location:</p>
+                    <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Location:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text" 
                     value={eventLocation} onChange={(e) => setEventLocation(e.target.value)}  
                     placeholder='abc Building' required/>
