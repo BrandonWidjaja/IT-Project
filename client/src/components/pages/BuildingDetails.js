@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import GetPosts from './Posts';
 //import PostComments from './Comments'
 import PostList from './PostList';
-
+import EventList from './EventList';
 
 function BuildingDetails() {
     const { auth } = useAuth();
@@ -137,7 +137,7 @@ function BuildingDetails() {
                                 {approve ? (
                                     <p style = {{margin :"auto", marginRight: "1rem", marginBottom: "0"}}>Approved</p>
                                 ) :(
-                                    <button style = {{margin:"auto",  width: "15%"}} onClick={(e) => approveBuilding(building.data._id)}>Approve</button>
+                                    <button style = {{margin:"auto",  width: "15%", marginRight: "1rem", marginBottom: "0"}} onClick={(e) => approveBuilding(building.data._id)}>Approve</button>
                                 )}
                             </>
                             
@@ -165,6 +165,18 @@ function BuildingDetails() {
             ) : (
                 <></>
             )}
+            <div style = {{display: 'flex', flexDirection: 'column'}}>
+                <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Events</h1>
+                <EventList name = {name}/>
+                {auth.role === "User" && (
+                    <div style = {{display: "flex", width: "100%", justifyContent:"right"}}>
+                        <Link to={`/new-event/${name}`} style = {{color: "grey"}}><button style = {{margin:"auto",  width: "100%"}}>New Event</button></Link>
+                    </div>
+                    
+                )}
+            </div>
+            
+            
             <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Posts</h1>
             <PostList postList = {post}/>
 

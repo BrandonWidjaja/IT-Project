@@ -155,7 +155,7 @@ function PostList(props) {
                   <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
                     <input className={styles.new_comment} type="text" placeholder='Comment' 
                     onChange={(e) => setContent(e.target.value)}></input>
-                    <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem", color:"var(--light-secondary)"}} icon= {Icons.faPaperPlane}/>
+                    <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem"}} icon= {Icons.faPaperPlane}/>
                   </form>
                 </div>
             </div>
@@ -164,14 +164,14 @@ function PostList(props) {
                 {checkliked(post) ? (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 ) : (
-                  <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 )}
                 <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
                 
                 {checkdisliked(post) ? (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 ) : (
-                  <FontAwesomeIcon style = {{color: "black"}} className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 )}
                 <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
               </div>

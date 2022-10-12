@@ -82,15 +82,18 @@ input {
 
 .likeIcon:hover {
     cursor: pointer;
+    color: grey;
 }
 
 .buttons {
     font-size: 1.5rem;
     margin: auto;
+    color: var(--light-secondary);
 }
 
 .buttons:hover {
     cursor: pointer;
+    color: grey;
 }
 
 .deleteButton {

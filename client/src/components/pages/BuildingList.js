@@ -14,7 +14,7 @@ GetList.defaultProps = {
 
 function GetList(props) {
     const {buildingList} = props;
-    console.log(props);
+
     return (
         <>
         {buildingList.map((building) => (

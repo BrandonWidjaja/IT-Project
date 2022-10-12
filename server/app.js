@@ -7,6 +7,11 @@ const path = require("path");
 var userRouter = require("./routes/userRouter");
 var buildingRouter = require("./routes/buildingRouter");
 var adminRouter = require("./routes/adminRouter");
+
+var clubRouter = require("./routes/clubRouter");
+
+const eventRouter = require("./routes/eventRouter.js");
+
 const postRouter = require("./routes/postRouter");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -62,13 +67,18 @@ app.use("/admin", adminRouter)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, "/client/build")));
 } 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 app.listen(PORT, () => {
   console.log("Demo app is listening on port " + PORT);
 });
 
 //app.use("/test", testRouter);
 
-
+app.use("/user", userRouter);
+app.use("/building", buildingRouter);
+app.use("/post", postRouter);
+app.use("/admin", adminRouter);
+app.use("/event", eventRouter);
+app.use("/club", clubRouter);

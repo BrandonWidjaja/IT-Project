@@ -24,12 +24,11 @@ function CommentList(props) {
         <>
         {commentList.map((comment) => (
             <div>
-                <p style = {{fontSize: "1.5rem"}}>{comment.content}</p>
+                <p style = {{fontSize: "1rem"}}>{comment.content}</p>
                 <div style = {{color: "grey", textAlign: "right"}}>
                     By: <Link to={`/profile/${comment.postedByID}`} style = {{color: "grey", fontSize: "1rem"}}>{comment.postedByName}</Link>
                     <p style = {{fontSize: "1rem"}}>Date: {comment.dateTimePosted}</p>
                 </div>
-                
                 <hr></hr>
             </div>
             

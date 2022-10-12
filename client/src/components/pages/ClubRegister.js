@@ -19,7 +19,7 @@ const Register  = ()=>{
       if (!err) {
         const configuration = {
           method: "post",
-          url: "/user/register",
+          url: "/club/register",
           data: {
             name,
             email,
@@ -92,10 +92,10 @@ const Register  = ()=>{
    return (
       <div style = {{padding: "3%"}}>
           <div style = {{display:"flex", width:"100%", justifyContent: "end"}}>
-            <Link style = {{ color: "grey"}} to={`/club-register`}>Register As Club</Link>
+            <Link style = {{ color: "grey"}} to={`/register`}>Register As User</Link>
           </div>
           <form style = {{padding: "3%", width : "94%"}} className={styles.login_card} onSubmit={PostData}>
-            <h1 style = {{color: "#607EAA"}}>User Registration</h1>
+            <h1 style = {{color: "#607EAA"}}>Club Registration</h1>
             <input style = {{width : "40%"}} type="text" placeholder="Username" value={name} onChange={(e)=>setName(e.target.value)} required/>
             <input style = {{width : "40%"}} type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
@@ -130,104 +130,3 @@ const Register  = ()=>{
    )
 }
 export default Register
-
-
-// import React, { useState } from "react";
-// import { Form, Button } from "react-bootstrap";
-// import axios from "axios";
-// import styles from './Modules/Login.module.css';
-
-// export default function Register() {
-//   // initial state
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [register, setRegister] = useState(false);
-
-//   const handleSubmit = (e) => {
-//     // prevent the form from refreshing the whole page
-//     e.preventDefault();
-
-//     // set configurations
-//     const configuration = {
-//       method: "post",
-//       url: "http://localhost:3001/user/register",
-//       data: {
-//         name,
-//         email,
-//         password,
-//       },
-//     };
-
-//     // make the API call
-//     axios(configuration)
-//       .then((result) => {
-//         setRegister(true);
-//       })
-//       .catch((error) => {
-//         error = new Error();
-//       });
-//   };
-
-//   return (
-//     <>
-//       <div style = {{padding: "3%"}}>
-        
-//         <Form onSubmit={(e) => handleSubmit(e)} style = {{padding: "3%", width : "94%"}} className={styles.login_card}>
-//           <h1 style = {{color: "#607EAA"}}>Register</h1>
-//           {/* name */}
-//           <Form.Group controlId="formBasicName">
-//             <Form.Control
-//               type="text"
-//               name="name"
-//               value={name}
-//               onChange={(e) => setName(e.target.value)}
-//               placeholder="Enter name"
-//               style = {{width : "40%"}} 
-//             />
-//           </Form.Group>
-//           {/* email */}
-//           <Form.Group controlId="formBasicEmail">
-//             <Form.Control
-//               type="email"
-//               name="email"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//               placeholder="Enter email"
-//               style = {{width : "40%"}} 
-//             />
-//           </Form.Group>
-
-//           {/* password */}
-//           <Form.Group controlId="formBasicPassword">
-//             <Form.Control
-//               type="password"
-//               name="password"
-//               value={password}
-//               onChange={(e) => setPassword(e.target.value)}
-//               placeholder="Password"
-//               style = {{width : "40%"}} 
-//             />
-//           </Form.Group>
-
-//           {/* submit button */}
-//           <Button
-//             variant="primary"
-//             type="submit"
-//             onClick={(e) => handleSubmit(e)}
-//             style = {{minWidth : "20%"}}
-//           >
-//             Register
-//           </Button>
-
-//           {/* display success message */}
-//           {register ? (
-//             <p className="text-success">You Are Registered Successfully</p>
-//           ) : (
-//             <p className="text-danger">You Are Not Registered</p>
-//           )}
-//         </Form>
-//       </div>
-//     </>
-//   );
-// }

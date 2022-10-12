@@ -48,9 +48,6 @@ function GetList(props) {
                                 <h2>{building.name}</h2>
                                 <p>Location: {building.location}</p>
                             </div>
-                            <div className={styles.pendbutton}>
-                                <button style = {{width: "15%"}} onClick={(e) => deleteBuilding(building.name)}>Deny</button>
-                            </div>
                         </div>
                         
                     </div>
