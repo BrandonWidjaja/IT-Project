@@ -7,10 +7,11 @@ const eventSchema = new mongoose.Schema({
   description: { type: String, required: true },
   eventDateTime: { type: String, required: true },
   eventLocation: { type: String, required: true },
+  eventLocationName : { type: String },
   dateTimePosted: { type: String, required: true },
   edited: { type: Boolean },
 });
 
 const Event = mongoose.model("Event", eventSchema);
 
-module.exports = {Event};
+module.exports = Event;

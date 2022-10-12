@@ -1,0 +1,31 @@
+.card {
+    background-color: #F2EFE7;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    margin-top: 1rem;
+    text-decoration: none;
+    max-height: 5rem;
+    overflow: auto;
+    font-size: 1.5rem;
+    flex-direction: column;
+}
+
+.content {
+    width: 100%;
+}
+
+.card:hover{
+    max-height: 10rem;
+    transition-duration: 0.5s;
+}
+
+.title{
+    background-color: var(--dark-primary);
+    font-size: 1rem;
+    color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    width: 98%;
+    padding: 1%;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Modules/NewEvent.module.css';
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
 function NewEvent() {
     const [eventName, setEventName] = useState(""); 
@@ -8,8 +9,8 @@ function NewEvent() {
     const [eventLocation, setEventLocation] = useState(""); 
     const [description, setDescription] = useState("");
     const [event, setEvent] = useState(false);
-
-
+    const {name} = useParams();
+ 
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
@@ -19,6 +20,7 @@ function NewEvent() {
           method: "post",
           url: "/event/new",
           data: {
+            eventLocationName: name,
             eventName,
             eventDateTime,
             eventLocation,
@@ -46,7 +48,7 @@ function NewEvent() {
                     <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Name of Event:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text"
                     value={eventName} onChange={(e) => setEventName(e.target.value)} 
-                    placeholder='Romeo Birthday' required/>
+                    placeholder='Event Name' required/>
                     </div>
                     <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Date & Time of Event:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text"
@@ -56,12 +58,12 @@ function NewEvent() {
                     <div style = {{paddingBottom: "0.5rem", display: "flex"}}><p style = {{width: "25%"}}>Location:</p>
                     <input style = {{width: "60%"}} className={styles.searchbar} type="text" 
                     value={eventLocation} onChange={(e) => setEventLocation(e.target.value)}  
-                    placeholder='abc Building' required/>
+                    placeholder='Location' required/>
                     </div>
                     <div style = {{display: "flex", marginBottom: "1rem"}}><p style = {{width: "25%"}}>Description:</p>
                     <textarea style = {{width: "60%", height: "20rem"}} className={styles.searchbar} type="text" 
                     value={description} onChange={(e) => setDescription(e.target.value)} 
-                    placeholder='His 18th birthday' required/>
+                    placeholder='Description' required/>
                     </div>
                     <button onClick={(e) => handleSubmit(e)} style = {{marginTop: "auto", alignSelf: "flex-end"}}>Save</button>
                 </div>

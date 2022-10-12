@@ -1,4 +1,4 @@
-const { Event } = require("../models/event");
+const Event = require("../models/event");
 
 const addNewEvent = async (req, res, next) => {
   try {
@@ -36,9 +36,27 @@ const getEvent = async (req, res, next) => {
   }
 };
 
+// get a event from building
+const getBuildingEvent = async (req, res, next) => {
+  try {
+
+    // find the user in the database
+    let exists = await Event.find({ eventLocationName: req.params.name });
+
+    if (exists) {
+      return res.send({ status: "OK", data: exists });
+    }
+    // user not found
+    return res.send("event does not exist");
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
+
 const getDateTime = () => {
   const today = new Date().toLocaleString("en-AU", {timeZone: "Australia/Melbourne"});
   return today;
 }
 
-module.exports = { addNewEvent, getEvent};
+module.exports = { addNewEvent, getEvent, getBuildingEvent};

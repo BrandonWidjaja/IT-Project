@@ -11,7 +11,9 @@ const clubSchema = new mongoose.Schema({
   events: [ObjectId],
   //darkMode: { type: Boolean, default: false },    this can be used later for dark mode
   status: { type: String },
-  pic: { type: String }
+  pic: { type: String },
+  role: { type: String, default: "Club" },
+  pic: { type: String, default: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}
 });
 
 const Club = mongoose.model("Club", clubSchema);

@@ -24,7 +24,8 @@ import ClubRegister from './components/pages/ClubRegister';
 
 const ROLES = {
   User: "User",
-  Admin: "Admin"
+  Admin: "Admin",
+  Club: "Club"
 }
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
-            <Route path="/new-event" element={<NewEvent />} />
+            <Route path="/new-event/:name" element={<NewEvent />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
