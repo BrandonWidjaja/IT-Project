@@ -175,8 +175,11 @@ function PostList(props) {
                 )}
                 <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
               </div>
-              <p className = {styles.deleteButton} onClick={(e) => deletePost(post)}>delete</p>
-
+              {auth.role == "Admin" ? (
+                <p className = {styles.deleteButton} onClick={(e) => deletePost(post)}>delete</p>
+              ) : (
+                <></>
+              )}
             </div>
         </div>
         ))}
