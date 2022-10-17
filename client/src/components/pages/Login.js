@@ -79,6 +79,7 @@ const Login = () => {
                     autoComplete="off"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
+                    placeholder = "Email"
                     required
                 />
                 <input
@@ -86,6 +87,7 @@ const Login = () => {
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={password}
+                    placeholder = "Password"
                     required
                 />
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"}>{errMsg}</p>

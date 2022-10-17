@@ -29,3 +29,12 @@
     width: 98%;
     padding: 1%;
 }
+
+.delete {
+    color: red;
+    font-size: 1rem;
+}
+
+.delete:hover {
+    cursor: pointer;
+}

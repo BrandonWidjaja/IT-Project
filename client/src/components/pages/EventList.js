@@ -18,13 +18,31 @@ function EventList(props) {
     useEffect(() => {
          axios.get(`/event/getbuildingevent/${name}`)
         .then(res => {
-            console.log(res.data.data);
             setEvents(res.data.data);
         }).catch(
             (err) => console.log("err", err)
         );
-    }, [name])
+    }, [name, events, setEvents])
 
+    function deleteEvent(e) {
+        console.log(e);        
+        // set configurations
+        const configuration = {
+          method: "delete",
+          url: "/event/delete-event",
+          data: {
+            _id: e._id,
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+          })
+          .catch((error) => {
+            error = new Error();
+        });
+    };
     return (
         <>
         <div className={styles.card}>
@@ -35,6 +53,7 @@ function EventList(props) {
                     <p style ={{marginLeft:"1rem"}}>Location: {event.eventLocation}</p>
                     
                     <p style ={{marginLeft:"1rem"}}>Description: {event.description}</p>
+                    <div style = {{display: "flex", justifyContent: "right"}}><p className = {styles.delete} onClick={(e) => deleteEvent(event)}>Delete</p></div>
                     <hr></hr>
                 </div>
             ))}

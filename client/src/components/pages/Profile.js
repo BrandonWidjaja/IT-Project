@@ -61,7 +61,7 @@ function Profile() {
             error = new Error();
         });
     };
-    
+
     const unban = (e) => {
         // prevent the form from refreshing the whole page
         e.preventDefault();
@@ -109,7 +109,7 @@ function Profile() {
                         <>
                             { auth.role === "Admin" ? (
                                 <>
-                                    { auth.status === "Active" ? (
+                                    { user.data?.status === "Active" ? (
                                         <div style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
                                             <button style = {{width: "100%"}} onClick={(e) => handleSubmit(e)} >Ban</button>
                                         </div>

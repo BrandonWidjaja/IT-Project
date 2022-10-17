@@ -59,4 +59,19 @@ const getDateTime = () => {
   return today;
 }
 
-module.exports = { addNewEvent, getEvent, getBuildingEvent};
+const deleteEvent = async (req, res, next) => {
+  try {
+    // retrieve object id of event from request
+    let eventID = req.body._id;
+    // find the user in the database
+    let exists = await Event.findOne({ _id: eventID });
+    if (exists) {
+      await Event.deleteOne({_id: eventID} );
+      return res.send(exist);
+    }
+  } catch (e) {
+    console.error(e);
+    return res.send(e);
+  }
+};
+module.exports = { addNewEvent, getEvent, getBuildingEvent, deleteEvent};
