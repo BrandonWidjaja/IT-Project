@@ -20,6 +20,8 @@ function PostList(props) {
     const {postList} = props;
     const { auth } = useAuth();
     const [content, setContent] = useState([]);
+    const [checkLike, setCheckLike] = useState([])
+    const [checkDislike, setCheckDislike] = useState([])
 
     function handleSubmit(e) {
       // prevent the form from refreshing the whole page
@@ -53,20 +55,20 @@ function PostList(props) {
       // set configurations
       axios.get(`/post/checkliked/${e._id}/${auth._id}`,)
       .then(res => {
-          return res.data;
-        }
-      )
-      return false;
+          setCheckLike(res.data);
+        }).catch(
+          (err) => console.log("err", err)
+      );
     };
 
     function checkdisliked(e) {
       // set configurations
       axios.get(`/post/checkdisliked/${e._id}/${auth._id}`,)
       .then(res => {
-          return res.data;
-        }
-      )
-      return false;
+        setCheckDislike(res.data);
+        }).catch(
+          (err) => console.log("err", err)
+      );
     };
 
     function like(e) { 
@@ -171,15 +173,17 @@ function PostList(props) {
             </div>
             <div style = {{display: "flex", justifyContent: "space-between"}}>
               <div className={styles.like}>
-                {checkliked(post) ? (
-                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                {checkliked(post)}
+                {checkdisliked(post)}
+                {checkLike  ? (
+                  <FontAwesomeIcon className ={styles.likeDone} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 ) : (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 )}
                 <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
                 
-                {checkdisliked(post) ? (
-                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                {checkDislike  ? (
+                  <FontAwesomeIcon className ={styles.likeDone} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 ) : (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 )}

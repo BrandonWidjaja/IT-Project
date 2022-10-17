@@ -77,12 +77,20 @@ input {
 .like {
     margin-top: 0.5rem;
     display: flex;
+}
+
+.likeIcon{
     color: var(--light-secondary);
 }
 
 .likeIcon:hover {
     cursor: pointer;
     color: grey;
+}
+
+.likeDone{
+    cursor: pointer;
+    color: var(--dark-secondary);
 }
 
 .buttons {
