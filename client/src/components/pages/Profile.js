@@ -61,8 +61,30 @@ function Profile() {
             error = new Error();
         });
     };
-
     
+    const unban = (e) => {
+        // prevent the form from refreshing the whole page
+        e.preventDefault();
+        
+        // set configurations
+        const configuration = {
+          method: "post",
+          url: "/admin/unban-user",
+          data: {
+            id: id
+          },
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+            navigate("/");
+          })
+          .catch((error) => {
+            error = new Error();
+        });
+    };
+
     return (
         <>
             {user.data?.role === "User" && <h1 style = {{color: "#607EAA"}}>Profile</h1>}
@@ -86,9 +108,19 @@ function Profile() {
                     other ? (
                         <>
                             { auth.role === "Admin" ? (
-                                <div style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
-                                    <button style = {{width: "100%"}} onClick={(e) => handleSubmit(e)} >Ban</button>
-                                </div>
+                                <>
+                                    { auth.status === "Active" ? (
+                                        <div style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                                            <button style = {{width: "100%"}} onClick={(e) => handleSubmit(e)} >Ban</button>
+                                        </div>
+                                    ) : (
+                                        <div style = {{marginTop: "auto", alignSelf: "flex-end", marginBottom: "0", width: "15%"}}>
+                                            <button style = {{width: "100%"}} onClick={(e) => unban(e)} >Unban</button>
+                                        </div>
+                                    )}
+
+                                </>
+
                             ): (
                                 <></>
                             )}

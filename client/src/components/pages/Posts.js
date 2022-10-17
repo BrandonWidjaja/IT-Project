@@ -22,7 +22,6 @@ function Posts(props) {
     const handleSubmit = (e) => {
       // prevent the form from refreshing the whole page
       e.preventDefault();
-      
       // set configurations
       const configuration = {
         method: "post",
