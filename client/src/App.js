@@ -20,7 +20,6 @@ import AdminBuildingDetails from './components/pages/AdminBuildingDetails';
 import NewEvent from './components/pages/NewEvent';
 import AdminBuildingPending from './components/pages/AdminBuildingPending';
 import BuildingEdit from './components/pages/BuildingEdit';
-import ClubRegister from './components/pages/ClubRegister';
 
 const ROLES = {
   User: "User",
@@ -41,7 +40,7 @@ function App() {
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<Buildings />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Club, ROLES.Admin]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
             
@@ -60,7 +59,6 @@ function App() {
         <Route element={<Layout2 />} >
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/club-register" element={<ClubRegister />} />
           <Route path="/about" element={<About />} />
           <Route path="/logout" element={<Logout />} />
         </Route>
