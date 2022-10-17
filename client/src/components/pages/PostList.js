@@ -32,7 +32,7 @@ function PostList(props) {
           newComment: content,
           user_id: auth._id,
           user_name: auth.displayName
-        },
+        }
       };
   
       // make the API call
@@ -175,7 +175,7 @@ function PostList(props) {
                 )}
                 <p style={{marginLeft:'0.5rem', color:"var(--light-secondary)"}}>{post?.dislikedBy.length}</p>
               </div>
-              {auth.role == "Admin" ? (
+              {auth.role === "Admin" ? (
                 <p className = {styles.deleteButton} onClick={(e) => deletePost(post)}>delete</p>
               ) : (
                 <></>

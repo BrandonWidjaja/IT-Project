@@ -28,7 +28,7 @@ function BuildingDetails() {
           method: "post",
           url: "/building/rate-building",
           data: {
-            id: JSON.parse(localStorage.getItem("User"))._id,
+            id: auth._id,
             buildingName: name,
             rating
           },

@@ -1,5 +1,5 @@
 export default function authHeader() {
-    const user = JSON.parse(localStorage.getItem('User'));
+    const user = getWithExpiry("Session");
   
     if (user && user.accessToken) {
       // for Node.js Express back-end

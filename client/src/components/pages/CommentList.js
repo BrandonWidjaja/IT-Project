@@ -19,7 +19,6 @@ CommentList.defaultProps = {
 function CommentList(props) {
     const {commentList} = props;
     //const { auth } = useAuth();
-
     return (
         <>
         {commentList.map((comment) => (

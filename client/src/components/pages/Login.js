@@ -38,7 +38,8 @@ const Login = () => {
             if (res.data.status === "ok") {
                 const user = JSON.stringify(res.data.data);
                 if (JSON.parse(user).status !== "Banned") {
-                    window.localStorage.setItem("User", user);
+                    //window.localStorage.setItem("User", user);
+                    setWithExpiry("Session", user, 24*60*60000); // one day
                     setAuth(res.data.data);
                     setEmail('');
                     setPwd('');
@@ -53,6 +54,16 @@ const Login = () => {
         }).catch(
             (err) => console.log("err", err)
         );
+    }
+
+    function setWithExpiry(key, value, ttl) {
+        const now = new Date()
+    
+        const item = {
+            value: value,
+            expiry: now.getTime() + ttl,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
     }
 
     return (

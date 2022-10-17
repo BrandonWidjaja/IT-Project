@@ -9,7 +9,7 @@ export const Logout = () => {
 
   const handleLogout = () => {
     setAuth({});
-    window.localStorage.removeItem("User");
+    window.localStorage.removeItem("Session");
     navigate('/')
   }
 

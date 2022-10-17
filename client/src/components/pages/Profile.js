@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import PostList from './PostList';
 
 function Profile() {
-    const { auth } = useAuth();
+    const { auth, getWithExpiry } = useAuth();
     const { id } = useParams();
     const [user, setUser] = useState("");
     const [other, setOther] = useState(true);
@@ -15,7 +15,7 @@ function Profile() {
     const [post, setPost] = useState([]);
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('User'));
+        const user = getWithExpiry("Session");
         axios.get(`/user/getprofile/${id}`)
             .then(res => {
                 setUser(res.data);
@@ -30,15 +30,14 @@ function Profile() {
             (err) => console.log("err", err)
         );
 
-        if (localStorage.getItem('User')) {
+        if (localStorage.getItem('Session')) {
             if (user._id === id) {
                 setOther(false);
             } else {
                 setOther(true);
-                console.log("hi");
             }
         }
-    }, [setUser, navigate, setPost, id, auth, post, user])
+    }, [setUser, navigate, setPost, id, auth, post, user, getWithExpiry])
 
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page

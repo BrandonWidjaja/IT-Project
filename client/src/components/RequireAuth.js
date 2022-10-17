@@ -4,11 +4,11 @@ import React, {useEffect} from 'react'
 
 const RequireAuth = ({ allowedRoles }) => {
     const navigate = useNavigate();
-    const {auth} = useAuth();
+    const {auth, getWithExpiry} = useAuth();
 
     useEffect(() => {
-        if (localStorage.getItem("User")) {
-            const user = JSON.parse(localStorage.getItem("User"));
+        if (getWithExpiry("Session")) {
+            const user = getWithExpiry("Session");
             if (user?.status === "Banned") {
                 navigate("/ban-page");
             }
@@ -26,7 +26,7 @@ const RequireAuth = ({ allowedRoles }) => {
                 navigate("/login");
             }
         }
-      }, [allowedRoles, navigate, auth])
+      }, [allowedRoles, navigate, auth, getWithExpiry])
 
     return (
         <>

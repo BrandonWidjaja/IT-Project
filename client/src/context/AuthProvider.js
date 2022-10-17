@@ -7,17 +7,30 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState([]);
     const navigate = useNavigate();
 
+    function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+            return null
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key)
+            return null
+        }
+        return JSON.parse(item.value)
+    }
+
     useEffect(() => {
-        if (localStorage.getItem("User")) {
-            const user = JSON.parse(localStorage.getItem("User"));
-            if (user) {
-                setAuth(user);
-            }
+        const data = getWithExpiry("Session");
+        if (data) {
+            setAuth(data);
         }
     }, [navigate])
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, getWithExpiry }}>
             {children}
         </AuthContext.Provider>
     )

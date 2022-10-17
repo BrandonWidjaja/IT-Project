@@ -194,7 +194,7 @@ const addComment = async (req, res, next) => {
       content: req.body.newComment,
       dateTimePosted: today,
       postedByName: req.body.user_name,
-      postedbyID: req.body.user_id,
+      postedByID: req.body.user_id,
       parent: req.body._id
     };
 

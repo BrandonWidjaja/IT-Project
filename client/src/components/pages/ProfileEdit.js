@@ -2,6 +2,7 @@ import styles from './Modules/Profile.module.css';
 import React,{useState, useEffect, useCallback } from 'react'
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import useAuth from "../../hooks/useAuth";
 
 function ProfileEdit() {
     const [newDisplayName, setNewDisplayName] = useState('');
@@ -16,12 +17,14 @@ function ProfileEdit() {
     const [success, setSuccess] = useState(false);
     const [user, setUser] = useState("")
     const navigate = useNavigate();
+    const { getWithExpiry } = useAuth();
 
     const uploadFields = useCallback(() => {
+        
         setLoading(true);
         const configuration = {
           method: "post",
-          url: `/user/edit-profile/${JSON.parse(localStorage.getItem("User"))._id}`,
+          url: `/user/edit-profile/${getWithExpiry("Session")._id}`,
           data: {
             newDisplayName,
             newPassword,
@@ -39,8 +42,8 @@ function ProfileEdit() {
         .catch((error) => {
           error = new Error();
         });
-        navigate(`/profile/${JSON.parse(localStorage.getItem("User"))._id}`);
-      }, [newDisplayName, newPassword, newBio, url, navigate])
+        navigate(`/profile/${getWithExpiry("Session")._id}`);
+      }, [newDisplayName, newPassword, newBio, url, navigate, getWithExpiry])
     
       useEffect(() => {
         if(url){
