@@ -39,11 +39,14 @@ function PostList(props) {
       axios(configuration)
         .then((result) => {
           console.log(result)
+          setContent("");
           //setComments(true);
         })
         .catch((error) => {
           error = new Error();
         });
+
+      
     };
 
     function checkliked(e) {
@@ -66,45 +69,48 @@ function PostList(props) {
       return false;
     };
 
-    function like(e) {   
+    function like(e) { 
         // set configurations
-        const configuration = {
-          method: "post",
-          url: "/post/likepost",
-          data: {
-            _id: e._id,
-            user: auth._id
-          },
-        };
-    
-        // make the API call
-        axios(configuration)
-          .then((result) => {
-          })
-          .catch((error) => {
-            error = new Error();
-          });
+        if(auth.email){
+          const configuration = {
+            method: "post",
+            url: "/post/likepost",
+            data: {
+              _id: e._id,
+              user: auth._id
+            },
+          };
+      
+          // make the API call
+          axios(configuration)
+            .then((result) => {
+            })
+            .catch((error) => {
+              error = new Error();
+            });
+        }
       };
     
-    function dislike(e) {
-        console.log(e);        
+    function dislike(e) {      
         // set configurations
-        const configuration = {
-          method: "post",
-          url: "/post/dislikepost",
-          data: {
-            _id: e._id,
-            user: auth._id
-          },
-        };
-    
-        // make the API call
-        axios(configuration)
-          .then((result) => {
-          })
-          .catch((error) => {
-            error = new Error();
-          });
+        if(auth.email){
+          const configuration = {
+            method: "post",
+            url: "/post/dislikepost",
+            data: {
+              _id: e._id,
+              user: auth._id
+            },
+          };
+      
+          // make the API call
+          axios(configuration)
+            .then((result) => {
+            })
+            .catch((error) => {
+              error = new Error();
+            });
+        }
       };
     
       function deletePost(e) {
@@ -151,13 +157,17 @@ function PostList(props) {
 
             <div className={styles.comments}>
                 <CommentList commentList = {post.comments}/>
+                {auth.email ? (
                 <div >
                   <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
                     <input className={styles.new_comment} type="text" placeholder='Comment' 
-                    onChange={(e) => setContent(e.target.value)}></input>
+                    onChange={(e) => setContent(e.target.value)} value={content}></input>
                     <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem"}} icon= {Icons.faPaperPlane}/>
                   </form>
                 </div>
+                ) : (
+                  <></>
+                )}
             </div>
             <div style = {{display: "flex", justifyContent: "space-between"}}>
               <div className={styles.like}>
