@@ -168,7 +168,7 @@ function BuildingDetails() {
             <div style = {{display: 'flex', flexDirection: 'column'}}>
                 <h1 style = {{color: "#607EAA", marginTop: "3rem"}}>Events</h1>
                 <EventList name = {name}/>
-                {auth.role === "User" && (
+                {auth.role === "Club" && (
                     <div style = {{display: "flex", width: "100%", justifyContent:"right"}}>
                         <Link to={`/new-event/${name}`} style = {{color: "grey"}}><button style = {{margin:"auto",  width: "100%"}}>New Event</button></Link>
                     </div>

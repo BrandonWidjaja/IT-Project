@@ -44,6 +44,9 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
             <Route path="/new-building" element={<NewBuilding />} />
             <Route path="/profile-edit" element={<ProfileEdit />} />
+            
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Club]} />}>
             <Route path="/new-event/:name" element={<NewEvent />} />
           </Route>
           <Route path="/building-detail/:name" element={<BuildingDetails />} />

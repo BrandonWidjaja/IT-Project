@@ -86,6 +86,18 @@ const banUser = async (req, res, next) => {
 	}
 }
 
+const unBanUser = async (req, res, next) => {
+  try {
+    await User.findOneAndUpdate(
+      { _id:  req.body.id },
+      { status: "Active"},
+    );
+		res.json({ status: 'ok' })
+	} catch (err) {
+		res.json({ status: 'error'})
+	}
+}
+
 const banClub = async (req, res, next) => {
   try {
     await Club.findOneAndUpdate(
@@ -110,4 +122,4 @@ const approveBuilding = async (req, res, next) => {
 	}
 }
 
-module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser, approveBuilding, banClub};
+module.exports = {userToAdmin, addNewAdmin, deleteBuilding, deletePost, banUser, approveBuilding, banClub, unBanUser};
