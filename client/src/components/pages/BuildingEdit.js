@@ -25,7 +25,7 @@ const uploadFields = useCallback(() => {
     method: "post",
     url: `/building/edit-building/${name}`,
     data: {
-      name: newName,
+      newName,
       newLocation,
       newDescription,
       newPic:url
@@ -41,7 +41,7 @@ const uploadFields = useCallback(() => {
   .catch((error) => {
     error = new Error();
   });
-  navigate(`/building-detail/${name}`);
+  navigate(`/building-detail/${newName}`);
 }, [name, newName, newLocation, newDescription, url, navigate])
 
 useEffect(() => {
@@ -83,7 +83,6 @@ const handleSubmit = async (e) => {
     }else{
         uploadFields()
     }
-  
 }
 
     const previewImage = async (e) => {

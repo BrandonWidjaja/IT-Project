@@ -54,12 +54,20 @@ const editBuilding = async (req, res, next) => {
 
     console.log(buildingDetails);
     // initialise info
-    var newDescription = buildingDetails.newDescription;
-    var newPic = buildingDetails.newPic;
+    var newName = buildingDetails.name;
+    var newDescription = buildingDetails.description;
+    var newLocation = buildingDetails.location;
+    var newPic = buildingDetails.pic;
 
     // update editable info if found in request
+    if (req.body.newName) {
+      newName = req.body.newName;
+    }
     if (req.body.newDescription) {
       newDescription = req.body.newDescription;
+    }
+    if (req.body.newLocation) {
+      newLocation = req.body.newLocation;
     }
     if (req.body.newPic) {
       newPic = req.body.newPic;
@@ -68,7 +76,7 @@ const editBuilding = async (req, res, next) => {
     // update the specified building with new info
     await Building.findOneAndUpdate(
       { name: req.params.name },
-      { description: newDescription, pic: newPic }
+      { name: newName, description: newDescription, location: newLocation, pic: newPic }
     );
     res.json({ status: "ok" });
   } catch (err) {
