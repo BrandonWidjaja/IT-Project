@@ -36,6 +36,13 @@
     margin-top: 1rem;
 }
 
+.login_card select{
+    margin: auto;
+    padding:0.5rem;
+    border-radius: 1rem;
+    margin: auto;
+}
+
 .login_card button{
     margin: auto;
     margin-top: 2rem;

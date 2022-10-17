@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
       email: req.body.email,
       password: newPassword,
       pic: req.body.pic,
-      role: "User",
+      role: req.body.role,
       status: "Active",
       bio: req.body.bio
     });
@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
   });
 
   if (!user) {
-    return { status: "error", error: "Invalid login" };
+    return res.send({status: "error", error: "Incorrect Password" });
   }
 
   const isPasswordValid = await bcrypt.compare(

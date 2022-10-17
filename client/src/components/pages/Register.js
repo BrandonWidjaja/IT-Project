@@ -13,9 +13,9 @@ const Register  = ()=>{
     const [register, setRegister] = useState(false);
     const [err, setErr] = useState(false);
     const [preview, setPreview] = useState("");
+    const [userType, setUserType] = useState("User");
 
     const uploadFields = useCallback((e) => {
-
       if (!err) {
         const configuration = {
           method: "post",
@@ -24,7 +24,8 @@ const Register  = ()=>{
             name,
             email,
             password,
-            pic:url
+            pic:url,
+            role: userType
           },
         };
   
@@ -41,7 +42,7 @@ const Register  = ()=>{
       }
       
         
-    }, [email, name, password, url, err])
+    }, [email, name, password, url, err, userType])
 
     useEffect(()=>{
         if(url){
@@ -91,16 +92,19 @@ const Register  = ()=>{
 
    return (
       <div style = {{padding: "3%"}}>
-          <div style = {{display:"flex", width:"100%", justifyContent: "end"}}>
-            <Link style = {{ color: "grey"}} to={`/club-register`}>Register As Club</Link>
-          </div>
           <form style = {{padding: "3%", width : "94%"}} className={styles.login_card} onSubmit={PostData}>
             <h1 style = {{color: "#607EAA"}}>User Registration</h1>
             <input style = {{width : "40%"}} type="text" placeholder="Username" value={name} onChange={(e)=>setName(e.target.value)} required/>
             <input style = {{width : "40%"}} type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/>
+
             {err ? <p style = {{fontSize:"0.8rem", color:"grey"}}> Passwords did not match </p> : ''}
+            <h3 style = {{color : "var(--light-secondary)", marginTop:"2rem"}}>Register As</h3>
+            <select style = {{width : "auto", margin: "auto", textAlign: "center"}} onChange = {(e)=>setUserType(e.target.value)}>
+              <option value="User">User</option>
+              <option value="Club">Club</option>
+            </select>
             <div style = {{width : "40%", textAlign: "center", margin: "auto", marginTop:"2rem"}}>
                 <h3 style = {{color : "var(--light-secondary)"}}>Profile Picture</h3>
                 {

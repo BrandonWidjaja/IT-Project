@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
   postedByClub: { type: String },
-  postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "Club" },
+  postedByID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   eventName: { type: String, required: true },
   description: { type: String, required: true },
   eventDateTime: { type: String, required: true },
