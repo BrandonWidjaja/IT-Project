@@ -24,12 +24,14 @@
 
 .menu ul li {
     display: inline-block;
+    align-items: center;
     margin-left: 1rem;
     margin-right: 1rem;
 }
 
 li a {
     color: white;
+    display: flex;
     text-decoration: none;
 }
 
@@ -40,7 +42,11 @@ li a:hover {
 .hamburger {
     position: absolute;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     vertical-align: middle;
+=======
+    align-items: center;
+>>>>>>> Stashed changes
 =======
     align-items: center;
 >>>>>>> Stashed changes
@@ -71,17 +77,25 @@ li a:hover {
     }
 
     .drop-down-menu{
-        display: block;
+        display: flex;
     }
 
     .drop-down-menu ul{
         display: flex;
+        flex: 1;
         flex-direction: column;
+        justify-content: flex-start;
+        float: right;
         position: absolute;
         margin: 0;
         top: 7vh;
         right: 0;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+        width: 50%;
+        height: 100%;
+>>>>>>> Stashed changes
 =======
         width: 50%;
         height: 100%;
@@ -92,11 +106,16 @@ li a:hover {
         list-style-type: none;
         text-align: center;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         width: 50%;
         height: 100%;
         translate: "translateX(40%)";
 =======
         line-height: 3;
+>>>>>>> Stashed changes
+=======
+        line-height: 3;
+        z-index: 10;
 >>>>>>> Stashed changes
     }
 

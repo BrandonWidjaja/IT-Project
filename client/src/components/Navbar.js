@@ -1,5 +1,16 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import "./nav-style.css"
+=======
+import NavLinks from "./NavLinks";
+import NavLinksAlt from "./NavLinksAlt";
+import {GiHamburgerMenu} from 'react-icons/gi'
+import { useState } from "react";
+import "./Navbar.css";
+import { NavLink } from 'react-router-dom';
+
+const Navbar= () => {
+>>>>>>> Stashed changes
 
 <<<<<<< Updated upstream
 function Navbar() {
@@ -28,11 +39,19 @@ function Navbar() {
 =======
     const [open, setOpen] = useState(false);
 
+
+
     return(
         <>
             <img className="logo" src="https://res.cloudinary.com/dm13bguzr/image/upload/v1664315793/unknown_yistqv.png" alt = "logo"></img>
+<<<<<<< Updated upstream
             <GiHamburgerMenu className ='hamburger' size ='4vh' color='white' onClick ={() => setOpen(!open)}/>
             { open && <div className="drop-down-menu"><NavLinks /></div>}
+=======
+            </NavLink>
+                <GiHamburgerMenu className ='hamburger' size ='6vh' color='white' onClick ={() => setOpen(!open)}/>
+                { open && <div className="drop-down-menu"><NavLinksAlt /></div>}
+>>>>>>> Stashed changes
             <div className="menu">
                 <NavLinks />
 >>>>>>> Stashed changes

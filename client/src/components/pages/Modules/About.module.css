@@ -3,6 +3,24 @@
     padding: 2rem;
 }
 
+<<<<<<< Updated upstream
+=======
+.container .logo img{
+    width: 40%;
+    height: auto;
+    position: 'absolute';
+    border-radius: 0.5rem;
+}
+
+
+.container .member img{
+    width: 80%;
+    height: auto;
+    margin: 1rem;
+    border-radius: 0.5rem;
+}
+
+>>>>>>> Stashed changes
 h1 {
     color: #607EAA;
 }
