@@ -167,7 +167,7 @@ function PostList(props) {
                 <div >
                   <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
                     <input className={styles.new_comment} type="text" placeholder='Comment' 
-                    onChange={(e) => setContent(e.target.value)} value={content}></input>
+                    onChange={(e) => setContent(e.target.value)}></input>
                     <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem"}} icon= {Icons.faPaperPlane}/>
                   </form>
                 </div>
