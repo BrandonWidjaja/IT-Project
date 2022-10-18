@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import AuthContext from "../../context/AuthProvider";
 import styles from './Modules/Login.module.css'
 import React, {useContext} from 'react';
+import axios from "axios";
 
 export const Logout = () => {
   const navigate = useNavigate()
@@ -10,7 +11,12 @@ export const Logout = () => {
   const handleLogout = () => {
     setAuth({});
     window.localStorage.removeItem("Session");
-    navigate('/')
+    axios.get(`/logout`,)
+      .then(res => {
+          return res;
+        }
+    )
+    navigate('/login')
   }
 
   return (

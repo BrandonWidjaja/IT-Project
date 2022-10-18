@@ -126,6 +126,7 @@ function PostList(props) {
             error = new Error();
         });
     };
+    
     return (
         <>
         {postList.map((post) => (
@@ -133,7 +134,10 @@ function PostList(props) {
         <div className={styles.post}>
             <div style = {{marginBottom: "0.5rem"}}>
                 {post?.postedByName ? (
-                        <Link to={`/profile/${post.postedByID}`} style = {{color: "grey"}}>{post.postedByName}: </Link>
+                    <div style ={{display: "flex"}}>
+                      {post.postedByPic && (<img style = {{height :"1.5rem", width:"1.5rem", marginRight: "0.5rem", borderRadius: "0.5rem", border: "1px solid lightgrey"}} src={post.postedByPic} alt="profile_pic" />)}
+                      <Link to={`/profile/${post.postedByID}`} style = {{color: "grey", textDecoration: "None"}}>{post.postedByName}: </Link>
+                    </div>
                     ): (
                         <></>
                 )}

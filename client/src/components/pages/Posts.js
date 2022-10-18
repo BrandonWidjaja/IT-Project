@@ -29,6 +29,7 @@ function Posts(props) {
         data: {
           postedByName: auth.displayName,
           postedByID: auth._id,
+          postedByPic: auth.pic,
           buildingName: building,
           title,
           description

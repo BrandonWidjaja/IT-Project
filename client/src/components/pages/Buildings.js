@@ -20,7 +20,7 @@ const Buildings = () => {
 
     const search =(data) => {
         if (data) {
-            return data.filter((item) => item.name.toLowerCase().includes(query));
+            return data.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
         }
         
     }

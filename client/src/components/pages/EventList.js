@@ -46,17 +46,24 @@ function EventList(props) {
     return (
         <>
         <div className={styles.card}>
-            {events.map((event) => (
-                <div className={styles.content}>
-                    <p className={styles.title}>Name: {event.eventName}</p>
-                    <p style ={{marginLeft:"1rem"}}>Date: {event.eventDateTime}</p>
-                    <p style ={{marginLeft:"1rem"}}>Location: {event.eventLocation}</p>
-                    
-                    <p style ={{marginLeft:"1rem"}}>Description: {event.description}</p>
-                    <div style = {{display: "flex", justifyContent: "right"}}><p className = {styles.delete} onClick={(e) => deleteEvent(event)}>Delete</p></div>
-                    <hr></hr>
-                </div>
-            ))}
+            {events.length === 0 ? (
+                <>No event</>
+            ) : (
+                <>
+                    {events.map((event) => (
+                    <div className={styles.content}>
+                        <p className={styles.title}>Name: {event.eventName}</p>
+                        <p style ={{marginLeft:"1rem"}}>Date: {event.eventDateTime}</p>
+                        <p style ={{marginLeft:"1rem"}}>Location: {event.eventLocation}</p>
+                        
+                        <p style ={{marginLeft:"1rem"}}>Description: {event.description}</p>
+                        <div style = {{display: "flex", justifyContent: "right"}}><p className = {styles.delete} onClick={(e) => deleteEvent(event)}>Delete</p></div>
+                        <hr></hr>
+                    </div>
+                    ))}
+                </>
+            )} 
+            
 
         </div>
         </>

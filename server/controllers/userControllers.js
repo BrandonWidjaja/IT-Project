@@ -64,7 +64,7 @@ const login = async (req, res, next) => {
         expiresIn: 86400
       }
     );
-
+    req.session.user = user;
     return res.send({status: "ok", data : user, accessToken: token});
   } else {
     return res.send({status: "error", error: "Incorrect Password" });
@@ -145,6 +145,8 @@ const getProfile = async (req, res, next) => {
     return res.send(e);
   }
 }
+
+
 module.exports = { register, login, getProfile};
 
 
