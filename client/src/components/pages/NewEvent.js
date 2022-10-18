@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Modules/NewEvent.module.css';
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function NewEvent() {
     const [eventName, setEventName] = useState(""); 
@@ -10,6 +10,9 @@ function NewEvent() {
     const [description, setDescription] = useState("");
     const [event, setEvent] = useState(false);
     const {name} = useParams();
+
+    const navigate = useNavigate();
+    const goBack = () => navigate(-1);
  
     const handleSubmit = (e) => {
         // prevent the form from refreshing the whole page
@@ -68,7 +71,12 @@ function NewEvent() {
                     <button onClick={(e) => handleSubmit(e)} style = {{marginTop: "auto", alignSelf: "flex-end"}}>Save</button>
                 </div>
             ): (
+              <div style = {{margin: "auto", textAlign : "center"}}>
                 <p>Event added successfully</p>
+                <div>
+                <button onClick={goBack}>Go Back</button>
+                </div>
+              </div>
             )}
             </div>
         </>

@@ -55,14 +55,13 @@ function ProfileEdit() {
         } else {
           setErr(true);
         }
-        const user = JSON.parse(localStorage.getItem('User'));
-        axios.get(`/user/getprofile/${user._id}`)
+        axios.get(`/user/getprofile/${getWithExpiry("Session")._id}`)
         .then(res => {
             setUser(res.data);
         }).catch(
             (err) => console.log("err", err)
         );
-      }, [setUser, confirmPassword, newPassword, url, uploadFields])
+      }, [setUser, confirmPassword, newPassword, url, uploadFields, getWithExpiry])
     
       const uploadPic = ()=>{
           const data = new FormData()

@@ -4,7 +4,6 @@ import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 
 function BuildingEdit() {
-  const [newName, setNewName] = useState('');
   const [newLocation, setNewLocation] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [image,setImage] = useState("");
@@ -25,7 +24,6 @@ const uploadFields = useCallback(() => {
     method: "post",
     url: `/building/edit-building/${name}`,
     data: {
-      name: newName,
       newLocation,
       newDescription,
       newPic:url
@@ -42,7 +40,7 @@ const uploadFields = useCallback(() => {
     error = new Error();
   });
   navigate(`/building-detail/${name}`);
-}, [name, newName, newLocation, newDescription, url, navigate])
+}, [name, newLocation, newDescription, url, navigate])
 
 useEffect(() => {
   if(url){
@@ -83,7 +81,6 @@ const handleSubmit = async (e) => {
     }else{
         uploadFields()
     }
-  
 }
 
     const previewImage = async (e) => {
@@ -92,14 +89,9 @@ const handleSubmit = async (e) => {
   }
     return (
         <>
-            <h1 style = {{color: "#607EAA"}}>Edit Building</h1>
+            <h1 style = {{color: "#607EAA"}}>Edit Building: {name}</h1>
             <div className={styles.add}>
                 <form style = {{width: "100%", display: "flex", flexDirection: "column"}} onSubmit={(e) => handleSubmit(e)}>
-                    <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Name of building:</p>
-                    <input style = {{width: "60%"}} className={styles.searchbar} type="text" 
-                    placeholder= {name} required
-                    onChange={(e) => setNewName(e.target.value)} ></input>
-                    </div>
                     <div style = {{display: "flex"}}><p style = {{width: "25%"}}>Location:</p>
                         <input style = {{width: "60%"}} className={styles.searchbar} type="text" 
                         placeholder={building?.data?.location}

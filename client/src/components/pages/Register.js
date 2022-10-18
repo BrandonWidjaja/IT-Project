@@ -93,7 +93,7 @@ const Register  = ()=>{
    return (
       <div style = {{padding: "3%"}}>
           <form style = {{padding: "3%", width : "94%"}} className={styles.login_card} onSubmit={PostData}>
-            <h1 style = {{color: "#607EAA"}}>User Registration</h1>
+            <h1 style = {{color: "#607EAA"}}>Registration</h1>
             <input style = {{width : "40%"}} type="text" placeholder="Username" value={name} onChange={(e)=>setName(e.target.value)} required/>
             <input style = {{width : "40%"}} type="text" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             <input style = {{width : "40%"}} type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
@@ -106,7 +106,7 @@ const Register  = ()=>{
               <option value="Club">Club</option>
             </select>
             <div style = {{width : "40%", textAlign: "center", margin: "auto", marginTop:"2rem"}}>
-                <h3 style = {{color : "var(--light-secondary)"}}>Profile Picture</h3>
+                <h3 style = {{color : "var(--light-secondary)"}}>Profile Picture (Optional) </h3>
                 {
                     preview ? (
                         <img style = {{width : "8rem", height : "10rem", maxHeight: "10rem",marginTop: "1rem", objectFit: "cover"}} src = {preview} alt = "upload"></img>

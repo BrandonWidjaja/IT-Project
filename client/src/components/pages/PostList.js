@@ -20,6 +20,8 @@ function PostList(props) {
     const {postList} = props;
     const { auth } = useAuth();
     const [content, setContent] = useState([]);
+    const [checkLike, setCheckLike] = useState([])
+    const [checkDislike, setCheckDislike] = useState([])
 
     function handleSubmit(e) {
       // prevent the form from refreshing the whole page
@@ -39,72 +41,78 @@ function PostList(props) {
       axios(configuration)
         .then((result) => {
           console.log(result)
+          setContent("");
           //setComments(true);
         })
         .catch((error) => {
           error = new Error();
         });
+
+      
     };
 
     function checkliked(e) {
       // set configurations
       axios.get(`/post/checkliked/${e._id}/${auth._id}`,)
       .then(res => {
-          return res.data;
-        }
-      )
-      return false;
+          setCheckLike(res.data);
+        }).catch(
+          (err) => console.log("err", err)
+      );
     };
 
     function checkdisliked(e) {
       // set configurations
       axios.get(`/post/checkdisliked/${e._id}/${auth._id}`,)
       .then(res => {
-          return res.data;
-        }
-      )
-      return false;
+        setCheckDislike(res.data);
+        }).catch(
+          (err) => console.log("err", err)
+      );
     };
 
-    function like(e) {   
+    function like(e) { 
         // set configurations
-        const configuration = {
-          method: "post",
-          url: "/post/likepost",
-          data: {
-            _id: e._id,
-            user: auth._id
-          },
-        };
-    
-        // make the API call
-        axios(configuration)
-          .then((result) => {
-          })
-          .catch((error) => {
-            error = new Error();
-          });
+        if(auth.email){
+          const configuration = {
+            method: "post",
+            url: "/post/likepost",
+            data: {
+              _id: e._id,
+              user: auth._id
+            },
+          };
+      
+          // make the API call
+          axios(configuration)
+            .then((result) => {
+            })
+            .catch((error) => {
+              error = new Error();
+            });
+        }
       };
     
-    function dislike(e) {
-        console.log(e);        
+    function dislike(e) {      
         // set configurations
-        const configuration = {
-          method: "post",
-          url: "/post/dislikepost",
-          data: {
-            _id: e._id,
-            user: auth._id
-          },
-        };
-    
-        // make the API call
-        axios(configuration)
-          .then((result) => {
-          })
-          .catch((error) => {
-            error = new Error();
-          });
+        if(auth.email){
+          const configuration = {
+            method: "post",
+            url: "/post/dislikepost",
+            data: {
+              _id: e._id,
+              user: auth._id
+            },
+          };
+      
+          // make the API call
+          axios(configuration)
+            .then((result) => {
+            })
+            .catch((error) => {
+              error = new Error();
+            });
+        }
       };
     
       function deletePost(e) {
@@ -155,25 +163,31 @@ function PostList(props) {
 
             <div className={styles.comments}>
                 <CommentList commentList = {post.comments}/>
+                {auth.email ? (
                 <div >
                   <form onSubmit={handleSubmit} style = {{width: "100%", display: "flex", marginTop: "1rem"}}>
                     <input className={styles.new_comment} type="text" placeholder='Comment' 
-                    onChange={(e) => setContent(e.target.value)}></input>
+                    onChange={(e) => setContent(e.target.value)} value={content}></input>
                     <FontAwesomeIcon className ={styles.buttons} onClick={(e) => handleSubmit(post)} style = {{margin: "0.5rem"}} icon= {Icons.faPaperPlane}/>
                   </form>
                 </div>
+                ) : (
+                  <></>
+                )}
             </div>
             <div style = {{display: "flex", justifyContent: "space-between"}}>
               <div className={styles.like}>
-                {checkliked(post) ? (
-                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
+                {checkliked(post)}
+                {checkdisliked(post)}
+                {checkLike  ? (
+                  <FontAwesomeIcon className ={styles.likeDone} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 ) : (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsUp} size="xl" onClick={(e) => like(post)}/>
                 )}
                 <p style={{marginLeft:'0.5rem', marginRight:'0.5rem', color:"var(--light-secondary)"}}>{post?.likedBy.length}</p>
                 
-                {checkdisliked(post) ? (
-                  <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
+                {checkDislike  ? (
+                  <FontAwesomeIcon className ={styles.likeDone} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 ) : (
                   <FontAwesomeIcon className ={styles.likeIcon} icon={Icons.faThumbsDown} size="xl" onClick={(e) => dislike(post)}/>
                 )}
