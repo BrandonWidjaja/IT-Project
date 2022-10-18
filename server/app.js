@@ -63,7 +63,15 @@ app.use(
 app.use("/user", userRouter);
 app.use("/building", buildingRouter);
 app.use("/post", postRouter);
-app.use("/admin", adminRouter)
+app.use("/admin", adminRouter);
+app.use("/event", eventRouter);
+app.use("/club", clubRouter);
+app.get("/logout",(req,res) => {
+  res.status(200).clearCookie('connect.sid', {
+    path: '/'
+  });
+  req.session.destroy();
+});
 // // Express-Session
 // app.use(
 //   session({
@@ -82,23 +90,12 @@ app.use("/admin", adminRouter)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, "/client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
 } 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
+
 app.listen(PORT, () => {
   console.log("Demo app is listening on port " + PORT);
 });
 
-app.use("/user", userRouter);
-app.use("/building", buildingRouter);
-app.use("/post", postRouter);
-app.use("/admin", adminRouter);
-app.use("/event", eventRouter);
-app.use("/club", clubRouter);
-app.get("/logout",(req,res) => {
-  res.status(200).clearCookie('connect.sid', {
-    path: '/'
-  });
-  req.session.destroy();
-});
