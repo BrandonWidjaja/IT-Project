@@ -101,7 +101,7 @@ function BuildingDetails() {
             <div style = {{display: "flex", justifyContent: "space-between"}}>
             <h1 style = {{color: "#607EAA"}}>{building.name}</h1>
             <div style = {{marginTop: "auto", marginBottom: "0"}}>
-                {auth.email ? (
+                {auth.role === "Admin" ? (
                     <Link style = {{color: "grey"}} key = {building.id} to={`/building-edit/${building.name}`}>Edit Building</Link>
                 ) :(
                     <></>
